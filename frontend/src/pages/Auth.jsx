@@ -548,6 +548,36 @@ const Auth = () => {
             }
           }
           
+          .title-fade-in {
+            animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+          }
+          
+          .title-fade-out {
+            animation: fadeOutDown 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+          }
+          
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(1rem);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          
+          @keyframes fadeOutDown {
+            from {
+              opacity: 1;
+              transform: translateY(0);
+            }
+            to {
+              opacity: 0;
+              transform: translateY(-1rem);
+            }
+          }
+          
           /* Keep all input fields statically styled - no changes on any interaction */
           input,
           input:focus,
