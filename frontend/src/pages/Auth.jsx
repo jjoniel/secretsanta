@@ -546,6 +546,50 @@ const Auth = () => {
             }
           }
           
+          @keyframes morphOut {
+            0% {
+              opacity: 1;
+              transform: scale(1) translateY(0);
+              filter: blur(0);
+            }
+            50% {
+              opacity: 0.3;
+              transform: scale(0.95) translateY(-0.5rem);
+              filter: blur(0.125rem);
+            }
+            100% {
+              opacity: 0;
+              transform: scale(0.9) translateY(-1rem);
+              filter: blur(0.25rem);
+            }
+          }
+          
+          @keyframes morphIn {
+            0% {
+              opacity: 0;
+              transform: scale(0.9) translateY(1rem);
+              filter: blur(0.25rem);
+            }
+            50% {
+              opacity: 0.3;
+              transform: scale(0.95) translateY(0.5rem);
+              filter: blur(0.125rem);
+            }
+            100% {
+              opacity: 1;
+              transform: scale(1) translateY(0);
+              filter: blur(0);
+            }
+          }
+          
+          .title-morph-out {
+            animation: morphOut 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+          }
+          
+          .title-morph-in {
+            animation: morphIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+          }
+          
           /* Keep all input fields statically styled - no changes on any interaction */
           input,
           input:focus,
