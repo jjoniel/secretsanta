@@ -9,7 +9,6 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
-import GroupDetail from "./pages/GroupDetail";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./App.css";
 
@@ -27,14 +26,6 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <Dashboard />
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/groups/:groupId"
-                element={
-                  <ProtectedRoute>
-                    <GroupDetail />
                   </ProtectedRoute>
                 }
               />
