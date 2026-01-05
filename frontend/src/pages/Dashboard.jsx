@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
 import {
-  FaSnowflake,
   FaExclamationTriangle,
   FaBox,
   FaCheck,
@@ -110,9 +109,7 @@ const Dashboard = () => {
       const response = await axios.put(`/api/groups/${groupId}`, {
         name: trimmedName,
       });
-      setGroups(
-        groups.map((g) => (g.id === groupId ? response.data : g))
-      );
+      setGroups(groups.map((g) => (g.id === groupId ? response.data : g)));
       setEditingGroupName(null);
       setSuccess("Group name updated");
     } catch (err) {
@@ -259,8 +256,7 @@ const Dashboard = () => {
               gap: "var(--spacing-sm)",
             }}
           >
-            <FaSnowflake style={{ color: "var(--color-accent)" }} /> Secret
-            Santa
+            exchan.ge
           </h1>
           <p
             style={{
@@ -269,7 +265,7 @@ const Dashboard = () => {
               fontSize: "0.9375rem",
             }}
           >
-            Manage your gift exchanges
+            Organize Secret Santa and Assassins games
           </p>
         </div>
         <div className="flex gap-md">
@@ -304,7 +300,12 @@ const Dashboard = () => {
             <div className="empty-state-icon">
               <FaBox style={{ fontSize: "3rem" }} />
             </div>
-            <h3 style={{ marginBottom: "var(--spacing-sm)", color: "var(--color-text)" }}>
+            <h3
+              style={{
+                marginBottom: "var(--spacing-sm)",
+                color: "var(--color-text)",
+              }}
+            >
               No groups yet
             </h3>
             <p style={{ color: "var(--color-text)" }}>
@@ -333,9 +334,7 @@ const Dashboard = () => {
                     <input
                       type="text"
                       value={editingGroupNameValue}
-                      onChange={(e) =>
-                        setEditingGroupNameValue(e.target.value)
-                      }
+                      onChange={(e) => setEditingGroupNameValue(e.target.value)}
                       onBlur={() => handleSaveGroupName(group.id)}
                       onKeyDown={(e) => {
                         if (e.key === "Enter") {
@@ -467,7 +466,9 @@ const Dashboard = () => {
                         />
                       </div>
                       <div className="form-group" style={{ marginBottom: 0 }}>
-                        <label style={{ color: "var(--color-text)" }}>Email</label>
+                        <label style={{ color: "var(--color-text)" }}>
+                          Email
+                        </label>
                         <input
                           type="email"
                           value={newParticipant.email}
@@ -556,7 +557,10 @@ const Dashboard = () => {
                         <div>
                           <div className="flex-between mb-sm">
                             <strong
-                              style={{ fontSize: "0.875rem", color: "var(--color-text)" }}
+                              style={{
+                                fontSize: "0.875rem",
+                                color: "var(--color-text)",
+                              }}
                             >
                               Can be assigned to:
                             </strong>
