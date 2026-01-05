@@ -507,8 +507,8 @@ const Auth = () => {
       <style>{`
           @keyframes fadeInUp {
             from {
-              opacity: 0;
-              transform: translateY(1rem);
+              opacity: 0.5;
+              transform: translateY(2rem);
             }
             to {
               opacity: 1;
@@ -527,29 +527,27 @@ const Auth = () => {
             }
           }
           
-          /* Prevent browser autofill from changing input styles */
+          /* Keep all input fields statically styled - no changes on any interaction */
+          input,
+          input:focus,
+          input:focus-visible,
+          input:active,
+          input:hover,
           input:-webkit-autofill,
           input:-webkit-autofill:hover,
           input:-webkit-autofill:focus,
           input:-webkit-autofill:active {
-            -webkit-box-shadow: 0 0 0 1000px var(--color-bg) inset !important;
-            -webkit-text-fill-color: var(--color-text) !important;
-            box-shadow: 0 0 0 1000px var(--color-bg) inset !important;
-            background-color: var(--color-bg) !important;
-            border: 0.0625rem solid var(--color-border) !important;
-            transition: background-color 5000s ease-in-out 0s !important;
-          }
-          
-          /* Remove all active effects from inputs */
-          input:focus,
-          input:focus-visible,
-          input:active,
-          input:hover {
             outline: none !important;
             border: 0.0625rem solid var(--color-border) !important;
             background: var(--color-bg) !important;
+            background-color: var(--color-bg) !important;
             color: var(--color-text) !important;
+            -webkit-text-fill-color: var(--color-text) !important;
+            -webkit-box-shadow: 0 0 0 1000px var(--color-bg) inset !important;
+            box-shadow: none !important;
+            transition: none !important;
           }
+          
         `}</style>
     </div>
   );
