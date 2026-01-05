@@ -418,22 +418,27 @@ const Auth = () => {
                 }}
               />
               {emailExists === true && (
-                <FaCheckCircle
-                  title="account found!"
+                <div
                   style={{
                     position: "absolute",
                     right: "var(--spacing-sm)",
                     top: "50%",
                     transform: "translateY(-50%)",
-                    color: "var(--color-success)",
-                    fontSize: "1.25rem",
-                    background: "transparent",
-                    border: "0.125rem solid var(--color-success)",
-                    borderRadius: "50%",
-                    padding: "0.125rem",
                     cursor: "help",
                   }}
-                />
+                  title="account found!"
+                >
+                  <FaCheckCircle
+                    style={{
+                      color: "var(--color-success)",
+                      fontSize: "1.25rem",
+                      background: "transparent",
+                      border: "0.125rem solid var(--color-success)",
+                      borderRadius: "50%",
+                      padding: "0.125rem",
+                    }}
+                  />
+                </div>
               )}
             </div>
           </div>
@@ -461,6 +466,7 @@ const Auth = () => {
               maxWidth: "20rem",
               marginLeft: "auto",
               marginRight: "auto",
+              animation: "slideInUp 0.3s ease-out",
             }}
           >
             <div style={{ marginBottom: 0 }}>
@@ -569,6 +575,17 @@ const Auth = () => {
             from {
               opacity: 0;
               transform: translateY(1rem);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          
+          @keyframes slideInUp {
+            from {
+              opacity: 0;
+              transform: translateY(0.5rem);
             }
             to {
               opacity: 1;
