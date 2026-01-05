@@ -152,12 +152,18 @@ const Auth = () => {
             width: "200%",
             height: "200%",
             backgroundImage: `url(${hatImage})`,
-            backgroundSize: "2rem 2rem",
+            backgroundSize: "20rem 20rem",
             backgroundRepeat: "repeat",
-            backgroundPosition: "0 0",
+            backgroundPosition: "center center",
             transform: "rotate(45deg)",
             pointerEvents: "none",
             zIndex: 0,
+            maskImage: `radial-gradient(circle 1rem at center, black 0%, transparent 0%)`,
+            maskSize: "20rem 20rem",
+            maskRepeat: "repeat",
+            WebkitMaskImage: `radial-gradient(circle 1rem at center, black 0%, transparent 0%)`,
+            WebkitMaskSize: "20rem 20rem",
+            WebkitMaskRepeat: "repeat",
           }}
         />
       )}
