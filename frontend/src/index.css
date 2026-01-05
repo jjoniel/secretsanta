@@ -8,34 +8,15 @@
   box-sizing: border-box;
 }
 
-
 :root {
   font-size: 16px;
 
-  --color-bg-primary: #020617;
-  --color-bg-secondary: #0b1120;
-  --color-bg-tertiary: #111827;
-  --color-bg-elevated: #020617;
-
-  --color-text-primary: #f9fafb;
-  --color-text-secondary: #e5e7eb;
-  --color-text-tertiary: #9ca3af;
-  --color-text-inverse: #020617;
-
+  --color-bg: #020617;
+  --color-text: #ffffff;
   --color-border: #1f2933;
-  --color-border-subtle: #111827;
-
   --color-accent: #f97373;
-  --color-accent-hover: #fb7185;
-  --color-accent-active: #f97373;
-  --color-accent-light: #451a1a;
-
   --color-success: #4ade80;
-  --color-success-bg: #14532d;
   --color-error: #fb7185;
-  --color-error-bg: #3f1d1d;
-  --color-warning: #facc15;
-  --color-warning-bg: #3a2e1a;
 
   --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.5);
   --shadow-md: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.6);
@@ -73,8 +54,8 @@ body {
     sans-serif;
   font-weight: 400;
   line-height: 1.5;
-  color: var(--color-text-primary);
-  background: var(--color-bg-primary);
+  color: var(--color-text);
+  background: var(--color-bg);
   min-height: 100vh;
 }
 
@@ -97,6 +78,6 @@ body {
 
 /* Selection styles */
 ::selection {
-  background-color: var(--color-accent-light);
+  background-color: rgba(249, 115, 115, 0.2);
   color: var(--color-accent);
 }

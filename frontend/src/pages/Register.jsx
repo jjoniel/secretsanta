@@ -71,14 +71,14 @@ const Register = () => {
               fontSize: "clamp(1.75rem, 4vw, 2.25rem)",
               fontWeight: 700,
               marginBottom: "var(--spacing-sm)",
-              color: "var(--color-text-primary)",
+              color: "var(--color-text)",
             }}
           >
             Join Secret Santa
           </h1>
           <p
             style={{
-              color: "var(--color-text-secondary)",
+              color: "var(--color-text)",
               fontSize: "0.9375rem",
             }}
           >
@@ -114,7 +114,7 @@ const Register = () => {
             />
             <small
               style={{
-                color: "var(--color-text-tertiary)",
+                color: "var(--color-text)",
                 fontSize: "0.8125rem",
                 marginTop: "var(--spacing-xs)",
                 display: "block",

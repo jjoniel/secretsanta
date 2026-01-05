@@ -15,12 +15,13 @@ const Dashboard = () => {
   const [groups, setGroups] = useState([]);
   const [participantsByGroup, setParticipantsByGroup] = useState({});
   const [loading, setLoading] = useState(true);
-  const [newGroupName, setNewGroupName] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [showAddParticipant, setShowAddParticipant] = useState({});
   const [newParticipants, setNewParticipants] = useState({});
   const [editingRestrictions, setEditingRestrictions] = useState(null);
+  const [editingGroupName, setEditingGroupName] = useState(null);
+  const [editingGroupNameValue, setEditingGroupNameValue] = useState("");
   const { logout } = useAuth();
 
   useEffect(() => {
@@ -42,7 +43,7 @@ const Dashboard = () => {
       const response = await axios.get("/api/groups");
       const groupsData = response.data;
       setGroups(groupsData);
-      
+
       // Fetch participants for all groups
       const participantsPromises = groupsData.map((group) =>
         axios.get(`/api/groups/${group.id}/participants`).then((res) => ({
@@ -75,22 +76,54 @@ const Dashboard = () => {
     }
   };
 
-  const handleCreateGroup = async (e) => {
-    e.preventDefault();
-    if (!newGroupName.trim()) return;
-
+  const handleCreateGroup = async () => {
     try {
-      const response = await axios.post("/api/groups", { name: newGroupName });
-      setGroups([...groups, response.data]);
+      const response = await axios.post("/api/groups", { name: "New Group" });
+      const newGroup = response.data;
+      setGroups([...groups, newGroup]);
       setParticipantsByGroup({
         ...participantsByGroup,
-        [response.data.id]: [],
+        [newGroup.id]: [],
       });
-      setNewGroupName("");
-      setSuccess("Group created successfully");
+      setEditingGroupName(newGroup.id);
+      setEditingGroupNameValue("New Group");
+      setSuccess("Group created");
     } catch (err) {
       setError(err.response?.data?.detail || "Failed to create group");
     }
+  };
+
+  const handleStartEditGroupName = (groupId, currentName) => {
+    setEditingGroupName(groupId);
+    setEditingGroupNameValue(currentName);
+  };
+
+  const handleSaveGroupName = async (groupId) => {
+    const trimmedName = editingGroupNameValue.trim();
+    if (!trimmedName) {
+      setError("Group name cannot be empty");
+      setEditingGroupName(null);
+      return;
+    }
+
+    try {
+      const response = await axios.put(`/api/groups/${groupId}`, {
+        name: trimmedName,
+      });
+      setGroups(
+        groups.map((g) => (g.id === groupId ? response.data : g))
+      );
+      setEditingGroupName(null);
+      setSuccess("Group name updated");
+    } catch (err) {
+      setError(err.response?.data?.detail || "Failed to update group name");
+      setEditingGroupName(null);
+    }
+  };
+
+  const handleCancelEditGroupName = () => {
+    setEditingGroupName(null);
+    setEditingGroupNameValue("");
   };
 
   const handleDeleteGroup = async (groupId) => {
@@ -131,7 +164,9 @@ const Dashboard = () => {
     if (!window.confirm("Are you sure you want to delete this participant?"))
       return;
     try {
-      await axios.delete(`/api/groups/${groupId}/participants/${participantId}`);
+      await axios.delete(
+        `/api/groups/${groupId}/participants/${participantId}`
+      );
       setSuccess("Participant deleted");
       fetchParticipants(groupId);
     } catch (err) {
@@ -215,7 +250,7 @@ const Dashboard = () => {
         <div>
           <h1
             style={{
-              color: "var(--color-text-inverse)",
+              color: "var(--color-text)",
               fontSize: "clamp(2rem, 5vw, 3rem)",
               fontWeight: 700,
               marginBottom: "var(--spacing-xs)",
@@ -224,11 +259,12 @@ const Dashboard = () => {
               gap: "var(--spacing-sm)",
             }}
           >
-            <FaSnowflake style={{ color: "var(--color-accent)" }} /> Secret Santa
+            <FaSnowflake style={{ color: "var(--color-accent)" }} /> Secret
+            Santa
           </h1>
           <p
             style={{
-              color: "var(--color-text-inverse)",
+              color: "var(--color-text)",
               opacity: 0.9,
               fontSize: "0.9375rem",
             }}
@@ -237,11 +273,7 @@ const Dashboard = () => {
           </p>
         </div>
         <div className="flex gap-md">
-          <button
-            onClick={logout}
-            className="btn btn-ghost"
-            style={{ color: "var(--color-text-inverse)" }}
-          >
+          <button onClick={logout} className="btn btn-ghost">
             Sign Out
           </button>
         </div>
@@ -260,36 +292,10 @@ const Dashboard = () => {
         </div>
       )}
 
-      <div className="card">
-        <h2 style={{ marginBottom: "var(--spacing-lg)", color: "#ffffff" }}>
-          Create New Group
-        </h2>
-        <form
-          onSubmit={handleCreateGroup}
-          className="flex gap-md"
-          style={{ flexWrap: "wrap" }}
-        >
-          <input
-            type="text"
-            value={newGroupName}
-            onChange={(e) => setNewGroupName(e.target.value)}
-            placeholder="Group name (e.g., 'Family 2024')"
-            style={{
-              flex: "1 1 20rem",
-              padding: "var(--spacing-md)",
-              border: "0.0625rem solid var(--color-border)",
-              borderRadius: "var(--radius-md)",
-              fontSize: "1rem",
-              fontFamily: "inherit",
-              background: "var(--color-bg-primary)",
-              color: "var(--color-text-primary)",
-            }}
-            required
-          />
-          <button type="submit" className="btn btn-primary">
-            Create Group
-          </button>
-        </form>
+      <div style={{ marginBottom: "var(--spacing-lg)" }}>
+        <button onClick={handleCreateGroup} className="btn btn-primary">
+          + Create New Group
+        </button>
       </div>
 
       {groups.length === 0 ? (
@@ -298,10 +304,10 @@ const Dashboard = () => {
             <div className="empty-state-icon">
               <FaBox style={{ fontSize: "3rem" }} />
             </div>
-            <h3 style={{ marginBottom: "var(--spacing-sm)", color: "#ffffff" }}>
+            <h3 style={{ marginBottom: "var(--spacing-sm)", color: "var(--color-text)" }}>
               No groups yet
             </h3>
-            <p style={{ color: "#ffffff" }}>
+            <p style={{ color: "var(--color-text)" }}>
               Create your first Secret Santa group to get started!
             </p>
           </div>
@@ -310,18 +316,67 @@ const Dashboard = () => {
         groups.map((group, groupIndex) => {
           const participants = participantsByGroup[group.id] || [];
           const showAdd = showAddParticipant[group.id];
-          const newParticipant = newParticipants[group.id] || { name: "", email: "" };
+          const newParticipant = newParticipants[group.id] || {
+            name: "",
+            email: "",
+          };
 
           return (
-            <div key={group.id} className="card" style={{ marginBottom: "var(--spacing-xl)" }}>
+            <div
+              key={group.id}
+              className="card"
+              style={{ marginBottom: "var(--spacing-xl)" }}
+            >
               <div className="flex-between mb-lg">
-                <div>
-                  <h2 style={{ color: "#ffffff", marginBottom: "var(--spacing-xs)" }}>
-                    {group.name}
-                  </h2>
+                <div style={{ flex: 1 }}>
+                  {editingGroupName === group.id ? (
+                    <input
+                      type="text"
+                      value={editingGroupNameValue}
+                      onChange={(e) =>
+                        setEditingGroupNameValue(e.target.value)
+                      }
+                      onBlur={() => handleSaveGroupName(group.id)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          handleSaveGroupName(group.id);
+                        } else if (e.key === "Escape") {
+                          handleCancelEditGroupName();
+                        }
+                      }}
+                      autoFocus
+                      style={{
+                        fontSize: "clamp(1.5rem, 4vw, 2rem)",
+                        fontWeight: 600,
+                        color: "var(--color-text)",
+                        background: "transparent",
+                        border: "0.0625rem solid var(--color-accent)",
+                        borderRadius: "var(--radius-sm)",
+                        padding: "var(--spacing-sm) var(--spacing-md)",
+                        width: "100%",
+                        maxWidth: "30rem",
+                        fontFamily: "inherit",
+                      }}
+                    />
+                  ) : (
+                    <h2
+                      onDoubleClick={() =>
+                        handleStartEditGroupName(group.id, group.name)
+                      }
+                      style={{
+                        color: "var(--color-text)",
+                        marginBottom: "var(--spacing-xs)",
+                        cursor: "pointer",
+                        userSelect: "none",
+                      }}
+                      title="Double-click to edit"
+                    >
+                      {group.name}
+                    </h2>
+                  )}
                   <p
                     style={{
-                      color: "#ffffff",
+                      color: "var(--color-text)",
                       fontSize: "0.875rem",
                       opacity: 0.8,
                     }}
@@ -345,11 +400,11 @@ const Dashboard = () => {
 
               <div style={{ marginBottom: "var(--spacing-xl)" }}>
                 <div className="flex-between mb-lg">
-                  <h3 style={{ color: "#ffffff" }}>Participants</h3>
+                  <h3 style={{ color: "var(--color-text)" }}>Participants</h3>
                   <div className="flex gap-md" style={{ alignItems: "center" }}>
                     <span
                       style={{
-                        color: "#ffffff",
+                        color: "var(--color-text)",
                         fontSize: "0.875rem",
                       }}
                     >
@@ -376,11 +431,16 @@ const Dashboard = () => {
                     className="card"
                     style={{
                       marginBottom: "var(--spacing-lg)",
-                      background: "var(--color-bg-tertiary)",
+                      background: "var(--color-bg)",
                       animation: "slideDown 0.3s ease-out",
                     }}
                   >
-                    <h4 style={{ marginBottom: "var(--spacing-md)", color: "#ffffff" }}>
+                    <h4
+                      style={{
+                        marginBottom: "var(--spacing-md)",
+                        color: "#ffffff",
+                      }}
+                    >
                       New Participant
                     </h4>
                     <div
@@ -407,7 +467,7 @@ const Dashboard = () => {
                         />
                       </div>
                       <div className="form-group" style={{ marginBottom: 0 }}>
-                        <label style={{ color: "#ffffff" }}>Email</label>
+                        <label style={{ color: "var(--color-text)" }}>Email</label>
                         <input
                           type="email"
                           value={newParticipant.email}
@@ -436,11 +496,17 @@ const Dashboard = () => {
                     <div className="empty-state-icon">
                       <FaUsers style={{ fontSize: "3rem" }} />
                     </div>
-                    <h4 style={{ marginBottom: "var(--spacing-sm)", color: "#ffffff" }}>
+                    <h4
+                      style={{
+                        marginBottom: "var(--spacing-sm)",
+                        color: "#ffffff",
+                      }}
+                    >
                       No participants yet
                     </h4>
                     <p style={{ color: "#ffffff" }}>
-                      Add participants to get started with your Secret Santa exchange!
+                      Add participants to get started with your Secret Santa
+                      exchange!
                     </p>
                   </div>
                 ) : (
@@ -451,17 +517,24 @@ const Dashboard = () => {
                         className="card"
                         style={{
                           marginBottom: 0,
-                          animation: `fadeInUp 0.4s ease-out ${index * 0.05}s both`,
+                          animation: `fadeInUp 0.4s ease-out ${
+                            index * 0.05
+                          }s both`,
                         }}
                       >
                         <div className="flex-between mb-md">
                           <div>
-                            <h4 style={{ marginBottom: "var(--spacing-xs)", color: "#ffffff" }}>
+                            <h4
+                              style={{
+                                marginBottom: "var(--spacing-xs)",
+                                color: "var(--color-text)",
+                              }}
+                            >
                               {participant.name}
                             </h4>
                             <p
                               style={{
-                                color: "#ffffff",
+                                color: "var(--color-text)",
                                 fontSize: "0.875rem",
                                 opacity: 0.8,
                               }}
@@ -482,26 +555,31 @@ const Dashboard = () => {
 
                         <div>
                           <div className="flex-between mb-sm">
-                            <strong style={{ fontSize: "0.875rem", color: "#ffffff" }}>
+                            <strong
+                              style={{ fontSize: "0.875rem", color: "var(--color-text)" }}
+                            >
                               Can be assigned to:
                             </strong>
                             <button
                               onClick={() =>
                                 setEditingRestrictions(
-                                  editingRestrictions === `${group.id}-${participant.id}`
+                                  editingRestrictions ===
+                                    `${group.id}-${participant.id}`
                                     ? null
                                     : `${group.id}-${participant.id}`
                                 )
                               }
                               className="btn btn-secondary btn-sm"
                             >
-                              {editingRestrictions === `${group.id}-${participant.id}`
+                              {editingRestrictions ===
+                              `${group.id}-${participant.id}`
                                 ? "Cancel"
                                 : "Edit"}
                             </button>
                           </div>
 
-                          {editingRestrictions === `${group.id}-${participant.id}` ? (
+                          {editingRestrictions ===
+                          `${group.id}-${participant.id}` ? (
                             <RestrictionEditor
                               participant={participant}
                               allParticipants={participants}
@@ -516,7 +594,7 @@ const Dashboard = () => {
                           ) : (
                             <p
                               style={{
-                                color: "#ffffff",
+                                color: "var(--color-text)",
                                 fontSize: "0.8125rem",
                                 opacity: 0.8,
                               }}
@@ -551,18 +629,24 @@ const Dashboard = () => {
                   >
                     <FaGift style={{ color: "var(--color-accent)" }} />
                   </div>
-                  <h3 style={{ marginBottom: "var(--spacing-sm)", color: "#ffffff" }}>
+                  <h3
+                    style={{
+                      marginBottom: "var(--spacing-sm)",
+                      color: "#ffffff",
+                    }}
+                  >
                     Ready to Assign!
                   </h3>
                   <p
                     style={{
                       marginBottom: "var(--spacing-xl)",
-                      color: "#ffffff",
+                      color: "var(--color-text)",
                       opacity: 0.8,
                     }}
                   >
-                    Create Secret Santa assignments and send emails to all participants.
-                    Assignments will be saved to prevent repeats in future years.
+                    Create Secret Santa assignments and send emails to all
+                    participants. Assignments will be saved to prevent repeats
+                    in future years.
                   </p>
                   <button
                     onClick={() => handleCreateAssignments(group.id)}
@@ -676,17 +760,17 @@ const RestrictionEditor = ({ participant, allParticipants, onSave }) => {
                 gap: "var(--spacing-sm)",
                 padding: "var(--spacing-sm)",
                 background: selectedIds.has(p.id)
-                  ? "var(--color-accent-light)"
-                  : "var(--color-bg-secondary)",
+                  ? "rgba(249, 115, 115, 0.2)"
+                  : "var(--color-bg)",
                 borderRadius: "var(--radius-sm)",
                 cursor: "pointer",
                 transition: "all var(--transition-fast)",
                 border: `0.0625rem solid ${
                   selectedIds.has(p.id)
                     ? "var(--color-accent)"
-                    : "var(--color-border-subtle)"
+                    : "var(--color-border)"
                 }`,
-                color: "#ffffff",
+                color: "var(--color-text)",
               }}
             >
               <input
@@ -703,7 +787,7 @@ const RestrictionEditor = ({ participant, allParticipants, onSave }) => {
               <span
                 style={{
                   fontSize: "0.875rem",
-                  color: "#ffffff",
+                  color: "var(--color-text)",
                 }}
               >
                 {p.name}
@@ -718,7 +802,7 @@ const RestrictionEditor = ({ participant, allParticipants, onSave }) => {
         style={{
           marginTop: "var(--spacing-sm)",
           fontSize: "0.75rem",
-          color: "#ffffff",
+          color: "var(--color-text)",
           opacity: 0.7,
         }}
       >

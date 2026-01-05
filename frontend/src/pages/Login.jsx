@@ -71,14 +71,14 @@ const Login = () => {
               fontSize: "clamp(1.75rem, 4vw, 2.25rem)",
               fontWeight: 700,
               marginBottom: "var(--spacing-sm)",
-              color: "var(--color-text-primary)",
+              color: "var(--color-text)",
             }}
           >
             Secret Santa
           </h1>
           <p
             style={{
-              color: "var(--color-text-secondary)",
+              color: "var(--color-text)",
               fontSize: "0.9375rem",
             }}
           >
