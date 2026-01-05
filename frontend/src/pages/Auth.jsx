@@ -400,14 +400,13 @@ const Auth = () => {
                 style={{
                   width: "100%",
                   padding: "var(--spacing-sm) var(--spacing-lg)",
-                  paddingRight: "var(--spacing-lg)",
+                  paddingRight: emailExists === true ? "3rem" : "var(--spacing-lg)",
                   border: "0.0625rem solid var(--color-border)",
                   borderRadius: "9999px",
                   fontSize: "0.875rem",
                   fontFamily: "inherit",
                   background: "var(--color-bg)",
                   color: "var(--color-text)",
-                  transition: "all var(--transition-fast)",
                   textAlign: "center",
                 }}
               />
