@@ -367,6 +367,17 @@ const Auth = () => {
         </div>
 
         {/* Email Form - Always visible */}
+        <p
+          style={{
+            color: "var(--color-text)",
+            fontSize: "0.875rem",
+            textAlign: "center",
+            marginBottom: "var(--spacing-md)",
+            opacity: 0.8,
+          }}
+        >
+          jump right in
+        </p>
         <form
           onSubmit={handleEmailSubmit}
           style={{
