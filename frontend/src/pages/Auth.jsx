@@ -570,24 +570,6 @@ const Auth = () => {
               transform: translateY(0);
             }
           }
-          @keyframes fadeInOut {
-            0% {
-              opacity: 0;
-              transform: translateY(-50%) scale(0.8);
-            }
-            20% {
-              opacity: 1;
-              transform: translateY(-50%) scale(1);
-            }
-            80% {
-              opacity: 1;
-              transform: translateY(-50%) scale(1);
-            }
-            100% {
-              opacity: 0;
-              transform: translateY(-50%) scale(0.8);
-            }
-          }
         `}</style>
     </div>
   );
