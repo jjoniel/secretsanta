@@ -94,20 +94,27 @@ const Auth = () => {
     if (gameType === "santa") {
       return {
         backgroundImage: `url(${hatImage})`,
-        backgroundSize: "200px 200px",
+        backgroundSize: "12rem 12rem",
         backgroundRepeat: "repeat",
         backgroundPosition: "0 0",
         backgroundAttachment: "fixed",
       };
     } else if (gameType === "assassins") {
       return {
-        background: `
+        backgroundImage: `
           repeating-linear-gradient(
             45deg,
-            rgba(0, 0, 0, 0.1) 0px,
-            rgba(0, 0, 0, 0.1) 10px,
-            rgba(249, 115, 115, 0.05) 10px,
-            rgba(249, 115, 115, 0.05) 20px
+            transparent,
+            transparent 2rem,
+            rgba(249, 115, 115, 0.03) 2rem,
+            rgba(249, 115, 115, 0.03) 2.1rem
+          ),
+          repeating-linear-gradient(
+            -45deg,
+            transparent,
+            transparent 2rem,
+            rgba(249, 115, 115, 0.03) 2rem,
+            rgba(249, 115, 115, 0.03) 2.1rem
           )
         `,
       };
