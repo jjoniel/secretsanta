@@ -419,6 +419,7 @@ const Auth = () => {
               />
               {emailExists === true && (
                 <FaCheckCircle
+                  title="account found!"
                   style={{
                     position: "absolute",
                     right: "var(--spacing-sm)",
@@ -430,6 +431,7 @@ const Auth = () => {
                     border: "0.125rem solid var(--color-success)",
                     borderRadius: "50%",
                     padding: "0.125rem",
+                    cursor: "help",
                   }}
                 />
               )}
@@ -449,7 +451,6 @@ const Auth = () => {
             </p>
           )}
         </form>
-
 
         {/* Password Form (Login or Register) - Dynamically shown */}
         {emailExists !== null && (
