@@ -255,9 +255,6 @@ const Auth = () => {
           }}
         >
           <h1
-            className={
-              emailExists === true ? "title-fade-out" : "title-fade-in"
-            }
             style={{
               fontSize: "clamp(2.5rem, 6vw, 4rem)",
               fontWeight: 700,
@@ -269,16 +266,13 @@ const Auth = () => {
               opacity: emailExists === true ? 0 : 1,
               transform:
                 emailExists === true ? "translateY(-1rem)" : "translateY(0)",
-              transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+              transition: "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
               pointerEvents: "none",
             }}
           >
             exchan.ge
           </h1>
           <h1
-            className={
-              emailExists === true ? "title-fade-in" : "title-fade-out"
-            }
             style={{
               fontSize: "clamp(2.5rem, 6vw, 4rem)",
               fontWeight: 700,
@@ -290,7 +284,7 @@ const Auth = () => {
               opacity: emailExists === true ? 1 : 0,
               transform:
                 emailExists === true ? "translateY(0)" : "translateY(1rem)",
-              transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+              transition: "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
               pointerEvents: "none",
             }}
           >
