@@ -243,7 +243,7 @@ const Auth = () => {
           animation: "fadeInUp 0.5s ease-out",
         }}
       >
-        {/* Title with morphing stroke animation */}
+        {/* Title with transition */}
         <div
           style={{
             position: "relative",
@@ -255,35 +255,37 @@ const Auth = () => {
           }}
         >
           <h1
-            className={emailExists === true ? "title-morph-out" : "title-morph-in"}
+            className={emailExists === true ? "title-fade-out" : "title-fade-in"}
             style={{
               fontSize: "clamp(2.5rem, 6vw, 4rem)",
               fontWeight: 700,
-              color: emailExists === true ? "transparent" : "var(--color-text)",
+              color: "var(--color-text)",
               letterSpacing: "-0.02em",
               textAlign: "center",
               position: "absolute",
               width: "100%",
-              WebkitTextStroke: emailExists === true ? "0.125rem var(--color-text)" : "0.125rem transparent",
-              WebkitTextFillColor: emailExists === true ? "transparent" : "var(--color-text)",
-              transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
+              opacity: emailExists === true ? 0 : 1,
+              transform: emailExists === true ? "translateY(-1rem)" : "translateY(0)",
+              transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+              pointerEvents: "none",
             }}
           >
             exchan.ge
           </h1>
           <h1
-            className={emailExists === true ? "title-morph-in" : "title-morph-out"}
+            className={emailExists === true ? "title-fade-in" : "title-fade-out"}
             style={{
               fontSize: "clamp(2.5rem, 6vw, 4rem)",
               fontWeight: 700,
-              color: emailExists === true ? "var(--color-text)" : "transparent",
+              color: "var(--color-text)",
               letterSpacing: "-0.02em",
               textAlign: "center",
               position: "absolute",
               width: "100%",
-              WebkitTextStroke: emailExists === true ? "0.125rem transparent" : "0.125rem var(--color-text)",
-              WebkitTextFillColor: emailExists === true ? "var(--color-text)" : "transparent",
-              transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
+              opacity: emailExists === true ? 1 : 0,
+              transform: emailExists === true ? "translateY(0)" : "translateY(1rem)",
+              transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+              pointerEvents: "none",
             }}
           >
             welcome back
@@ -469,9 +471,7 @@ const Auth = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder={
-                emailExists
-                  ? "enter your password"
-                  : "create a password"
+                emailExists ? "enter your password" : "create a password"
               }
               required
               autoComplete={emailExists ? "current-password" : "new-password"}
@@ -546,50 +546,6 @@ const Auth = () => {
               opacity: 1;
               transform: translateY(-50%) scale(1);
             }
-          }
-          
-          @keyframes morphOut {
-            0% {
-              opacity: 1;
-              transform: scale(1) translateY(0);
-              filter: blur(0);
-            }
-            50% {
-              opacity: 0.3;
-              transform: scale(0.95) translateY(-0.5rem);
-              filter: blur(0.125rem);
-            }
-            100% {
-              opacity: 0;
-              transform: scale(0.9) translateY(-1rem);
-              filter: blur(0.25rem);
-            }
-          }
-          
-          @keyframes morphIn {
-            0% {
-              opacity: 0;
-              transform: scale(0.9) translateY(1rem);
-              filter: blur(0.25rem);
-            }
-            50% {
-              opacity: 0.3;
-              transform: scale(0.95) translateY(0.5rem);
-              filter: blur(0.125rem);
-            }
-            100% {
-              opacity: 1;
-              transform: scale(1) translateY(0);
-              filter: blur(0);
-            }
-          }
-          
-          .title-morph-out {
-            animation: morphOut 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-          }
-          
-          .title-morph-in {
-            animation: morphIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
           }
           
           /* Keep all input fields statically styled - no changes on any interaction */
