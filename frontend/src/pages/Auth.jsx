@@ -453,7 +453,7 @@ const Auth = () => {
           )}
         </form>
 
-        {/* Password Form (Login or Register) - Always reserve space */}
+        {/* Password Form (Login or Register) - Always present but invisible */}
         <form
           onSubmit={handlePasswordSubmit}
           style={{
@@ -461,122 +461,73 @@ const Auth = () => {
             maxWidth: "20rem",
             marginLeft: "auto",
             marginRight: "auto",
-            minHeight:
-              emailExists !== null ? (emailExists ? "3.5rem" : "7rem") : "0",
-            transition: "min-height var(--transition-base)",
-            overflow: "hidden",
+            opacity: emailExists !== null ? 1 : 0,
+            visibility: emailExists !== null ? "visible" : "hidden",
+            transition: "opacity var(--transition-base)",
           }}
         >
-          {emailExists !== null && (
-            <>
-              <div style={{ marginBottom: "var(--spacing-md)" }}>
-                <input
-                  id="password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder={
-                    emailExists ? "enter your password" : "create a password"
-                  }
-                  required
-                  autoComplete={
-                    emailExists ? "current-password" : "new-password"
-                  }
-                  autoFocus
+          <div style={{ marginBottom: "var(--spacing-md)" }}>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder={
+                emailExists ? "enter your password" : "create a password"
+              }
+              required
+              autoComplete={
+                emailExists ? "current-password" : "new-password"
+              }
+              autoFocus={emailExists !== null}
+              style={{
+                width: "100%",
+                padding: "var(--spacing-sm) var(--spacing-lg)",
+                border: "0.0625rem solid var(--color-border)",
+                borderRadius: "9999px",
+                fontSize: "0.875rem",
+                fontFamily: "inherit",
+                background: "var(--color-bg)",
+                color: "var(--color-text)",
+                transition: "all var(--transition-fast)",
+                textAlign: "center",
+              }}
+            />
+          </div>
+
+          {error && (
+            <div className="message message-error" role="alert">
+              <FaExclamationTriangle />
+              <span>{error}</span>
+            </div>
+          )}
+
+          <button
+            type="submit"
+            className="btn btn-primary"
+            style={{ width: "100%", marginTop: "var(--spacing-md)" }}
+            disabled={loading}
+          >
+            {loading ? (
+              <>
+                <span
+                  className="spinner"
                   style={{
-                    width: "100%",
-                    padding: "var(--spacing-sm) var(--spacing-lg)",
-                    border: "0.0625rem solid var(--color-border)",
-                    borderRadius: "9999px",
-                    fontSize: "0.875rem",
-                    fontFamily: "inherit",
-                    background: "var(--color-bg)",
-                    color: "var(--color-text)",
-                    transition: "all var(--transition-fast)",
-                    textAlign: "center",
+                    width: "1rem",
+                    height: "1rem",
+                    borderWidth: "0.125rem",
                   }}
                 />
-              </div>
-
-              {!emailExists && (
-                <div style={{ marginBottom: "var(--spacing-md)" }}>
-                  <input
-                    id="confirmPassword"
-                    type="password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    placeholder="reenter password"
-                    required
-                    autoComplete="new-password"
-                    onFocus={(e) => (e.target.style.outline = "none")}
-                    onBlur={(e) => (e.target.style.outline = "none")}
-                    style={{
-                      width: "100%",
-                      padding: "var(--spacing-sm) var(--spacing-lg)",
-                      border: "0.0625rem solid var(--color-border)",
-                      borderRadius: "9999px",
-                      fontSize: "0.875rem",
-                      fontFamily: "inherit",
-                      background: "var(--color-bg)",
-                      color: "var(--color-text)",
-                      transition: "all var(--transition-fast)",
-                      textAlign: "center",
-                      outline: "none",
-                    }}
-                  />
-                  <small
-                    style={{
-                      color: "var(--color-text)",
-                      fontSize: "0.8125rem",
-                      marginTop: "var(--spacing-xs)",
-                      display: "block",
-                      opacity: 0.7,
-                    }}
-                  >
-                    Must be at least 6 characters
-                  </small>
-                </div>
-              )}
-            </>
-          )}
-
-          {emailExists !== null && (
-            <>
-              {error && (
-                <div className="message message-error" role="alert">
-                  <FaExclamationTriangle />
-                  <span>{error}</span>
-                </div>
-              )}
-
-              <button
-                type="submit"
-                className="btn btn-primary"
-                style={{ width: "100%", marginTop: "var(--spacing-md)" }}
-                disabled={loading}
-              >
-                {loading ? (
-                  <>
-                    <span
-                      className="spinner"
-                      style={{
-                        width: "1rem",
-                        height: "1rem",
-                        borderWidth: "0.125rem",
-                      }}
-                    />
-                    <span>
-                      {emailExists ? "Signing in..." : "Creating account..."}
-                    </span>
-                  </>
-                ) : emailExists ? (
-                  "Sign In"
-                ) : (
-                  "Create Account"
-                )}
-              </button>
-            </>
-          )}
+                <span>
+                  {emailExists ? "Signing in..." : "Creating account..."}
+                </span>
+              </>
+            ) : emailExists ? (
+              "Sign In"
+            ) : (
+              "Create Account"
+            )}
+          </button>
         </form>
       </div>
 
