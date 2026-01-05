@@ -533,41 +533,44 @@ const Auth = () => {
             </>
           )}
 
-            {error && (
-              <div className="message message-error" role="alert">
-                <FaExclamationTriangle />
-                <span>{error}</span>
-              </div>
-            )}
-
-            <button
-              type="submit"
-              className="btn btn-primary"
-              style={{ width: "100%", marginTop: "var(--spacing-md)" }}
-              disabled={loading}
-            >
-              {loading ? (
-                <>
-                  <span
-                    className="spinner"
-                    style={{
-                      width: "1rem",
-                      height: "1rem",
-                      borderWidth: "0.125rem",
-                    }}
-                  />
-                  <span>
-                    {emailExists ? "Signing in..." : "Creating account..."}
-                  </span>
-                </>
-              ) : emailExists ? (
-                "Sign In"
-              ) : (
-                "Create Account"
+          {emailExists !== null && (
+            <>
+              {error && (
+                <div className="message message-error" role="alert">
+                  <FaExclamationTriangle />
+                  <span>{error}</span>
+                </div>
               )}
-            </button>
-          </form>
-        )}
+
+              <button
+                type="submit"
+                className="btn btn-primary"
+                style={{ width: "100%", marginTop: "var(--spacing-md)" }}
+                disabled={loading}
+              >
+                {loading ? (
+                  <>
+                    <span
+                      className="spinner"
+                      style={{
+                        width: "1rem",
+                        height: "1rem",
+                        borderWidth: "0.125rem",
+                      }}
+                    />
+                    <span>
+                      {emailExists ? "Signing in..." : "Creating account..."}
+                    </span>
+                  </>
+                ) : emailExists ? (
+                  "Sign In"
+                ) : (
+                  "Create Account"
+                )}
+              </button>
+            </>
+          )}
+        </form>
       </div>
 
       <style>{`
