@@ -490,7 +490,7 @@ const Auth = () => {
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  placeholder="Confirm your password"
+                  placeholder="reenter password"
                   required
                   autoComplete="new-password"
                   style={{
