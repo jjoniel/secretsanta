@@ -400,35 +400,36 @@ const Auth = () => {
                 style={{
                   width: "100%",
                   padding: "var(--spacing-sm) var(--spacing-lg)",
-                  paddingRight: emailExists === true ? "3rem" : "var(--spacing-lg)",
+                  paddingRight: "var(--spacing-lg)",
                   border: "0.0625rem solid var(--color-border)",
                   borderRadius: "9999px",
                   fontSize: "0.875rem",
                   fontFamily: "inherit",
                   background: "var(--color-bg)",
                   color: "var(--color-text)",
+                  transition: "all var(--transition-fast)",
                   textAlign: "center",
                 }}
               />
-              <FaCheckCircle
-                title="account found!"
-                style={{
-                  position: "absolute",
-                  right: "var(--spacing-sm)",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  color: "var(--color-success)",
-                  fontSize: "1.25rem",
-                  background: "transparent",
-                  border: "0.125rem solid var(--color-success)",
-                  borderRadius: "50%",
-                  padding: "0.125rem",
-                  cursor: "help",
-                  opacity: emailExists === true ? 1 : 0,
-                  animation: emailExists === true ? "checkmarkIn 0.3s ease-out" : "none",
-                  pointerEvents: emailExists === true ? "auto" : "none",
-                }}
-              />
+              {emailExists === true && (
+                <FaCheckCircle
+                  title="account found!"
+                  style={{
+                    position: "absolute",
+                    right: "var(--spacing-sm)",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    color: "var(--color-success)",
+                    fontSize: "1.25rem",
+                    background: "transparent",
+                    border: "0.125rem solid var(--color-success)",
+                    borderRadius: "50%",
+                    padding: "0.125rem",
+                    cursor: "help",
+                    animation: "checkmarkIn 0.3s ease-out",
+                  }}
+                />
+              )}
             </div>
           </div>
           {checkingEmail && (
@@ -454,8 +455,10 @@ const Auth = () => {
             maxWidth: "20rem",
             marginLeft: "auto",
             marginRight: "auto",
+            height: "8rem",
             opacity: emailExists !== null ? 1 : 0,
             pointerEvents: emailExists !== null ? "auto" : "none",
+            position: "relative",
           }}
         >
           <div style={{ marginBottom: "var(--spacing-md)" }}>
@@ -479,6 +482,7 @@ const Auth = () => {
                 fontFamily: "inherit",
                 background: "var(--color-bg)",
                 color: "var(--color-text)",
+                transition: "all var(--transition-fast)",
                 textAlign: "center",
               }}
             />
