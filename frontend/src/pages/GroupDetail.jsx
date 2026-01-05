@@ -436,22 +436,30 @@ const RestrictionEditor = ({ participant, allParticipants, onSave }) => {
                 padding: 'var(--spacing-sm)',
                 background: selectedIds.has(p.id)
                   ? 'var(--color-accent-light)'
-                  : 'var(--color-bg-tertiary)',
+                  : 'var(--color-bg-secondary)',
                 borderRadius: 'var(--radius-sm)',
                 cursor: 'pointer',
                 transition: 'all var(--transition-fast)',
                 border: `0.0625rem solid ${
-                  selectedIds.has(p.id) ? 'var(--color-accent)' : 'transparent'
+                  selectedIds.has(p.id) ? 'var(--color-accent)' : 'var(--color-border-subtle)'
                 }`,
+                color: 'var(--color-text-primary)',
               }}
             >
               <input
                 type="checkbox"
                 checked={selectedIds.has(p.id)}
                 onChange={() => toggleParticipant(p.id)}
-                style={{ cursor: 'pointer' }}
+                style={{
+                  cursor: 'pointer',
+                  width: '1rem',
+                  height: '1rem',
+                  accentColor: 'var(--color-accent)',
+                }}
               />
-              <span style={{ fontSize: '0.875rem' }}>{p.name}</span>
+              <span style={{ fontSize: '0.875rem', color: 'var(--color-text-primary)' }}>
+                {p.name}
+              </span>
             </label>
           ))}
       </div>
