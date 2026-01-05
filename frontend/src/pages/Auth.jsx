@@ -124,9 +124,11 @@ const Auth = () => {
 
         for (let row = -1; row < rows; row++) {
           for (let col = -1; col < cols; col++) {
+            // Stagger every other row by half spacing
+            const xOffset = row % 2 === 0 ? 0 : spacing / 2;
             hats.push({
               id: `${row}-${col}`,
-              x: col * spacing,
+              x: col * spacing + xOffset,
               y: row * spacing,
               rotation: getRandomRotation(),
             });
@@ -220,7 +222,6 @@ const Auth = () => {
           ))}
         </div>
       )}
-
 
       <div
         style={{
