@@ -223,6 +223,7 @@ const Auth = () => {
               transition: "all 0.3s ease",
               flex: "1 1 calc(50% - var(--spacing-sm) / 2)",
               minWidth: 0,
+              lineHeight: 1,
             }}
             onMouseEnter={(e) => {
               if (gameType !== "santa") {
@@ -242,9 +243,14 @@ const Auth = () => {
                   gameType === "santa"
                     ? "var(--color-accent)"
                     : "var(--color-accent)",
+                display: "flex",
+                alignItems: "center",
+                lineHeight: 1,
               }}
             />
-            Secret Santa
+            <span style={{ display: "flex", alignItems: "center", lineHeight: 1 }}>
+              Secret Santa
+            </span>
           </button>
           <button
             onClick={() => setGameType("assassins")}
@@ -271,6 +277,7 @@ const Auth = () => {
               transition: "all 0.3s ease",
               flex: "1 1 calc(50% - var(--spacing-sm) / 2)",
               minWidth: 0,
+              lineHeight: 1,
             }}
             onMouseEnter={(e) => {
               if (gameType !== "assassins") {
@@ -290,9 +297,14 @@ const Auth = () => {
                   gameType === "assassins"
                     ? "var(--color-accent)"
                     : "var(--color-accent)",
+                display: "flex",
+                alignItems: "center",
+                lineHeight: 1,
               }}
             />
-            Assassins
+            <span style={{ display: "flex", alignItems: "center", lineHeight: 1 }}>
+              Assassins
+            </span>
           </button>
         </div>
 
