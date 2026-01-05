@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useAuth } from '../contexts/AuthContext'
 import ThemeToggle from '../components/ThemeToggle'
+import { FaSnowflake, FaExclamationTriangle, FaBox } from 'react-icons/fa'
 import '../App.css'
 
 const Dashboard = () => {
@@ -79,9 +80,12 @@ const Dashboard = () => {
               fontSize: 'clamp(2rem, 5vw, 3rem)',
               fontWeight: 700,
               marginBottom: 'var(--spacing-xs)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 'var(--spacing-sm)',
             }}
           >
-            🎅 Secret Santa
+            <FaSnowflake /> Secret Santa
           </h1>
           <p
             style={{
@@ -103,7 +107,7 @@ const Dashboard = () => {
 
       {error && (
         <div className="message message-error" role="alert">
-          <span>⚠️</span>
+          <FaExclamationTriangle />
           <span>{error}</span>
         </div>
       )}
@@ -151,7 +155,9 @@ const Dashboard = () => {
 
         {groups.length === 0 ? (
           <div className="empty-state">
-            <div className="empty-state-icon">📦</div>
+            <div className="empty-state-icon">
+              <FaBox style={{ fontSize: '3rem' }} />
+            </div>
             <h3 style={{ marginBottom: 'var(--spacing-sm)' }}>No groups yet</h3>
             <p style={{ color: 'var(--color-text-secondary)' }}>
               Create your first Secret Santa group to get started!

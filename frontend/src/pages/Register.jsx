@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import ThemeToggle from "../components/ThemeToggle";
+import { FaSnowflake, FaExclamationTriangle } from "react-icons/fa";
 import "../App.css";
 
 const Register = () => {
@@ -70,9 +71,11 @@ const Register = () => {
               fontSize: "3.5rem",
               marginBottom: "var(--spacing-md)",
               lineHeight: 1,
+              display: "flex",
+              justifyContent: "center",
             }}
           >
-            🎅
+            <FaSnowflake />
           </div>
           <h1
             style={{
@@ -133,7 +136,7 @@ const Register = () => {
           </div>
           {error && (
             <div className="message message-error" role="alert">
-              <span>⚠️</span>
+              <FaExclamationTriangle />
               <span>{error}</span>
             </div>
           )}

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import ThemeToggle from '../components/ThemeToggle'
+import { FaExclamationTriangle, FaCheck, FaUsers, FaGift } from 'react-icons/fa'
 import '../App.css'
 
 const GroupDetail = () => {
@@ -161,13 +162,13 @@ const GroupDetail = () => {
 
       {error && (
         <div className="message message-error" role="alert">
-          <span>⚠️</span>
+          <FaExclamationTriangle />
           <span>{error}</span>
         </div>
       )}
       {success && (
         <div className="message message-success" role="alert">
-          <span>✓</span>
+          <FaCheck />
           <span>{success}</span>
         </div>
       )}
@@ -239,7 +240,9 @@ const GroupDetail = () => {
 
         {participants.length === 0 ? (
           <div className="empty-state">
-            <div className="empty-state-icon">👥</div>
+            <div className="empty-state-icon">
+              <FaUsers style={{ fontSize: '3rem' }} />
+            </div>
             <h3 style={{ marginBottom: 'var(--spacing-sm)' }}>No participants yet</h3>
             <p style={{ color: 'var(--color-text-secondary)' }}>
               Add participants to get started with your Secret Santa exchange!

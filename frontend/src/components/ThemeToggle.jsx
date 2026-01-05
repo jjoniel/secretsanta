@@ -1,4 +1,5 @@
 import { useTheme } from '../contexts/ThemeContext'
+import { FaMoon, FaSun } from 'react-icons/fa'
 import '../App.css'
 
 const ThemeToggle = () => {
@@ -17,9 +18,9 @@ const ThemeToggle = () => {
       }}
     >
       {theme === 'light' ? (
-        <span style={{ fontSize: '1.25rem' }}>🌙</span>
+        <FaMoon style={{ fontSize: '1.25rem' }} />
       ) : (
-        <span style={{ fontSize: '1.25rem' }}>☀️</span>
+        <FaSun style={{ fontSize: '1.25rem' }} />
       )}
     </button>
   )

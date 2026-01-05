@@ -41,9 +41,9 @@ div:not([role="button"]):not(.btn):not(button):not(a) {
   --color-bg-elevated: #ffffff;
   --color-bg-overlay: rgba(0, 0, 0, 0.4);
 
-  --color-text-primary: #1d1d1f;
-  --color-text-secondary: #6e6e73;
-  --color-text-tertiary: #86868b;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #ffffff;
+  --color-text-tertiary: #ffffff;
   --color-text-inverse: #ffffff;
 
   --color-border: #d2d2d7;
@@ -96,10 +96,10 @@ div:not([role="button"]):not(.btn):not(button):not(a) {
   --color-bg-elevated: #020617;
   --color-bg-overlay: rgba(0, 0, 0, 0.7);
 
-  --color-text-primary: #f9fafb;
-  --color-text-secondary: #e5e7eb;
-  --color-text-tertiary: #9ca3af;
-  --color-text-inverse: #020617;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #ffffff;
+  --color-text-tertiary: #ffffff;
+  --color-text-inverse: #ffffff;
 
   --color-border: #1f2933;
   --color-border-subtle: #111827;
