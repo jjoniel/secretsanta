@@ -406,7 +406,8 @@ const Auth = () => {
                 style={{
                   width: "100%",
                   padding: "var(--spacing-sm) var(--spacing-lg)",
-                  paddingRight: emailExists === true ? "8rem" : "var(--spacing-lg)",
+                  paddingRight:
+                    emailExists === true ? "8rem" : "var(--spacing-lg)",
                   border: "0.0625rem solid var(--color-border)",
                   borderRadius: "9999px",
                   fontSize: "0.875rem",
@@ -418,38 +419,20 @@ const Auth = () => {
                 }}
               />
               {emailExists === true && (
-                <div
+                <FaCheckCircle
                   style={{
                     position: "absolute",
                     right: "var(--spacing-sm)",
                     top: "50%",
                     transform: "translateY(-50%)",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "var(--spacing-xs)",
-                    animation: "fadeInOut 2s ease-in-out",
+                    color: "var(--color-success)",
+                    fontSize: "1.25rem",
+                    background: "transparent",
+                    border: "0.125rem solid var(--color-success)",
+                    borderRadius: "50%",
+                    padding: "0.125rem",
                   }}
-                >
-                  <FaCheckCircle
-                    style={{
-                      color: "white",
-                      fontSize: "1rem",
-                      background: "var(--color-success)",
-                      borderRadius: "50%",
-                      padding: "0.125rem",
-                    }}
-                  />
-                  <span
-                    style={{
-                      color: "var(--color-success)",
-                      fontSize: "0.8125rem",
-                      fontWeight: 500,
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    account found
-                  </span>
-                </div>
+                />
               )}
             </div>
           </div>
@@ -468,57 +451,6 @@ const Auth = () => {
           )}
         </form>
 
-        {/* Account Exists Popup */}
-        {emailExists === true && (
-          <div
-            style={{
-              background: "rgba(74, 222, 128, 0.1)",
-              border: "0.0625rem solid var(--color-success)",
-              borderRadius: "var(--radius-md)",
-              padding: "var(--spacing-md)",
-              marginBottom: "var(--spacing-lg)",
-              display: "flex",
-              alignItems: "center",
-              gap: "var(--spacing-sm)",
-              animation: "slideIn 0.3s ease-out",
-            }}
-          >
-            <FaCheck
-              style={{ color: "var(--color-success)", fontSize: "1.25rem" }}
-            />
-            <span
-              style={{ color: "var(--color-success)", fontSize: "0.875rem" }}
-            >
-              Account exists! Enter your password to sign in.
-            </span>
-          </div>
-        )}
-
-        {/* Account Exists Popup */}
-        {emailExists === true && (
-          <div
-            style={{
-              background: "rgba(74, 222, 128, 0.1)",
-              border: "0.0625rem solid var(--color-success)",
-              borderRadius: "var(--radius-md)",
-              padding: "var(--spacing-md)",
-              marginBottom: "var(--spacing-lg)",
-              display: "flex",
-              alignItems: "center",
-              gap: "var(--spacing-sm)",
-              animation: "slideIn 0.3s ease-out",
-            }}
-          >
-            <FaCheck
-              style={{ color: "var(--color-success)", fontSize: "1.25rem" }}
-            />
-            <span
-              style={{ color: "var(--color-success)", fontSize: "0.875rem" }}
-            >
-              Account exists! Enter your password to sign in.
-            </span>
-          </div>
-        )}
 
         {/* Password Form (Login or Register) - Dynamically shown */}
         {emailExists !== null && (
@@ -628,7 +560,7 @@ const Auth = () => {
         )}
       </div>
 
-        <style>{`
+      <style>{`
           @keyframes fadeInUp {
             from {
               opacity: 0;
