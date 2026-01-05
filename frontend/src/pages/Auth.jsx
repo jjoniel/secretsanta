@@ -106,14 +106,14 @@ const Auth = () => {
     return angles[Math.floor(Math.random() * angles.length)];
   };
 
-  const [hatPositions, setHatPositions] = useState([]);
+  const [patternPositions, setPatternPositions] = useState([]);
 
   useEffect(() => {
-    if (gameType === "santa") {
-      // Generate hat positions for Santa background
-      const generateHatPositions = () => {
-        const hats = [];
-        const spacing = 15; // rem spacing between hats
+    if (gameType === "santa" || gameType === "assassins") {
+      // Generate pattern positions for background
+      const generatePatternPositions = () => {
+        const items = [];
+        const spacing = 15; // rem spacing between items
         // Use viewport dimensions, fallback to reasonable defaults
         const viewportWidth =
           typeof window !== "undefined" ? window.innerWidth : 1920;
@@ -127,7 +127,7 @@ const Auth = () => {
           for (let col = -1; col < cols; col++) {
             // Stagger every other row by half spacing
             const xOffset = row % 2 === 0 ? 0 : spacing / 2;
-            hats.push({
+            items.push({
               id: `${row}-${col}`,
               x: col * spacing + xOffset,
               y: row * spacing,
@@ -135,19 +135,19 @@ const Auth = () => {
             });
           }
         }
-        return hats;
+        return items;
       };
 
-      setHatPositions(generateHatPositions());
+      setPatternPositions(generatePatternPositions());
 
       // Regenerate on window resize
       const handleResize = () => {
-        setHatPositions(generateHatPositions());
+        setPatternPositions(generatePatternPositions());
       };
       window.addEventListener("resize", handleResize);
       return () => window.removeEventListener("resize", handleResize);
     } else {
-      setHatPositions([]);
+      setPatternPositions([]);
     }
   }, [gameType]);
 
