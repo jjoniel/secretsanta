@@ -142,6 +142,25 @@ const Auth = () => {
         ...getBackgroundStyle(),
       }}
     >
+      {/* Rotated hat pattern for Santa */}
+      {gameType === "santa" && (
+        <div
+          style={{
+            position: "absolute",
+            top: "-50%",
+            left: "-50%",
+            width: "200%",
+            height: "200%",
+            backgroundImage: `url(${hatImage})`,
+            backgroundSize: "6rem 6rem",
+            backgroundRepeat: "repeat",
+            backgroundPosition: "0 0",
+            transform: "rotate(45deg)",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        />
+      )}
       {/* Overlay for readability */}
       <div
         style={{
@@ -153,7 +172,7 @@ const Auth = () => {
           background: gameType
             ? "rgba(2, 6, 23, 0.85)"
             : "rgba(2, 6, 23, 0.95)",
-          zIndex: 0,
+          zIndex: 1,
           transition: "background 0.5s ease",
         }}
       />
