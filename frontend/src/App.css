@@ -1,0 +1,110 @@
+.app {
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background: #667eea;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #5568d3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #5a6268;
+}
+
+.btn-danger {
+  background: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #c82333;
+}
+
+.btn-success {
+  background: #28a745;
+  color: white;
+}
+
+.btn-success:hover {
+  background: #218838;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.error {
+  color: #dc3545;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.success {
+  color: #28a745;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: white;
+}

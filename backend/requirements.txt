@@ -1,0 +1,21 @@
+# Web framework
+fastapi>=0.128.0
+uvicorn[standard]>=0.40.0
+
+# Database
+sqlalchemy>=2.0.45
+psycopg2-binary>=2.9.11
+
+# Config / auth / security
+python-dotenv>=1.2.1
+python-jose[cryptography]>=3.3.0
+bcrypt>=4.0.1,<5.0.0
+
+# Data validation (IMPORTANT for wheels)
+pydantic[email]>=2.12.5
+
+# Google APIs
+google-auth>2.41.0
+google-auth-oauthlib>=1.2.3
+google-auth-httplib2>=0.2.0
+google-api-python-client>=2.187.0
