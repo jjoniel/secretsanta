@@ -504,14 +504,15 @@ const Auth = () => {
                 autoFocus
                 style={{
                   width: "100%",
-                  padding: "0.875rem 1rem",
+                  padding: "var(--spacing-sm) var(--spacing-lg)",
                   border: "0.0625rem solid var(--color-border)",
-                  borderRadius: "var(--radius-md)",
-                  fontSize: "1rem",
+                  borderRadius: "9999px",
+                  fontSize: "0.875rem",
                   fontFamily: "inherit",
                   background: "var(--color-bg)",
                   color: "var(--color-text)",
                   transition: "all var(--transition-fast)",
+                  textAlign: "center",
                 }}
               />
             </div>
@@ -529,14 +530,15 @@ const Auth = () => {
                   autoComplete="new-password"
                   style={{
                     width: "100%",
-                    padding: "0.875rem 1rem",
+                    padding: "var(--spacing-sm) var(--spacing-lg)",
                     border: "0.0625rem solid var(--color-border)",
-                    borderRadius: "var(--radius-md)",
-                    fontSize: "1rem",
+                    borderRadius: "9999px",
+                    fontSize: "0.875rem",
                     fontFamily: "inherit",
                     background: "var(--color-bg)",
                     color: "var(--color-text)",
                     transition: "all var(--transition-fast)",
+                    textAlign: "center",
                   }}
                 />
                 <small
