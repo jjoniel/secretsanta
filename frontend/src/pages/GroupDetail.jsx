@@ -258,7 +258,9 @@ const GroupDetail = () => {
 
         {participants.length === 0 ? (
           <div className="empty-state">
-            <div className="empty-state-icon">👥</div>
+            <div className="empty-state-icon">
+              <FaUsers style={{ fontSize: "3rem" }} />
+            </div>
             <h3 style={{ marginBottom: "var(--spacing-sm)" }}>
               No participants yet
             </h3>
