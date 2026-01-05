@@ -432,6 +432,7 @@ const Auth = () => {
                     borderRadius: "50%",
                     padding: "0.125rem",
                     cursor: "help",
+                    animation: "checkmarkIn 0.3s ease-out",
                   }}
                 />
               )}
@@ -507,8 +508,8 @@ const Auth = () => {
                     placeholder="reenter password"
                     required
                     autoComplete="new-password"
-                    onFocus={(e) => e.target.style.outline = "none"}
-                    onBlur={(e) => e.target.style.outline = "none"}
+                    onFocus={(e) => (e.target.style.outline = "none")}
+                    onBlur={(e) => (e.target.style.outline = "none")}
                     style={{
                       width: "100%",
                       padding: "var(--spacing-sm) var(--spacing-lg)",
