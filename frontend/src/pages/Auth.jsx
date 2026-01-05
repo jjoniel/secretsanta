@@ -301,7 +301,7 @@ const Auth = () => {
               }`,
               background:
                 gameType === "santa"
-                  ? "rgba(249, 115, 115, 0.1)"
+                  ? "var(--color-accent)"
                   : "var(--color-bg)",
               color: "var(--color-text)",
               fontSize: "0.875rem",
