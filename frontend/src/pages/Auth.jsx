@@ -542,14 +542,21 @@ const Auth = () => {
             transition: background-color 5000s ease-in-out 0s !important;
           }
           
-             /* Style inputs on focus to match selected button */
-             input:focus,
-             input:focus-visible {
-               outline: none !important;
-               border: 0.0625rem solid var(--color-accent) !important;
-               background: var(--color-accent) !important;
-               color: var(--color-text) !important;
-             }
+          /* Style inputs on focus to match selected button */
+          input:focus,
+          input:focus-visible {
+            outline: none !important;
+            border: 0.0625rem solid var(--color-accent) !important;
+            background: var(--color-accent) !important;
+            color: var(--color-text) !important;
+          }
+          
+          /* Style placeholder text on focus to match selected button */
+          input:focus::placeholder,
+          input:focus-visible::placeholder {
+            color: var(--color-text) !important;
+            opacity: 0.7 !important;
+          }
         `}</style>
     </div>
   );
