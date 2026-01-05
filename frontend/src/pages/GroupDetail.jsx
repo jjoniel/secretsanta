@@ -1,68 +1,75 @@
-import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-import "../App.css";
+import { useState, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import ThemeToggle from '../components/ThemeToggle'
+import '../App.css'
 
 const GroupDetail = () => {
-  const { groupId } = useParams();
-  const navigate = useNavigate();
-  const [group, setGroup] = useState(null);
-  const [participants, setParticipants] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const [showAddParticipant, setShowAddParticipant] = useState(false);
-  const [newParticipant, setNewParticipant] = useState({ name: "", email: "" });
-  const [editingRestrictions, setEditingRestrictions] = useState(null);
+  const { groupId } = useParams()
+  const navigate = useNavigate()
+  const [group, setGroup] = useState(null)
+  const [participants, setParticipants] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
+  const [showAddParticipant, setShowAddParticipant] = useState(false)
+  const [newParticipant, setNewParticipant] = useState({ name: '', email: '' })
+  const [editingRestrictions, setEditingRestrictions] = useState(null)
 
   useEffect(() => {
-    fetchData();
-  }, [groupId]);
+    fetchData()
+  }, [groupId])
+
+  useEffect(() => {
+    if (error || success) {
+      const timer = setTimeout(() => {
+        setError('')
+        setSuccess('')
+      }, 5000)
+      return () => clearTimeout(timer)
+    }
+  }, [error, success])
 
   const fetchData = async () => {
     try {
       const [groupRes, participantsRes] = await Promise.all([
         axios.get(`/api/groups/${groupId}`),
         axios.get(`/api/groups/${groupId}/participants`),
-      ]);
-      setGroup(groupRes.data);
-      setParticipants(participantsRes.data);
+      ])
+      setGroup(groupRes.data)
+      setParticipants(participantsRes.data)
     } catch (err) {
-      setError("Failed to load group data");
+      setError('Failed to load group data')
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   const handleAddParticipant = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      await axios.post(`/api/groups/${groupId}/participants`, newParticipant);
-      setNewParticipant({ name: "", email: "" });
-      setShowAddParticipant(false);
-      setSuccess("Participant added successfully");
-      fetchData();
+      await axios.post(`/api/groups/${groupId}/participants`, newParticipant)
+      setNewParticipant({ name: '', email: '' })
+      setShowAddParticipant(false)
+      setSuccess('Participant added successfully')
+      fetchData()
     } catch (err) {
-      setError(err.response?.data?.detail || "Failed to add participant");
+      setError(err.response?.data?.detail || 'Failed to add participant')
     }
-  };
+  }
 
   const handleDeleteParticipant = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this participant?"))
-      return;
+    if (!window.confirm('Are you sure you want to delete this participant?')) return
     try {
-      await axios.delete(`/api/groups/${groupId}/participants/${id}`);
-      setSuccess("Participant deleted");
-      fetchData();
+      await axios.delete(`/api/groups/${groupId}/participants/${id}`)
+      setSuccess('Participant deleted')
+      fetchData()
     } catch (err) {
-      setError("Failed to delete participant");
+      setError('Failed to delete participant')
     }
-  };
+  }
 
-  const handleUpdateRestrictions = async (
-    participantId,
-    allowedReceiverIds
-  ) => {
+  const handleUpdateRestrictions = async (participantId, allowedReceiverIds) => {
     try {
       await axios.put(
         `/api/groups/${groupId}/participants/${participantId}/restrictions`,
@@ -70,27 +77,27 @@ const GroupDetail = () => {
           giver_id: participantId,
           allowed_receiver_ids: allowedReceiverIds,
         }
-      );
-      setEditingRestrictions(null);
-      setSuccess("Restrictions updated");
-      fetchData();
+      )
+      setEditingRestrictions(null)
+      setSuccess('Restrictions updated')
+      fetchData()
     } catch (err) {
-      setError(err.response?.data?.detail || "Failed to update restrictions");
+      setError(err.response?.data?.detail || 'Failed to update restrictions')
     }
-  };
+  }
 
   const handleCreateAssignments = async () => {
     if (participants.length < 2) {
-      setError("Need at least 2 participants");
-      return;
+      setError('Need at least 2 participants')
+      return
     }
 
     if (
       !window.confirm(
-        "Create assignments and send emails? This will be saved to history."
+        'Create assignments and send emails? This will be saved to history.'
       )
     )
-      return;
+      return
 
     try {
       const response = await axios.post(
@@ -102,106 +109,113 @@ const GroupDetail = () => {
         {
           params: { send_emails: true },
         }
-      );
-      setSuccess(
-        response.data.message || "Assignments created and emails sent!"
-      );
+      )
+      setSuccess(response.data.message || 'Assignments created and emails sent!')
     } catch (err) {
-      setError(err.response?.data?.detail || "Failed to create assignments");
+      setError(err.response?.data?.detail || 'Failed to create assignments')
     }
-  };
+  }
 
   if (loading) {
-    return <div className="loading">Loading...</div>;
+    return (
+      <div className="loading">
+        <div className="spinner" />
+        <p>Loading group...</p>
+      </div>
+    )
   }
 
   return (
     <div className="container">
-      <div
+      <header
+        className="flex-between"
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "2rem",
+          marginBottom: 'var(--spacing-2xl)',
+          flexWrap: 'wrap',
+          gap: 'var(--spacing-md)',
         }}
       >
         <div>
           <button
-            onClick={() => navigate("/dashboard")}
-            className="btn btn-secondary"
-            style={{ marginBottom: "1rem" }}
+            onClick={() => navigate('/dashboard')}
+            className="btn btn-ghost"
+            style={{
+              marginBottom: 'var(--spacing-md)',
+              color: 'var(--color-text-inverse)',
+            }}
           >
-            ← Back to Dashboard
+            ← Back
           </button>
-          <h1 style={{ color: "white", fontSize: "2.5rem" }}>{group?.name}</h1>
+          <h1
+            style={{
+              color: 'var(--color-text-inverse)',
+              fontSize: 'clamp(2rem, 5vw, 3rem)',
+              fontWeight: 700,
+            }}
+          >
+            {group?.name}
+          </h1>
         </div>
-      </div>
+        <ThemeToggle />
+      </header>
 
       {error && (
-        <div
-          className="card"
-          style={{ background: "#fee", border: "2px solid #dc3545" }}
-        >
-          <div className="error">{error}</div>
+        <div className="message message-error" role="alert">
+          <span>⚠️</span>
+          <span>{error}</span>
         </div>
       )}
       {success && (
-        <div
-          className="card"
-          style={{ background: "#efe", border: "2px solid #28a745" }}
-        >
-          <div className="success">{success}</div>
+        <div className="message message-success" role="alert">
+          <span>✓</span>
+          <span>{success}</span>
         </div>
       )}
 
       <div className="card">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: "1.5rem",
-          }}
-        >
-          <h2>Participants ({participants.length})</h2>
-          <button
-            onClick={() => setShowAddParticipant(!showAddParticipant)}
-            className="btn btn-primary"
-          >
-            {showAddParticipant ? "Cancel" : "+ Add Participant"}
-          </button>
+        <div className="flex-between mb-lg">
+          <h2>Participants</h2>
+          <div className="flex gap-md" style={{ alignItems: 'center' }}>
+            <span
+              style={{
+                color: 'var(--color-text-secondary)',
+                fontSize: '0.875rem',
+              }}
+            >
+              {participants.length} {participants.length === 1 ? 'person' : 'people'}
+            </span>
+            <button
+              onClick={() => setShowAddParticipant(!showAddParticipant)}
+              className="btn btn-primary"
+            >
+              {showAddParticipant ? 'Cancel' : '+ Add Participant'}
+            </button>
+          </div>
         </div>
 
         {showAddParticipant && (
           <form
             onSubmit={handleAddParticipant}
+            className="card"
             style={{
-              marginBottom: "2rem",
-              padding: "1.5rem",
-              background: "#f5f5f5",
-              borderRadius: "8px",
+              marginBottom: 'var(--spacing-lg)',
+              background: 'var(--color-bg-secondary)',
+              animation: 'slideDown 0.3s ease-out',
             }}
           >
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: "1rem",
-                marginBottom: "1rem",
-              }}
-            >
+            <h3 style={{ marginBottom: 'var(--spacing-md)' }}>New Participant</h3>
+            <div className="grid grid-2" style={{ marginBottom: 'var(--spacing-md)' }}>
               <div className="form-group" style={{ marginBottom: 0 }}>
                 <label>Name</label>
                 <input
                   type="text"
                   value={newParticipant.name}
                   onChange={(e) =>
-                    setNewParticipant({
-                      ...newParticipant,
-                      name: e.target.value,
-                    })
+                    setNewParticipant({ ...newParticipant, name: e.target.value })
                   }
+                  placeholder="John Doe"
                   required
+                  autoFocus
                 />
               </div>
               <div className="form-group" style={{ marginBottom: 0 }}>
@@ -210,11 +224,9 @@ const GroupDetail = () => {
                   type="email"
                   value={newParticipant.email}
                   onChange={(e) =>
-                    setNewParticipant({
-                      ...newParticipant,
-                      email: e.target.value,
-                    })
+                    setNewParticipant({ ...newParticipant, email: e.target.value })
                   }
+                  placeholder="john@example.com"
                   required
                 />
               </div>
@@ -226,69 +238,59 @@ const GroupDetail = () => {
         )}
 
         {participants.length === 0 ? (
-          <p style={{ color: "#666", textAlign: "center", padding: "2rem" }}>
-            No participants yet. Add some to get started!
-          </p>
+          <div className="empty-state">
+            <div className="empty-state-icon">👥</div>
+            <h3 style={{ marginBottom: 'var(--spacing-sm)' }}>No participants yet</h3>
+            <p style={{ color: 'var(--color-text-secondary)' }}>
+              Add participants to get started with your Secret Santa exchange!
+            </p>
+          </div>
         ) : (
-          <div style={{ display: "grid", gap: "1rem" }}>
-            {participants.map((participant) => (
+          <div className="grid grid-2">
+            {participants.map((participant, index) => (
               <div
                 key={participant.id}
+                className="card"
                 style={{
-                  padding: "1.5rem",
-                  border: "2px solid #e0e0e0",
-                  borderRadius: "8px",
+                  marginBottom: 0,
+                  animation: `fadeInUp 0.4s ease-out ${index * 0.05}s both`,
                 }}
               >
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "start",
-                    marginBottom: "1rem",
-                  }}
-                >
+                <div className="flex-between mb-md">
                   <div>
-                    <h3 style={{ marginBottom: "0.5rem" }}>
+                    <h3 style={{ marginBottom: 'var(--spacing-xs)' }}>
                       {participant.name}
                     </h3>
-                    <p style={{ color: "#666", fontSize: "0.875rem" }}>
+                    <p
+                      style={{
+                        color: 'var(--color-text-secondary)',
+                        fontSize: '0.875rem',
+                      }}
+                    >
                       {participant.email}
                     </p>
                   </div>
                   <button
                     onClick={() => handleDeleteParticipant(participant.id)}
-                    className="btn btn-danger"
-                    style={{ padding: "0.5rem 1rem", fontSize: "0.875rem" }}
+                    className="btn btn-danger btn-sm"
+                    aria-label={`Delete ${participant.name}`}
                   >
                     Delete
                   </button>
                 </div>
 
                 <div>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      marginBottom: "0.5rem",
-                    }}
-                  >
-                    <strong>Can be assigned to:</strong>
+                  <div className="flex-between mb-sm">
+                    <strong style={{ fontSize: '0.875rem' }}>Can be assigned to:</strong>
                     <button
                       onClick={() =>
                         setEditingRestrictions(
-                          editingRestrictions === participant.id
-                            ? null
-                            : participant.id
+                          editingRestrictions === participant.id ? null : participant.id
                         )
                       }
-                      className="btn btn-secondary"
-                      style={{ padding: "0.5rem 1rem", fontSize: "0.875rem" }}
+                      className="btn btn-secondary btn-sm"
                     >
-                      {editingRestrictions === participant.id
-                        ? "Cancel"
-                        : "Edit Restrictions"}
+                      {editingRestrictions === participant.id ? 'Cancel' : 'Edit'}
                     </button>
                   </div>
 
@@ -301,11 +303,16 @@ const GroupDetail = () => {
                       }
                     />
                   ) : (
-                    <div style={{ color: "#666", fontSize: "0.875rem" }}>
+                    <p
+                      style={{
+                        color: 'var(--color-text-secondary)',
+                        fontSize: '0.8125rem',
+                      }}
+                    >
                       {participant.allowed_receivers.length > 0
-                        ? participant.allowed_receivers.join(", ")
-                        : "All other participants (no restrictions)"}
-                    </div>
+                        ? participant.allowed_receivers.join(', ')
+                        : 'All other participants'}
+                    </p>
                   )}
                 </div>
               </div>
@@ -315,88 +322,106 @@ const GroupDetail = () => {
       </div>
 
       {participants.length >= 2 && (
-        <div className="card">
-          <h2 style={{ marginBottom: "1rem" }}>Create Assignments</h2>
-          <p style={{ marginBottom: "1.5rem", color: "#666" }}>
-            This will create Secret Santa assignments for all participants and
-            send emails. Assignments will be saved to history to prevent repeats
-            in future years.
+        <div className="card" style={{ textAlign: 'center' }}>
+          <div style={{ fontSize: '3rem', marginBottom: 'var(--spacing-md)' }}>🎁</div>
+          <h2 style={{ marginBottom: 'var(--spacing-sm)' }}>Ready to Assign!</h2>
+          <p
+            style={{
+              marginBottom: 'var(--spacing-xl)',
+              color: 'var(--color-text-secondary)',
+            }}
+          >
+            Create Secret Santa assignments and send emails to all participants.
+            Assignments will be saved to prevent repeats in future years.
           </p>
           <button
             onClick={handleCreateAssignments}
-            className="btn btn-success"
-            style={{ fontSize: "1.1rem", padding: "1rem 2rem" }}
+            className="btn btn-success btn-lg"
           >
             🎁 Create Assignments & Send Emails
           </button>
         </div>
       )}
+
+      <style>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(1rem);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        @keyframes slideDown {
+          from {
+            opacity: 0;
+            transform: translateY(-1rem);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </div>
-  );
-};
+  )
+}
 
 const RestrictionEditor = ({ participant, allParticipants, onSave }) => {
   const [selectedIds, setSelectedIds] = useState(
     new Set(
       participant.allowed_receivers
         .map((name) => {
-          const p = allParticipants.find((ap) => ap.name === name);
-          return p ? p.id : null;
+          const p = allParticipants.find((ap) => ap.name === name)
+          return p ? p.id : null
         })
         .filter(Boolean)
     )
-  );
+  )
 
   const toggleParticipant = (id) => {
-    if (id === participant.id) return; // Can't assign to self
-    const newSet = new Set(selectedIds);
+    if (id === participant.id) return
+    const newSet = new Set(selectedIds)
     if (newSet.has(id)) {
-      newSet.delete(id);
+      newSet.delete(id)
     } else {
-      newSet.add(id);
+      newSet.add(id)
     }
-    setSelectedIds(newSet);
-  };
+    setSelectedIds(newSet)
+  }
 
   const handleSave = () => {
-    onSave(Array.from(selectedIds));
-  };
+    onSave(Array.from(selectedIds))
+  }
 
   const handleSelectAll = () => {
     const allOtherIds = allParticipants
       .filter((p) => p.id !== participant.id)
-      .map((p) => p.id);
-    setSelectedIds(new Set(allOtherIds));
-  };
+      .map((p) => p.id)
+    setSelectedIds(new Set(allOtherIds))
+  }
 
   const handleSelectNone = () => {
-    setSelectedIds(new Set());
-  };
+    setSelectedIds(new Set())
+  }
 
   return (
-    <div style={{ marginTop: "1rem" }}>
-      <div style={{ marginBottom: "1rem", display: "flex", gap: "0.5rem" }}>
-        <button
-          onClick={handleSelectAll}
-          className="btn btn-secondary"
-          style={{ padding: "0.5rem 1rem", fontSize: "0.875rem" }}
-        >
+    <div style={{ marginTop: 'var(--spacing-md)' }}>
+      <div className="flex gap-sm mb-md">
+        <button onClick={handleSelectAll} className="btn btn-secondary btn-sm">
           Select All
         </button>
-        <button
-          onClick={handleSelectNone}
-          className="btn btn-secondary"
-          style={{ padding: "0.5rem 1rem", fontSize: "0.875rem" }}
-        >
+        <button onClick={handleSelectNone} className="btn btn-secondary btn-sm">
           Select None
         </button>
       </div>
       <div
+        className="grid grid-2"
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))",
-          gap: "0.5rem",
-          marginBottom: "1rem",
+          marginBottom: 'var(--spacing-md)',
+          gap: 'var(--spacing-sm)',
         }}
       >
         {allParticipants
@@ -405,37 +430,45 @@ const RestrictionEditor = ({ participant, allParticipants, onSave }) => {
             <label
               key={p.id}
               style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
-                padding: "0.5rem",
-                background: selectedIds.has(p.id) ? "#e7f3ff" : "#f5f5f5",
-                borderRadius: "4px",
-                cursor: "pointer",
+                display: 'flex',
+                alignItems: 'center',
+                gap: 'var(--spacing-sm)',
+                padding: 'var(--spacing-sm)',
+                background: selectedIds.has(p.id)
+                  ? 'var(--color-accent-light)'
+                  : 'var(--color-bg-tertiary)',
+                borderRadius: 'var(--radius-sm)',
+                cursor: 'pointer',
+                transition: 'all var(--transition-fast)',
+                border: `0.0625rem solid ${
+                  selectedIds.has(p.id) ? 'var(--color-accent)' : 'transparent'
+                }`,
               }}
             >
               <input
                 type="checkbox"
                 checked={selectedIds.has(p.id)}
                 onChange={() => toggleParticipant(p.id)}
+                style={{ cursor: 'pointer' }}
               />
-              {p.name}
+              <span style={{ fontSize: '0.875rem' }}>{p.name}</span>
             </label>
           ))}
       </div>
-      <button
-        onClick={handleSave}
-        className="btn btn-success"
-        style={{ padding: "0.5rem 1rem", fontSize: "0.875rem" }}
-      >
+      <button onClick={handleSave} className="btn btn-success btn-sm">
         Save Restrictions
       </button>
-      <p style={{ marginTop: "0.5rem", fontSize: "0.75rem", color: "#666" }}>
-        If no restrictions are set, participant can be assigned to anyone
-        (except themselves).
+      <p
+        style={{
+          marginTop: 'var(--spacing-sm)',
+          fontSize: '0.75rem',
+          color: 'var(--color-text-tertiary)',
+        }}
+      >
+        If none selected, participant can be assigned to anyone (except themselves).
       </p>
     </div>
-  );
-};
+  )
+}
 
-export default GroupDetail;
+export default GroupDetail
