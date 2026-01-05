@@ -174,6 +174,41 @@ const Auth = () => {
         ...getBackgroundStyle(),
       }}
     >
+      {/* Randomly rotated hat pattern for Santa */}
+      {gameType === "santa" && (
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            overflow: "hidden",
+            zIndex: 0,
+            pointerEvents: "none",
+          }}
+        >
+          {hatPositions.map((hat) => (
+            <div
+              key={hat.id}
+              style={{
+                position: "absolute",
+                left: `${hat.x}rem`,
+                top: `${hat.y}rem`,
+                width: "2rem",
+                height: "2rem",
+                backgroundImage: `url(${hatImage})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
+                transform: `rotate(${hat.rotation}deg)`,
+                opacity: 0.1,
+              }}
+            />
+          ))}
+        </div>
+      )}
+
       {/* Overlay for readability */}
       <div
         style={{
