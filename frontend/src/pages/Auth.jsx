@@ -454,8 +454,16 @@ const Auth = () => {
 
         {/* Password Form (Login or Register) - Dynamically shown */}
         {emailExists !== null && (
-          <form onSubmit={handlePasswordSubmit}>
-            <div className="form-group">
+          <form
+            onSubmit={handlePasswordSubmit}
+            style={{
+              width: "100%",
+              maxWidth: "20rem",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          >
+            <div style={{ marginBottom: 0 }}>
               <input
                 id="password"
                 type="password"
@@ -483,8 +491,7 @@ const Auth = () => {
             </div>
 
             {!emailExists && (
-              <div className="form-group">
-                <label htmlFor="confirmPassword">Confirm Password</label>
+              <div style={{ marginBottom: 0 }}>
                 <input
                   id="confirmPassword"
                   type="password"
