@@ -41,12 +41,6 @@
   box-shadow: var(--shadow-lg);
 }
 
-[data-theme="light"] .card {
-  --color-text-primary: #000000;
-  --color-text-secondary: #4b5563;
-  --color-text-tertiary: #6b7280;
-}
-
 /* Only clickable cards get hover effect */
 .card-clickable {
   cursor: pointer;
@@ -243,10 +237,6 @@
   align-items: center;
   gap: var(--spacing-sm);
   animation: slideIn 0.3s ease-out;
-}
-
-.message svg {
-  flex-shrink: 0;
 }
 
 @keyframes slideIn {

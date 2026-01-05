@@ -75,7 +75,7 @@ const Register = () => {
               justifyContent: "center",
             }}
           >
-            <FaSnowflake />
+            <FaSnowflake style={{ color: "var(--color-accent)" }} />
           </div>
           <h1
             style={{

@@ -41,9 +41,9 @@ div:not([role="button"]):not(.btn):not(button):not(a) {
   --color-bg-elevated: #ffffff;
   --color-bg-overlay: rgba(0, 0, 0, 0.4);
 
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #ffffff;
-  --color-text-tertiary: #ffffff;
+  --color-text-primary: #1d1d1f;
+  --color-text-secondary: #6e6e73;
+  --color-text-tertiary: #86868b;
   --color-text-inverse: #ffffff;
 
   --color-border: #d2d2d7;
@@ -85,8 +85,8 @@ div:not([role="button"]):not(.btn):not(button):not(a) {
   --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-theme: 600ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  --gradient-primary: linear-gradient(135deg, #b91c1c 0%, #14532d 100%);
-  --gradient-accent: linear-gradient(135deg, #dc2626 0%, #16a34a 100%);
+  --gradient-primary: linear-gradient(135deg, #b91c1c 0%, #eab308 100%);
+  --gradient-accent: linear-gradient(135deg, #dc2626 0%, #facc15 100%);
 }
 
 [data-theme="dark"] {
@@ -96,10 +96,10 @@ div:not([role="button"]):not(.btn):not(button):not(a) {
   --color-bg-elevated: #020617;
   --color-bg-overlay: rgba(0, 0, 0, 0.7);
 
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #ffffff;
-  --color-text-tertiary: #ffffff;
-  --color-text-inverse: #ffffff;
+  --color-text-primary: #f9fafb;
+  --color-text-secondary: #e5e7eb;
+  --color-text-tertiary: #9ca3af;
+  --color-text-inverse: #020617;
 
   --color-border: #1f2933;
   --color-border-subtle: #111827;

@@ -1,58 +1,58 @@
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import { useAuth } from '../contexts/AuthContext'
-import ThemeToggle from '../components/ThemeToggle'
-import { FaSnowflake, FaExclamationTriangle, FaBox } from 'react-icons/fa'
-import '../App.css'
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useAuth } from "../contexts/AuthContext";
+import ThemeToggle from "../components/ThemeToggle";
+import { FaSnowflake, FaExclamationTriangle, FaBox } from "react-icons/fa";
+import "../App.css";
 
 const Dashboard = () => {
-  const [groups, setGroups] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [newGroupName, setNewGroupName] = useState('')
-  const [error, setError] = useState('')
-  const { logout } = useAuth()
-  const navigate = useNavigate()
+  const [groups, setGroups] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [newGroupName, setNewGroupName] = useState("");
+  const [error, setError] = useState("");
+  const { logout } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetchGroups()
-  }, [])
+    fetchGroups();
+  }, []);
 
   const fetchGroups = async () => {
     try {
-      const response = await axios.get('/api/groups')
-      setGroups(response.data)
+      const response = await axios.get("/api/groups");
+      setGroups(response.data);
     } catch (err) {
-      setError('Failed to load groups')
+      setError("Failed to load groups");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const handleCreateGroup = async (e) => {
-    e.preventDefault()
-    if (!newGroupName.trim()) return
+    e.preventDefault();
+    if (!newGroupName.trim()) return;
 
     try {
-      const response = await axios.post('/api/groups', { name: newGroupName })
-      setGroups([...groups, response.data])
-      setNewGroupName('')
-      navigate(`/groups/${response.data.id}`)
+      const response = await axios.post("/api/groups", { name: newGroupName });
+      setGroups([...groups, response.data]);
+      setNewGroupName("");
+      navigate(`/groups/${response.data.id}`);
     } catch (err) {
-      setError(err.response?.data?.detail || 'Failed to create group')
+      setError(err.response?.data?.detail || "Failed to create group");
     }
-  }
+  };
 
   const handleDeleteGroup = async (groupId) => {
-    if (!window.confirm('Are you sure you want to delete this group?')) return
+    if (!window.confirm("Are you sure you want to delete this group?")) return;
 
     try {
-      await axios.delete(`/api/groups/${groupId}`)
-      setGroups(groups.filter((g) => g.id !== groupId))
+      await axios.delete(`/api/groups/${groupId}`);
+      setGroups(groups.filter((g) => g.id !== groupId));
     } catch (err) {
-      setError('Failed to delete group')
+      setError("Failed to delete group");
     }
-  }
+  };
 
   if (loading) {
     return (
@@ -60,7 +60,7 @@ const Dashboard = () => {
         <div className="spinner" />
         <p>Loading your groups...</p>
       </div>
-    )
+    );
   }
 
   return (
@@ -68,30 +68,30 @@ const Dashboard = () => {
       <header
         className="flex-between"
         style={{
-          marginBottom: 'var(--spacing-2xl)',
-          flexWrap: 'wrap',
-          gap: 'var(--spacing-md)',
+          marginBottom: "var(--spacing-2xl)",
+          flexWrap: "wrap",
+          gap: "var(--spacing-md)",
         }}
       >
         <div>
           <h1
             style={{
-              color: 'var(--color-text-inverse)',
-              fontSize: 'clamp(2rem, 5vw, 3rem)',
+              color: "var(--color-text-inverse)",
+              fontSize: "clamp(2rem, 5vw, 3rem)",
               fontWeight: 700,
-              marginBottom: 'var(--spacing-xs)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 'var(--spacing-sm)',
+              marginBottom: "var(--spacing-xs)",
+              display: "flex",
+              alignItems: "center",
+              gap: "var(--spacing-sm)",
             }}
           >
-            <FaSnowflake /> Secret Santa
+            <FaSnowflake style={{ color: "var(--color-accent)" }} /> Secret Santa
           </h1>
           <p
             style={{
-              color: 'var(--color-text-inverse)',
+              color: "var(--color-text-inverse)",
               opacity: 0.9,
-              fontSize: '0.9375rem',
+              fontSize: "0.9375rem",
             }}
           >
             Manage your gift exchanges
@@ -99,7 +99,11 @@ const Dashboard = () => {
         </div>
         <div className="flex gap-md">
           <ThemeToggle />
-          <button onClick={logout} className="btn btn-ghost" style={{ color: 'var(--color-text-inverse)' }}>
+          <button
+            onClick={logout}
+            className="btn btn-ghost"
+            style={{ color: "var(--color-text-inverse)" }}
+          >
             Sign Out
           </button>
         </div>
@@ -113,22 +117,26 @@ const Dashboard = () => {
       )}
 
       <div className="card">
-        <h2 style={{ marginBottom: 'var(--spacing-lg)' }}>Create New Group</h2>
-        <form onSubmit={handleCreateGroup} className="flex gap-md" style={{ flexWrap: 'wrap' }}>
+        <h2 style={{ marginBottom: "var(--spacing-lg)" }}>Create New Group</h2>
+        <form
+          onSubmit={handleCreateGroup}
+          className="flex gap-md"
+          style={{ flexWrap: "wrap" }}
+        >
           <input
             type="text"
             value={newGroupName}
             onChange={(e) => setNewGroupName(e.target.value)}
             placeholder="Group name (e.g., 'Family 2024')"
             style={{
-              flex: '1 1 20rem',
-              padding: 'var(--spacing-md)',
-              border: '0.0625rem solid var(--color-border)',
-              borderRadius: 'var(--radius-md)',
-              fontSize: '1rem',
-              fontFamily: 'inherit',
-              background: 'var(--color-bg-primary)',
-              color: 'var(--color-text-primary)',
+              flex: "1 1 20rem",
+              padding: "var(--spacing-md)",
+              border: "0.0625rem solid var(--color-border)",
+              borderRadius: "var(--radius-md)",
+              fontSize: "1rem",
+              fontFamily: "inherit",
+              background: "var(--color-bg-primary)",
+              color: "var(--color-text-primary)",
             }}
             required
           />
@@ -144,11 +152,11 @@ const Dashboard = () => {
           {groups.length > 0 && (
             <span
               style={{
-                color: 'var(--color-text-secondary)',
-                fontSize: '0.875rem',
+                color: "var(--color-text-secondary)",
+                fontSize: "0.875rem",
               }}
             >
-              {groups.length} {groups.length === 1 ? 'group' : 'groups'}
+              {groups.length} {groups.length === 1 ? "group" : "groups"}
             </span>
           )}
         </div>
@@ -156,10 +164,10 @@ const Dashboard = () => {
         {groups.length === 0 ? (
           <div className="empty-state">
             <div className="empty-state-icon">
-              <FaBox style={{ fontSize: '3rem' }} />
+              <FaBox style={{ fontSize: "3rem" }} />
             </div>
-            <h3 style={{ marginBottom: 'var(--spacing-sm)' }}>No groups yet</h3>
-            <p style={{ color: 'var(--color-text-secondary)' }}>
+            <h3 style={{ marginBottom: "var(--spacing-sm)" }}>No groups yet</h3>
+            <p style={{ color: "var(--color-text-secondary)" }}>
               Create your first Secret Santa group to get started!
             </p>
           </div>
@@ -175,12 +183,15 @@ const Dashboard = () => {
                 }}
                 onClick={() => navigate(`/groups/${group.id}`)}
               >
-                <div className="flex-between" style={{ marginBottom: 'var(--spacing-md)' }}>
+                <div
+                  className="flex-between"
+                  style={{ marginBottom: "var(--spacing-md)" }}
+                >
                   <h3 style={{ margin: 0 }}>{group.name}</h3>
                   <button
                     onClick={(e) => {
-                      e.stopPropagation()
-                      handleDeleteGroup(group.id)
+                      e.stopPropagation();
+                      handleDeleteGroup(group.id);
                     }}
                     className="btn btn-danger btn-sm"
                     aria-label={`Delete ${group.name}`}
@@ -190,23 +201,24 @@ const Dashboard = () => {
                 </div>
                 <p
                   style={{
-                    color: 'var(--color-text-secondary)',
-                    fontSize: '0.875rem',
-                    marginBottom: 'var(--spacing-md)',
+                    color: "var(--color-text-secondary)",
+                    fontSize: "0.875rem",
+                    marginBottom: "var(--spacing-md)",
                   }}
                 >
-                  Created {new Date(group.created_at).toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: 'numeric',
-                    year: 'numeric',
+                  Created{" "}
+                  {new Date(group.created_at).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
                   })}
                 </p>
                 <button
                   className="btn btn-primary"
-                  style={{ width: '100%' }}
+                  style={{ width: "100%" }}
                   onClick={(e) => {
-                    e.stopPropagation()
-                    navigate(`/groups/${group.id}`)
+                    e.stopPropagation();
+                    navigate(`/groups/${group.id}`);
                   }}
                 >
                   Open Group
@@ -230,7 +242,7 @@ const Dashboard = () => {
         }
       `}</style>
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
