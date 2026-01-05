@@ -243,7 +243,7 @@ const Auth = () => {
           animation: "fadeInUp 0.5s ease-out",
         }}
       >
-        {/* Title with morphing animation */}
+        {/* Title with morphing stroke animation */}
         <div
           style={{
             position: "relative",
@@ -259,12 +259,13 @@ const Auth = () => {
             style={{
               fontSize: "clamp(2.5rem, 6vw, 4rem)",
               fontWeight: 700,
-              color: "var(--color-text)",
+              color: emailExists === true ? "transparent" : "var(--color-text)",
               letterSpacing: "-0.02em",
               textAlign: "center",
               position: "absolute",
               width: "100%",
-              WebkitTextStroke: emailExists === true ? "0.125rem transparent" : "0.125rem var(--color-text)",
+              WebkitTextStroke: emailExists === true ? "0.125rem var(--color-text)" : "0.125rem transparent",
+              WebkitTextFillColor: emailExists === true ? "transparent" : "var(--color-text)",
               transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
             }}
           >
@@ -275,12 +276,13 @@ const Auth = () => {
             style={{
               fontSize: "clamp(2.5rem, 6vw, 4rem)",
               fontWeight: 700,
-              color: "transparent",
+              color: emailExists === true ? "var(--color-text)" : "transparent",
               letterSpacing: "-0.02em",
               textAlign: "center",
               position: "absolute",
               width: "100%",
-              WebkitTextStroke: emailExists === true ? "0.125rem var(--color-text)" : "0.125rem transparent",
+              WebkitTextStroke: emailExists === true ? "0.125rem transparent" : "0.125rem var(--color-text)",
+              WebkitTextFillColor: emailExists === true ? "var(--color-text)" : "transparent",
               transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
             }}
           >
