@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
-import ThemeToggle from "../components/ThemeToggle";
 import { FaSnowflake, FaExclamationTriangle, FaBox } from "react-icons/fa";
 import "../App.css";
 
@@ -98,7 +97,6 @@ const Dashboard = () => {
           </p>
         </div>
         <div className="flex gap-md">
-          <ThemeToggle />
           <button
             onClick={logout}
             className="btn btn-ghost"

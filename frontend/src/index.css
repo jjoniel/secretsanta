@@ -34,62 +34,7 @@ div:not([role="button"]):not(.btn):not(button):not(a) {
   /* Base font size for rem calculations */
   font-size: 16px;
 
-  /* Light theme colors - Christmas palette */
-  --color-bg-primary: #fefdf8;
-  --color-bg-secondary: #fff7ed;
-  --color-bg-tertiary: #fee2e2;
-  --color-bg-elevated: #ffffff;
-  --color-bg-overlay: rgba(0, 0, 0, 0.4);
-
-  --color-text-primary: #1d1d1f;
-  --color-text-secondary: #6e6e73;
-  --color-text-tertiary: #86868b;
-  --color-text-inverse: #ffffff;
-
-  --color-border: #d2d2d7;
-  --color-border-subtle: #e8e8ed;
-
-  --color-accent: #c81e1e;
-  --color-accent-hover: #b91c1c;
-  --color-accent-active: #991b1b;
-  --color-accent-light: #fee2e2;
-
-  --color-success: #16a34a;
-  --color-success-bg: #dcfce7;
-  --color-error: #ef4444;
-  --color-error-bg: #fee2e2;
-  --color-warning: #eab308;
-  --color-warning-bg: #fef3c7;
-
-  --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 0.5rem 1rem rgba(0, 0, 0, 0.12);
-  --shadow-xl: 0 1rem 2rem rgba(0, 0, 0, 0.16);
-
-  --radius-sm: 0.5rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1rem;
-  --radius-xl: 1.5rem;
-  --radius-full: 9999px;
-
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 3rem;
-  --spacing-3xl: 4rem;
-
-  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-theme: 600ms cubic-bezier(0.4, 0, 0.2, 1);
-
-  --gradient-primary: linear-gradient(135deg, #b91c1c 0%, #eab308 100%);
-  --gradient-accent: linear-gradient(135deg, #dc2626 0%, #facc15 100%);
-}
-
-[data-theme="dark"] {
+  /* Dark theme colors - Christmas palette */
   --color-bg-primary: #020617;
   --color-bg-secondary: #0b1120;
   --color-bg-tertiary: #111827;
@@ -120,6 +65,25 @@ div:not([role="button"]):not(.btn):not(button):not(a) {
   --shadow-md: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.6);
   --shadow-lg: 0 0.5rem 1rem rgba(0, 0, 0, 0.7);
   --shadow-xl: 0 1rem 2rem rgba(0, 0, 0, 0.8);
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-theme: 600ms cubic-bezier(0.4, 0, 0.2, 1);
 
   --gradient-primary: linear-gradient(135deg, #022c22 0%, #111827 100%);
   --gradient-accent: linear-gradient(135deg, #f97373 0%, #22c55e 100%);

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import ThemeToggle from "../components/ThemeToggle";
 import { FaSnowflake, FaExclamationTriangle } from "react-icons/fa";
 import "../App.css";
 
@@ -45,16 +44,6 @@ const Login = () => {
         position: "relative",
       }}
     >
-      <div
-        style={{
-          position: "absolute",
-          top: "var(--spacing-lg)",
-          right: "var(--spacing-lg)",
-        }}
-      >
-        <ThemeToggle />
-      </div>
-
       <div
         className="card"
         style={{

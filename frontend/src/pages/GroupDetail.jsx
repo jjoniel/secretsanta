@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import ThemeToggle from "../components/ThemeToggle";
 import { FaExclamationTriangle, FaCheck, FaUsers, FaGift } from "react-icons/fa";
 import "../App.css";
 
@@ -163,7 +162,6 @@ const GroupDetail = () => {
             {group?.name}
           </h1>
         </div>
-        <ThemeToggle />
       </header>
 
       {error && (
