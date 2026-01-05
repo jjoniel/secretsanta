@@ -14,7 +14,7 @@ import watergunImage from "../assets/images/watergun.png";
 import "../App.css";
 
 const Auth = () => {
-  const [gameType, setGameType] = useState(null); // 'santa' or 'assassins'
+  const [gameType, setGameType] = useState("santa"); // 'santa' or 'assassins'
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailExists, setEmailExists] = useState(null); // null, true, or false
@@ -314,13 +314,11 @@ const Auth = () => {
             onMouseEnter={(e) => {
               if (gameType !== "santa") {
                 e.currentTarget.style.borderColor = "var(--color-accent)";
-                e.currentTarget.style.transform = "scale(1.05)";
               }
             }}
             onMouseLeave={(e) => {
               if (gameType !== "santa") {
                 e.currentTarget.style.borderColor = "var(--color-border)";
-                e.currentTarget.style.transform = "scale(1)";
               }
             }}
           >
@@ -345,7 +343,7 @@ const Auth = () => {
               }`,
               background:
                 gameType === "assassins"
-                  ? "rgba(249, 115, 115, 0.1)"
+                  ? "var(--color-accent)"
                   : "var(--color-bg)",
               color: "var(--color-text)",
               fontSize: "0.875rem",
@@ -358,18 +356,16 @@ const Auth = () => {
             onMouseEnter={(e) => {
               if (gameType !== "assassins") {
                 e.currentTarget.style.borderColor = "var(--color-accent)";
-                e.currentTarget.style.transform = "scale(1.05)";
               }
             }}
             onMouseLeave={(e) => {
               if (gameType !== "assassins") {
                 e.currentTarget.style.borderColor = "var(--color-border)";
-                e.currentTarget.style.transform = "scale(1)";
               }
             }}
           >
             <FaCrosshairs
-              style={{ fontSize: "1rem", color: "var(--color-accent)" }}
+              style={{ fontSize: "1rem", color: "var(--color-text)" }}
             />
             assassins
           </button>
@@ -432,19 +428,6 @@ const Auth = () => {
               )}
             </div>
           </div>
-          {checkingEmail && (
-            <p
-              style={{
-                color: "var(--color-text)",
-                fontSize: "0.875rem",
-                opacity: 0.7,
-                textAlign: "center",
-                marginTop: "var(--spacing-sm)",
-              }}
-            >
-              Checking...
-            </p>
-          )}
         </form>
 
         {/* Password Form (Login or Register) - Always present */}
