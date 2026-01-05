@@ -152,26 +152,6 @@ const Auth = () => {
   }, [gameType]);
 
   const getBackgroundStyle = () => {
-    if (gameType === "assassins") {
-      return {
-        backgroundImage: `
-          repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 2rem,
-            rgba(249, 115, 115, 0.03) 2rem,
-            rgba(249, 115, 115, 0.03) 2.1rem
-          ),
-          repeating-linear-gradient(
-            -45deg,
-            transparent,
-            transparent 2rem,
-            rgba(249, 115, 115, 0.03) 2rem,
-            rgba(249, 115, 115, 0.03) 2.1rem
-          )
-        `,
-      };
-    }
     return {};
   };
 
