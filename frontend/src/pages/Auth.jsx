@@ -176,142 +176,139 @@ const Auth = () => {
         </h1>
 
         {/* Game Type Pills */}
-        {!gameType && (
-          <div
+        <div
+          style={{
+            display: "flex",
+            gap: "var(--spacing-md)",
+            justifyContent: "center",
+            marginBottom: "var(--spacing-xl)",
+            flexWrap: "wrap",
+          }}
+        >
+          <button
+            onClick={() => setGameType("santa")}
             style={{
               display: "flex",
-              gap: "var(--spacing-md)",
-              justifyContent: "center",
-              marginBottom: "var(--spacing-2xl)",
-              flexWrap: "wrap",
-            }}
-          >
-            <button
-              onClick={() => setGameType("santa")}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "var(--spacing-sm)",
-                padding: "var(--spacing-md) var(--spacing-xl)",
-                borderRadius: "9999px",
-                border: "0.0625rem solid var(--color-border)",
-                background: "var(--color-bg)",
-                color: "var(--color-text)",
-                fontSize: "1rem",
-                fontWeight: 500,
-                cursor: "pointer",
-                transition: "all 0.3s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--color-accent)";
-                e.currentTarget.style.transform = "scale(1.05)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--color-border)";
-                e.currentTarget.style.transform = "scale(1)";
-              }}
-            >
-              <FaGift style={{ fontSize: "1.25rem", color: "var(--color-accent)" }} />
-              Secret Santa
-            </button>
-            <button
-              onClick={() => setGameType("assassins")}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "var(--spacing-sm)",
-                padding: "var(--spacing-md) var(--spacing-xl)",
-                borderRadius: "9999px",
-                border: "0.0625rem solid var(--color-border)",
-                background: "var(--color-bg)",
-                color: "var(--color-text)",
-                fontSize: "1rem",
-                fontWeight: 500,
-                cursor: "pointer",
-                transition: "all 0.3s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--color-accent)";
-                e.currentTarget.style.transform = "scale(1.05)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--color-border)";
-                e.currentTarget.style.transform = "scale(1)";
-              }}
-            >
-              <FaCrosshairs style={{ fontSize: "1.25rem", color: "var(--color-accent)" }} />
-              Assassins
-            </button>
-          </div>
-        )}
-
-        {/* Back button if game type selected */}
-        {gameType && (
-          <button
-            onClick={() => {
-              setGameType(null);
-              setEmail("");
-              setPassword("");
-              setConfirmPassword("");
-              setEmailExists(null);
-              setError("");
-            }}
-            style={{
-              marginBottom: "var(--spacing-lg)",
-              background: "transparent",
-              border: "none",
+              alignItems: "center",
+              gap: "var(--spacing-sm)",
+              padding: "var(--spacing-md) var(--spacing-xl)",
+              borderRadius: "9999px",
+              border: `0.0625rem solid ${
+                gameType === "santa" ? "var(--color-accent)" : "var(--color-border)"
+              }`,
+              background: gameType === "santa" ? "rgba(249, 115, 115, 0.1)" : "var(--color-bg)",
               color: "var(--color-text)",
+              fontSize: "1rem",
+              fontWeight: 500,
               cursor: "pointer",
-              fontSize: "0.875rem",
-              opacity: 0.8,
-              transition: "opacity 0.2s ease",
+              transition: "all 0.3s ease",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = "1")}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = "0.8")}
+            onMouseEnter={(e) => {
+              if (gameType !== "santa") {
+                e.currentTarget.style.borderColor = "var(--color-accent)";
+                e.currentTarget.style.transform = "scale(1.05)";
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (gameType !== "santa") {
+                e.currentTarget.style.borderColor = "var(--color-border)";
+                e.currentTarget.style.transform = "scale(1)";
+              }
+            }}
           >
-            ← Back
+            <FaGift style={{ fontSize: "1.25rem", color: "var(--color-accent)" }} />
+            Secret Santa
           </button>
-        )}
+          <button
+            onClick={() => setGameType("assassins")}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "var(--spacing-sm)",
+              padding: "var(--spacing-md) var(--spacing-xl)",
+              borderRadius: "9999px",
+              border: `0.0625rem solid ${
+                gameType === "assassins" ? "var(--color-accent)" : "var(--color-border)"
+              }`,
+              background:
+                gameType === "assassins" ? "rgba(249, 115, 115, 0.1)" : "var(--color-bg)",
+              color: "var(--color-text)",
+              fontSize: "1rem",
+              fontWeight: 500,
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+            }}
+            onMouseEnter={(e) => {
+              if (gameType !== "assassins") {
+                e.currentTarget.style.borderColor = "var(--color-accent)";
+                e.currentTarget.style.transform = "scale(1.05)";
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (gameType !== "assassins") {
+                e.currentTarget.style.borderColor = "var(--color-border)";
+                e.currentTarget.style.transform = "scale(1)";
+              }
+            }}
+          >
+            <FaCrosshairs style={{ fontSize: "1.25rem", color: "var(--color-accent)" }} />
+            Assassins
+          </button>
+        </div>
 
-        {/* Email Form */}
-        {gameType && emailExists === null && (
-          <form onSubmit={handleEmailSubmit}>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
-                required
-                autoComplete="email"
-                autoFocus
-                style={{
-                  width: "100%",
-                  padding: "0.875rem 1rem",
-                  border: "0.0625rem solid var(--color-border)",
-                  borderRadius: "var(--radius-md)",
-                  fontSize: "1rem",
-                  fontFamily: "inherit",
-                  background: "var(--color-bg)",
-                  color: "var(--color-text)",
-                  transition: "all var(--transition-fast)",
-                }}
-              />
-            </div>
-            {checkingEmail && (
-              <p style={{ color: "var(--color-text)", fontSize: "0.875rem", opacity: 0.7 }}>
-                Checking...
-              </p>
-            )}
-            {error && (
-              <div className="message message-error" role="alert">
-                <FaExclamationTriangle />
-                <span>{error}</span>
-              </div>
-            )}
-          </form>
+        {/* Email Form - Always visible */}
+        <form onSubmit={handleEmailSubmit} style={{ marginBottom: "var(--spacing-lg)" }}>
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              required
+              autoComplete="email"
+              autoFocus
+              style={{
+                width: "100%",
+                padding: "0.875rem 1rem",
+                border: "0.0625rem solid var(--color-border)",
+                borderRadius: "var(--radius-md)",
+                fontSize: "1rem",
+                fontFamily: "inherit",
+                background: "var(--color-bg)",
+                color: "var(--color-text)",
+                transition: "all var(--transition-fast)",
+              }}
+            />
+          </div>
+          {checkingEmail && (
+            <p style={{ color: "var(--color-text)", fontSize: "0.875rem", opacity: 0.7 }}>
+              Checking...
+            </p>
+          )}
+        </form>
+
+        {/* Account Exists Popup */}
+        {emailExists === true && (
+          <div
+            style={{
+              background: "rgba(74, 222, 128, 0.1)",
+              border: "0.0625rem solid var(--color-success)",
+              borderRadius: "var(--radius-md)",
+              padding: "var(--spacing-md)",
+              marginBottom: "var(--spacing-lg)",
+              display: "flex",
+              alignItems: "center",
+              gap: "var(--spacing-sm)",
+              animation: "slideIn 0.3s ease-out",
+            }}
+          >
+            <FaCheck style={{ color: "var(--color-success)", fontSize: "1.25rem" }} />
+            <span style={{ color: "var(--color-success)", fontSize: "0.875rem" }}>
+              Account exists! Enter your password to sign in.
+            </span>
+          </div>
         )}
 
         {/* Account Exists Popup */}
@@ -336,7 +333,7 @@ const Auth = () => {
           </div>
         )}
 
-        {/* Password Form (Login or Register) */}
+        {/* Password Form (Login or Register) - Dynamically shown */}
         {emailExists !== null && (
           <form onSubmit={handlePasswordSubmit}>
             <div className="form-group">
