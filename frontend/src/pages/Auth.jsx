@@ -362,7 +362,7 @@ const Auth = () => {
             <FaCrosshairs
               style={{ fontSize: "1rem", color: "var(--color-accent)" }}
             />
-            Assassins
+            assassins
           </button>
         </div>
 
