@@ -470,9 +470,7 @@ const Auth = () => {
                 emailExists ? "enter your password" : "create a password"
               }
               required
-              autoComplete={
-                emailExists ? "current-password" : "new-password"
-              }
+              autoComplete={emailExists ? "current-password" : "new-password"}
               autoFocus={emailExists !== null}
               style={{
                 width: "100%",
