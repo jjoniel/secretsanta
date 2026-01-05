@@ -8,26 +8,19 @@
   box-sizing: border-box;
 }
 
-/* Smooth theme transitions - exclude interactive elements that need faster transitions */
-*,
-*::before,
-*::after {
+/* Smooth theme transitions for non-interactive elements */
+html,
+body,
+.card,
+.form-group label,
+.empty-state,
+h1, h2, h3, h4, h5, h6,
+p, span, div:not([role="button"]):not(.btn):not(button):not(a) {
   transition: background-color var(--transition-theme) ease,
               color var(--transition-theme) ease,
               border-color var(--transition-theme) ease,
               box-shadow var(--transition-theme) ease,
               background-image var(--transition-theme) ease;
-}
-
-/* Reset transitions for interactive elements */
-button,
-a,
-input,
-select,
-textarea,
-.btn,
-[role="button"] {
-  transition: all var(--transition-fast);
 }
 
 :root {
