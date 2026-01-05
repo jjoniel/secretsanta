@@ -99,13 +99,45 @@ const Auth = () => {
     }
   };
 
-  const getBackgroundStyle = () => {
+  // Generate random hat rotations (45, 135, 225, or 315 degrees)
+  const getRandomRotation = () => {
+    const angles = [45, 135, 225, 315];
+    return angles[Math.floor(Math.random() * angles.length)];
+  };
+
+  // Generate hat positions for Santa background
+  const generateHatPositions = () => {
+    const hats = [];
+    const spacing = 15; // rem spacing between hats
+    const hatSize = 2; // rem size of each hat
+    const cols = Math.ceil(window.innerWidth / (spacing * 16)) + 2; // +2 for overflow
+    const rows = Math.ceil(window.innerHeight / (spacing * 16)) + 2;
+    
+    for (let row = -1; row < rows; row++) {
+      for (let col = -1; col < cols; col++) {
+        hats.push({
+          id: `${row}-${col}`,
+          x: col * spacing,
+          y: row * spacing,
+          rotation: getRandomRotation(),
+        });
+      }
+    }
+    return hats;
+  };
+
+  const [hatPositions, setHatPositions] = useState([]);
+
+  useEffect(() => {
     if (gameType === "santa") {
-      return {
-        position: "relative",
-        overflow: "hidden",
-      };
-    } else if (gameType === "assassins") {
+      setHatPositions(generateHatPositions());
+    } else {
+      setHatPositions([]);
+    }
+  }, [gameType]);
+
+  const getBackgroundStyle = () => {
+    if (gameType === "assassins") {
       return {
         backgroundImage: `
           repeating-linear-gradient(
@@ -142,31 +174,6 @@ const Auth = () => {
         ...getBackgroundStyle(),
       }}
     >
-      {/* Rotated hat pattern for Santa */}
-      {gameType === "santa" && (
-        <div
-          style={{
-            position: "absolute",
-            top: "-50%",
-            left: "-50%",
-            width: "200%",
-            height: "200%",
-            backgroundImage: `url(${hatImage})`,
-            backgroundSize: "20rem 20rem",
-            backgroundRepeat: "repeat",
-            backgroundPosition: "center center",
-            transform: "rotate(45deg)",
-            pointerEvents: "none",
-            zIndex: 0,
-            maskImage: `radial-gradient(circle 1rem at center, black 0%, transparent 0%)`,
-            maskSize: "20rem 20rem",
-            maskRepeat: "repeat",
-            WebkitMaskImage: `radial-gradient(circle 1rem at center, black 0%, transparent 0%)`,
-            WebkitMaskSize: "20rem 20rem",
-            WebkitMaskRepeat: "repeat",
-          }}
-        />
-      )}
       {/* Overlay for readability */}
       <div
         style={{
@@ -178,7 +185,7 @@ const Auth = () => {
           background: gameType
             ? "rgba(2, 6, 23, 0.85)"
             : "rgba(2, 6, 23, 0.95)",
-          zIndex: 1,
+          zIndex: 0,
           transition: "background 0.5s ease",
         }}
       />
@@ -236,7 +243,7 @@ const Auth = () => {
               }`,
               background:
                 gameType === "santa"
-                  ? "var(--color-accent)"
+                  ? "rgba(249, 115, 115, 0.1)"
                   : "var(--color-bg)",
               color: "var(--color-text)",
               fontSize: "0.875rem",
@@ -245,36 +252,24 @@ const Auth = () => {
               transition: "all 0.3s ease",
               flex: "1 1 calc(50% - var(--spacing-sm) / 2)",
               minWidth: 0,
-              lineHeight: 1,
             }}
             onMouseEnter={(e) => {
               if (gameType !== "santa") {
                 e.currentTarget.style.borderColor = "var(--color-accent)";
+                e.currentTarget.style.transform = "scale(1.05)";
               }
             }}
             onMouseLeave={(e) => {
               if (gameType !== "santa") {
                 e.currentTarget.style.borderColor = "var(--color-border)";
+                e.currentTarget.style.transform = "scale(1)";
               }
             }}
           >
             <FaGift
-              style={{
-                fontSize: "1rem",
-                color:
-                  gameType === "santa"
-                    ? "var(--color-accent)"
-                    : "var(--color-accent)",
-                display: "flex",
-                alignItems: "center",
-                lineHeight: 1,
-              }}
+              style={{ fontSize: "1rem", color: "var(--color-accent)" }}
             />
-            <span
-              style={{ display: "flex", alignItems: "center", lineHeight: 1 }}
-            >
-              Secret Santa
-            </span>
+            Secret Santa
           </button>
           <button
             onClick={() => setGameType("assassins")}
@@ -292,7 +287,7 @@ const Auth = () => {
               }`,
               background:
                 gameType === "assassins"
-                  ? "var(--color-accent)"
+                  ? "rgba(249, 115, 115, 0.1)"
                   : "var(--color-bg)",
               color: "var(--color-text)",
               fontSize: "0.875rem",
@@ -301,36 +296,24 @@ const Auth = () => {
               transition: "all 0.3s ease",
               flex: "1 1 calc(50% - var(--spacing-sm) / 2)",
               minWidth: 0,
-              lineHeight: 1,
             }}
             onMouseEnter={(e) => {
               if (gameType !== "assassins") {
                 e.currentTarget.style.borderColor = "var(--color-accent)";
+                e.currentTarget.style.transform = "scale(1.05)";
               }
             }}
             onMouseLeave={(e) => {
               if (gameType !== "assassins") {
                 e.currentTarget.style.borderColor = "var(--color-border)";
+                e.currentTarget.style.transform = "scale(1)";
               }
             }}
           >
             <FaCrosshairs
-              style={{
-                fontSize: "1rem",
-                color:
-                  gameType === "assassins"
-                    ? "var(--color-accent)"
-                    : "var(--color-accent)",
-                display: "flex",
-                alignItems: "center",
-                lineHeight: 1,
-              }}
+              style={{ fontSize: "1rem", color: "var(--color-accent)" }}
             />
-            <span
-              style={{ display: "flex", alignItems: "center", lineHeight: 1 }}
-            >
-              Assassins
-            </span>
+            Assassins
           </button>
         </div>
 
