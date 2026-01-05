@@ -113,8 +113,12 @@ const Auth = () => {
       const generateHatPositions = () => {
         const hats = [];
         const spacing = 15; // rem spacing between hats
-        const cols = Math.ceil(window.innerWidth / (spacing * 16)) + 2; // +2 for overflow
-        const rows = Math.ceil(window.innerHeight / (spacing * 16)) + 2;
+        // Use viewport dimensions, fallback to reasonable defaults
+        const viewportWidth = typeof window !== "undefined" ? window.innerWidth : 1920;
+        const viewportHeight = typeof window !== "undefined" ? window.innerHeight : 1080;
+        const remInPx = 16; // 1rem = 16px
+        const cols = Math.ceil(viewportWidth / (spacing * remInPx)) + 2; // +2 for overflow
+        const rows = Math.ceil(viewportHeight / (spacing * remInPx)) + 2;
 
         for (let row = -1; row < rows; row++) {
           for (let col = -1; col < cols; col++) {
@@ -130,6 +134,13 @@ const Auth = () => {
       };
 
       setHatPositions(generateHatPositions());
+
+      // Regenerate on window resize
+      const handleResize = () => {
+        setHatPositions(generateHatPositions());
+      };
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
     } else {
       setHatPositions([]);
     }
