@@ -418,27 +418,22 @@ const Auth = () => {
                 }}
               />
               {emailExists === true && (
-                <div
+                <FaCheckCircle
+                  title="account found!"
                   style={{
                     position: "absolute",
                     right: "var(--spacing-sm)",
                     top: "50%",
                     transform: "translateY(-50%)",
+                    color: "var(--color-success)",
+                    fontSize: "1.25rem",
+                    background: "transparent",
+                    border: "0.125rem solid var(--color-success)",
+                    borderRadius: "50%",
+                    padding: "0.125rem",
                     cursor: "help",
                   }}
-                  title="account found!"
-                >
-                  <FaCheckCircle
-                    style={{
-                      color: "var(--color-success)",
-                      fontSize: "1.25rem",
-                      background: "transparent",
-                      border: "0.125rem solid var(--color-success)",
-                      borderRadius: "50%",
-                      padding: "0.125rem",
-                    }}
-                  />
-                </div>
+                />
               )}
             </div>
           </div>
@@ -457,55 +452,33 @@ const Auth = () => {
           )}
         </form>
 
-        {/* Password Form (Login or Register) - Dynamically shown */}
-        {emailExists !== null && (
-          <form
-            onSubmit={handlePasswordSubmit}
-            style={{
-              width: "100%",
-              maxWidth: "20rem",
-              marginLeft: "auto",
-              marginRight: "auto",
-              animation: "slideInUp 0.3s ease-out",
-            }}
-          >
-            <div style={{ marginBottom: 0 }}>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder={
-                  emailExists ? "enter your password" : "create a password"
-                }
-                required
-                autoComplete={emailExists ? "current-password" : "new-password"}
-                autoFocus
-                style={{
-                  width: "100%",
-                  padding: "var(--spacing-sm) var(--spacing-lg)",
-                  border: "0.0625rem solid var(--color-border)",
-                  borderRadius: "9999px",
-                  fontSize: "0.875rem",
-                  fontFamily: "inherit",
-                  background: "var(--color-bg)",
-                  color: "var(--color-text)",
-                  transition: "all var(--transition-fast)",
-                  textAlign: "center",
-                }}
-              />
-            </div>
-
-            {!emailExists && (
-              <div style={{ marginBottom: 0 }}>
+        {/* Password Form (Login or Register) - Always reserve space */}
+        <form
+          onSubmit={handlePasswordSubmit}
+          style={{
+            width: "100%",
+            maxWidth: "20rem",
+            marginLeft: "auto",
+            marginRight: "auto",
+            minHeight: emailExists !== null ? (emailExists ? "3.5rem" : "7rem") : "0",
+            transition: "min-height var(--transition-base)",
+            overflow: "hidden",
+          }}
+        >
+          {emailExists !== null && (
+            <>
+              <div style={{ marginBottom: "var(--spacing-md)" }}>
                 <input
-                  id="confirmPassword"
+                  id="password"
                   type="password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  placeholder="reenter password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder={
+                    emailExists ? "enter your password" : "create a password"
+                  }
                   required
-                  autoComplete="new-password"
+                  autoComplete={emailExists ? "current-password" : "new-password"}
+                  autoFocus
                   style={{
                     width: "100%",
                     padding: "var(--spacing-sm) var(--spacing-lg)",
@@ -519,19 +492,46 @@ const Auth = () => {
                     textAlign: "center",
                   }}
                 />
-                <small
-                  style={{
-                    color: "var(--color-text)",
-                    fontSize: "0.8125rem",
-                    marginTop: "var(--spacing-xs)",
-                    display: "block",
-                    opacity: 0.7,
-                  }}
-                >
-                  Must be at least 6 characters
-                </small>
               </div>
-            )}
+
+              {!emailExists && (
+                <div style={{ marginBottom: 0 }}>
+                  <input
+                    id="confirmPassword"
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="reenter password"
+                    required
+                    autoComplete="new-password"
+                    style={{
+                      width: "100%",
+                      padding: "var(--spacing-sm) var(--spacing-lg)",
+                      border: "0.0625rem solid var(--color-border)",
+                      borderRadius: "9999px",
+                      fontSize: "0.875rem",
+                      fontFamily: "inherit",
+                      background: "var(--color-bg)",
+                      color: "var(--color-text)",
+                      transition: "all var(--transition-fast)",
+                      textAlign: "center",
+                    }}
+                  />
+                  <small
+                    style={{
+                      color: "var(--color-text)",
+                      fontSize: "0.8125rem",
+                      marginTop: "var(--spacing-xs)",
+                      display: "block",
+                      opacity: 0.7,
+                    }}
+                  >
+                    Must be at least 6 characters
+                  </small>
+                </div>
+              )}
+            </>
+          )}
 
             {error && (
               <div className="message message-error" role="alert">
@@ -575,17 +575,6 @@ const Auth = () => {
             from {
               opacity: 0;
               transform: translateY(1rem);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-          
-          @keyframes slideInUp {
-            from {
-              opacity: 0;
-              transform: translateY(0.5rem);
             }
             to {
               opacity: 1;
