@@ -6,6 +6,7 @@ import {
   FaCrosshairs,
   FaExclamationTriangle,
   FaCheck,
+  FaCheckCircle,
 } from "react-icons/fa";
 import axios from "axios";
 import hatImage from "../assets/images/hat.png";
@@ -404,9 +405,10 @@ const Auth = () => {
               style={{
                 width: "100%",
                 padding: "var(--spacing-sm) var(--spacing-lg)",
-                border: emailExists === true
-                  ? "0.125rem solid var(--color-success)"
-                  : "0.0625rem solid var(--color-border)",
+                border:
+                  emailExists === true
+                    ? "0.125rem solid var(--color-success)"
+                    : "0.0625rem solid var(--color-border)",
                 borderRadius: "9999px",
                 fontSize: "0.875rem",
                 fontFamily: "inherit",
@@ -592,28 +594,36 @@ const Auth = () => {
         )}
       </div>
 
-      <style>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(1rem);
+        <style>{`
+          @keyframes fadeInUp {
+            from {
+              opacity: 0;
+              transform: translateY(1rem);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
           }
-          to {
-            opacity: 1;
-            transform: translateY(0);
+          @keyframes fadeInOut {
+            0% {
+              opacity: 0;
+              transform: translateY(-50%) scale(0.8);
+            }
+            20% {
+              opacity: 1;
+              transform: translateY(-50%) scale(1);
+            }
+            80% {
+              opacity: 1;
+              transform: translateY(-50%) scale(1);
+            }
+            100% {
+              opacity: 0;
+              transform: translateY(-50%) scale(0.8);
+            }
           }
-        }
-        @keyframes slideIn {
-          from {
-            opacity: 0;
-            transform: translateY(-0.5rem);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
+        `}</style>
     </div>
   );
 };
