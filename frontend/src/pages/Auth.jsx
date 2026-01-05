@@ -262,6 +262,20 @@ const Auth = () => {
           exchan.ge
         </h1>
 
+        {/* Subheading */}
+        <h2
+          style={{
+            fontSize: "1.125rem",
+            fontWeight: 600,
+            marginBottom: "var(--spacing-lg)",
+            color: "var(--color-text)",
+            letterSpacing: "-0.01em",
+            textAlign: "center",
+          }}
+        >
+          jump right in
+        </h2>
+
         {/* Game Type Pills */}
         <div
           style={{
@@ -367,17 +381,6 @@ const Auth = () => {
         </div>
 
         {/* Email Form - Always visible */}
-        <p
-          style={{
-            color: "var(--color-text)",
-            fontSize: "0.875rem",
-            textAlign: "center",
-            marginBottom: "var(--spacing-md)",
-            opacity: 0.8,
-          }}
-        >
-          jump right in
-        </p>
         <form
           onSubmit={handleEmailSubmit}
           style={{
