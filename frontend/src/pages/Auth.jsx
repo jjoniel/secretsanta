@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { FaGift, FaCrosshairs, FaExclamationTriangle, FaCheck } from "react-icons/fa";
+import {
+  FaGift,
+  FaCrosshairs,
+  FaExclamationTriangle,
+  FaCheck,
+} from "react-icons/fa";
 import axios from "axios";
 import hatImage from "../assets/images/hat.png";
 import "../App.css";
@@ -29,7 +34,9 @@ const Auth = () => {
 
       setCheckingEmail(true);
       try {
-        const response = await axios.get(`/api/auth/check-email/${encodeURIComponent(email)}`);
+        const response = await axios.get(
+          `/api/auth/check-email/${encodeURIComponent(email)}`
+        );
         setEmailExists(response.data.exists);
         setError("");
       } catch (err) {
@@ -83,7 +90,9 @@ const Auth = () => {
         const firstError = errorDetail[0];
         setError(firstError?.msg || "Validation error");
       } else {
-        setError(errorDetail || emailExists ? "Failed to login" : "Failed to register");
+        setError(
+          errorDetail || emailExists ? "Failed to login" : "Failed to register"
+        );
       }
     } finally {
       setLoading(false);
@@ -179,10 +188,14 @@ const Auth = () => {
         <div
           style={{
             display: "flex",
-            gap: "var(--spacing-md)",
+            gap: "var(--spacing-sm)",
             justifyContent: "center",
-            marginBottom: "var(--spacing-xl)",
+            marginBottom: "var(--spacing-lg)",
             flexWrap: "wrap",
+            width: "100%",
+            maxWidth: "20rem",
+            marginLeft: "auto",
+            marginRight: "auto",
           }}
         >
           <button
@@ -190,15 +203,20 @@ const Auth = () => {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "var(--spacing-sm)",
-              padding: "var(--spacing-md) var(--spacing-xl)",
+              gap: "var(--spacing-xs)",
+              padding: "var(--spacing-sm) var(--spacing-lg)",
               borderRadius: "9999px",
               border: `0.0625rem solid ${
-                gameType === "santa" ? "var(--color-accent)" : "var(--color-border)"
+                gameType === "santa"
+                  ? "var(--color-accent)"
+                  : "var(--color-border)"
               }`,
-              background: gameType === "santa" ? "rgba(249, 115, 115, 0.1)" : "var(--color-bg)",
+              background:
+                gameType === "santa"
+                  ? "rgba(249, 115, 115, 0.1)"
+                  : "var(--color-bg)",
               color: "var(--color-text)",
-              fontSize: "1rem",
+              fontSize: "0.875rem",
               fontWeight: 500,
               cursor: "pointer",
               transition: "all 0.3s ease",
@@ -216,7 +234,9 @@ const Auth = () => {
               }
             }}
           >
-            <FaGift style={{ fontSize: "1.25rem", color: "var(--color-accent)" }} />
+            <FaGift
+              style={{ fontSize: "1rem", color: "var(--color-accent)" }}
+            />
             Secret Santa
           </button>
           <button
@@ -224,16 +244,20 @@ const Auth = () => {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "var(--spacing-sm)",
-              padding: "var(--spacing-md) var(--spacing-xl)",
+              gap: "var(--spacing-xs)",
+              padding: "var(--spacing-sm) var(--spacing-lg)",
               borderRadius: "9999px",
               border: `0.0625rem solid ${
-                gameType === "assassins" ? "var(--color-accent)" : "var(--color-border)"
+                gameType === "assassins"
+                  ? "var(--color-accent)"
+                  : "var(--color-border)"
               }`,
               background:
-                gameType === "assassins" ? "rgba(249, 115, 115, 0.1)" : "var(--color-bg)",
+                gameType === "assassins"
+                  ? "rgba(249, 115, 115, 0.1)"
+                  : "var(--color-bg)",
               color: "var(--color-text)",
-              fontSize: "1rem",
+              fontSize: "0.875rem",
               fontWeight: 500,
               cursor: "pointer",
               transition: "all 0.3s ease",
@@ -251,15 +275,25 @@ const Auth = () => {
               }
             }}
           >
-            <FaCrosshairs style={{ fontSize: "1.25rem", color: "var(--color-accent)" }} />
+            <FaCrosshairs
+              style={{ fontSize: "1rem", color: "var(--color-accent)" }}
+            />
             Assassins
           </button>
         </div>
 
         {/* Email Form - Always visible */}
-        <form onSubmit={handleEmailSubmit} style={{ marginBottom: "var(--spacing-lg)" }}>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
+        <form
+          onSubmit={handleEmailSubmit}
+          style={{
+            marginBottom: "var(--spacing-lg)",
+            width: "100%",
+            maxWidth: "20rem",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          <div className="form-group" style={{ marginBottom: 0 }}>
             <input
               id="email"
               type="email"
@@ -271,19 +305,28 @@ const Auth = () => {
               autoFocus
               style={{
                 width: "100%",
-                padding: "0.875rem 1rem",
+                padding: "var(--spacing-sm) var(--spacing-lg)",
                 border: "0.0625rem solid var(--color-border)",
-                borderRadius: "var(--radius-md)",
-                fontSize: "1rem",
+                borderRadius: "9999px",
+                fontSize: "0.875rem",
                 fontFamily: "inherit",
                 background: "var(--color-bg)",
                 color: "var(--color-text)",
                 transition: "all var(--transition-fast)",
+                textAlign: "center",
               }}
             />
           </div>
           {checkingEmail && (
-            <p style={{ color: "var(--color-text)", fontSize: "0.875rem", opacity: 0.7 }}>
+            <p
+              style={{
+                color: "var(--color-text)",
+                fontSize: "0.875rem",
+                opacity: 0.7,
+                textAlign: "center",
+                marginTop: "var(--spacing-sm)",
+              }}
+            >
               Checking...
             </p>
           )}
@@ -304,8 +347,12 @@ const Auth = () => {
               animation: "slideIn 0.3s ease-out",
             }}
           >
-            <FaCheck style={{ color: "var(--color-success)", fontSize: "1.25rem" }} />
-            <span style={{ color: "var(--color-success)", fontSize: "0.875rem" }}>
+            <FaCheck
+              style={{ color: "var(--color-success)", fontSize: "1.25rem" }}
+            />
+            <span
+              style={{ color: "var(--color-success)", fontSize: "0.875rem" }}
+            >
               Account exists! Enter your password to sign in.
             </span>
           </div>
@@ -326,8 +373,12 @@ const Auth = () => {
               animation: "slideIn 0.3s ease-out",
             }}
           >
-            <FaCheck style={{ color: "var(--color-success)", fontSize: "1.25rem" }} />
-            <span style={{ color: "var(--color-success)", fontSize: "0.875rem" }}>
+            <FaCheck
+              style={{ color: "var(--color-success)", fontSize: "1.25rem" }}
+            />
+            <span
+              style={{ color: "var(--color-success)", fontSize: "0.875rem" }}
+            >
               Account exists! Enter your password to sign in.
             </span>
           </div>
@@ -345,7 +396,9 @@ const Auth = () => {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder={emailExists ? "Enter your password" : "At least 6 characters"}
+                placeholder={
+                  emailExists ? "Enter your password" : "At least 6 characters"
+                }
                 required
                 autoComplete={emailExists ? "current-password" : "new-password"}
                 autoFocus
@@ -423,10 +476,14 @@ const Auth = () => {
                       borderWidth: "0.125rem",
                     }}
                   />
-                  <span>{emailExists ? "Signing in..." : "Creating account..."}</span>
+                  <span>
+                    {emailExists ? "Signing in..." : "Creating account..."}
+                  </span>
                 </>
+              ) : emailExists ? (
+                "Sign In"
               ) : (
-                emailExists ? "Sign In" : "Create Account"
+                "Create Account"
               )}
             </button>
           </form>
@@ -460,4 +517,3 @@ const Auth = () => {
 };
 
 export default Auth;
-
