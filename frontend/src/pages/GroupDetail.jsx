@@ -326,7 +326,9 @@ const GroupDetail = () => {
 
       {participants.length >= 2 && (
         <div className="card" style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: '3rem', marginBottom: 'var(--spacing-md)' }}>🎁</div>
+          <div style={{ fontSize: '3rem', marginBottom: 'var(--spacing-md)', display: 'flex', justifyContent: 'center' }}>
+            <FaGift />
+          </div>
           <h2 style={{ marginBottom: 'var(--spacing-sm)' }}>Ready to Assign!</h2>
           <p
             style={{
@@ -340,8 +342,9 @@ const GroupDetail = () => {
           <button
             onClick={handleCreateAssignments}
             className="btn btn-success btn-lg"
+            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 'var(--spacing-sm)', margin: '0 auto' }}
           >
-            🎁 Create Assignments & Send Emails
+            <FaGift /> Create Assignments & Send Emails
           </button>
         </div>
       )}
