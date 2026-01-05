@@ -214,12 +214,9 @@ const Auth = () => {
               }`,
               background:
                 gameType === "santa"
-                  ? "rgba(249, 115, 115, 0.1)"
-                  : "var(--color-bg)",
-              color:
-                gameType === "santa"
                   ? "var(--color-accent)"
-                  : "var(--color-text)",
+                  : "var(--color-bg)",
+              color: "var(--color-text)",
               fontSize: "0.875rem",
               fontWeight: 500,
               cursor: "pointer",
@@ -265,12 +262,9 @@ const Auth = () => {
               }`,
               background:
                 gameType === "assassins"
-                  ? "rgba(249, 115, 115, 0.1)"
-                  : "var(--color-bg)",
-              color:
-                gameType === "assassins"
                   ? "var(--color-accent)"
-                  : "var(--color-text)",
+                  : "var(--color-bg)",
+              color: "var(--color-text)",
               fontSize: "0.875rem",
               fontWeight: 500,
               cursor: "pointer",
