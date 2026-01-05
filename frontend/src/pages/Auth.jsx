@@ -6,10 +6,10 @@ import {
   FaCrosshairs,
   FaExclamationTriangle,
   FaCheck,
-  FaWater,
 } from "react-icons/fa";
 import axios from "axios";
 import hatImage from "../assets/images/hat.png";
+import watergunImage from "../assets/images/watergun.png";
 import "../App.css";
 
 const Auth = () => {
