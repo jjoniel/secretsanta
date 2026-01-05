@@ -393,31 +393,65 @@ const Auth = () => {
           }}
         >
           <div className="form-group" style={{ marginBottom: 0 }}>
-            <input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@example.com"
-              required
-              autoComplete="email"
-              autoFocus
-              style={{
-                width: "100%",
-                padding: "var(--spacing-sm) var(--spacing-lg)",
-                border:
-                  emailExists === true
-                    ? "0.125rem solid var(--color-success)"
-                    : "0.0625rem solid var(--color-border)",
-                borderRadius: "9999px",
-                fontSize: "0.875rem",
-                fontFamily: "inherit",
-                background: "var(--color-bg)",
-                color: "var(--color-text)",
-                transition: "all var(--transition-fast)",
-                textAlign: "center",
-              }}
-            />
+            <div style={{ position: "relative", width: "100%" }}>
+              <input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                required
+                autoComplete="email"
+                autoFocus
+                style={{
+                  width: "100%",
+                  padding: "var(--spacing-sm) var(--spacing-lg)",
+                  paddingRight: emailExists === true ? "8rem" : "var(--spacing-lg)",
+                  border: "0.0625rem solid var(--color-border)",
+                  borderRadius: "9999px",
+                  fontSize: "0.875rem",
+                  fontFamily: "inherit",
+                  background: "var(--color-bg)",
+                  color: "var(--color-text)",
+                  transition: "all var(--transition-fast)",
+                  textAlign: "center",
+                }}
+              />
+              {emailExists === true && (
+                <div
+                  style={{
+                    position: "absolute",
+                    right: "var(--spacing-sm)",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "var(--spacing-xs)",
+                    animation: "fadeInOut 2s ease-in-out",
+                  }}
+                >
+                  <FaCheckCircle
+                    style={{
+                      color: "white",
+                      fontSize: "1rem",
+                      background: "var(--color-success)",
+                      borderRadius: "50%",
+                      padding: "0.125rem",
+                    }}
+                  />
+                  <span
+                    style={{
+                      color: "var(--color-success)",
+                      fontSize: "0.8125rem",
+                      fontWeight: 500,
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    account found
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
           {checkingEmail && (
             <p
