@@ -460,7 +460,8 @@ const Auth = () => {
             maxWidth: "20rem",
             marginLeft: "auto",
             marginRight: "auto",
-            minHeight: emailExists !== null ? (emailExists ? "3.5rem" : "7rem") : "0",
+            minHeight:
+              emailExists !== null ? (emailExists ? "3.5rem" : "7rem") : "0",
             transition: "min-height var(--transition-base)",
             overflow: "hidden",
           }}
@@ -477,7 +478,9 @@ const Auth = () => {
                     emailExists ? "enter your password" : "create a password"
                   }
                   required
-                  autoComplete={emailExists ? "current-password" : "new-password"}
+                  autoComplete={
+                    emailExists ? "current-password" : "new-password"
+                  }
                   autoFocus
                   style={{
                     width: "100%",
@@ -504,6 +507,8 @@ const Auth = () => {
                     placeholder="reenter password"
                     required
                     autoComplete="new-password"
+                    onFocus={(e) => e.target.style.outline = "none"}
+                    onBlur={(e) => e.target.style.outline = "none"}
                     style={{
                       width: "100%",
                       padding: "var(--spacing-sm) var(--spacing-lg)",
@@ -515,6 +520,7 @@ const Auth = () => {
                       color: "var(--color-text)",
                       transition: "all var(--transition-fast)",
                       textAlign: "center",
+                      outline: "none",
                     }}
                   />
                   <small
