@@ -13,12 +13,14 @@ cp env.example .env
 ```
 
 Edit `.env`:
+
 ```env
 DATABASE_URL=sqlite:///./santa.db
 SECRET_KEY=your-random-secret-key-here
 ```
 
 **Gmail API:**
+
 1. [Google Cloud Console](https://console.cloud.google.com/) → Create project
 2. Enable Gmail API
 3. Create OAuth 2.0 credentials (Desktop app)
