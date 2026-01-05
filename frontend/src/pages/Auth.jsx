@@ -243,33 +243,50 @@ const Auth = () => {
           animation: "fadeInUp 0.5s ease-out",
         }}
       >
-        {/* Title */}
-        <h1
+        {/* Title with morphing animation */}
+        <div
           style={{
-            fontSize: "clamp(2.5rem, 6vw, 4rem)",
-            fontWeight: 700,
+            position: "relative",
+            height: "clamp(3rem, 7vw, 4.5rem)",
             marginBottom: "var(--spacing-xl)",
-            color: "var(--color-text)",
-            letterSpacing: "-0.02em",
-            textAlign: "center",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          exchan.ge
-        </h1>
-
-        {/* Subheading */}
-        <h2
-          style={{
-            fontSize: "1.125rem",
-            fontWeight: 600,
-            marginBottom: "var(--spacing-lg)",
-            color: "var(--color-text)",
-            letterSpacing: "-0.01em",
-            textAlign: "center",
-          }}
-        >
-          jump right in
-        </h2>
+          <h1
+            className={emailExists === true ? "title-morph-out" : "title-morph-in"}
+            style={{
+              fontSize: "clamp(2.5rem, 6vw, 4rem)",
+              fontWeight: 700,
+              color: "var(--color-text)",
+              letterSpacing: "-0.02em",
+              textAlign: "center",
+              position: "absolute",
+              width: "100%",
+              WebkitTextStroke: emailExists === true ? "0.125rem transparent" : "0.125rem var(--color-text)",
+              transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
+            }}
+          >
+            exchan.ge
+          </h1>
+          <h1
+            className={emailExists === true ? "title-morph-in" : "title-morph-out"}
+            style={{
+              fontSize: "clamp(2.5rem, 6vw, 4rem)",
+              fontWeight: 700,
+              color: "transparent",
+              letterSpacing: "-0.02em",
+              textAlign: "center",
+              position: "absolute",
+              width: "100%",
+              WebkitTextStroke: emailExists === true ? "0.125rem var(--color-text)" : "0.125rem transparent",
+              transition: "all 0.8s cubic-bezier(0.4, 0, 0.2, 1)",
+            }}
+          >
+            welcome back
+          </h1>
+        </div>
 
         {/* Game Type Pills */}
         <div
@@ -389,7 +406,7 @@ const Auth = () => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="enter your email"
+                placeholder="get started with your email"
                 required
                 autoComplete="email"
                 autoFocus
@@ -450,7 +467,9 @@ const Auth = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder={
-                emailExists ? "enter your password" : "create a password"
+                emailExists
+                  ? "enter your password"
+                  : "create a password"
               }
               required
               autoComplete={emailExists ? "current-password" : "new-password"}
