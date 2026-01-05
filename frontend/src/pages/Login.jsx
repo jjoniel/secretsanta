@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import {
-  FaGift,
-  FaCrosshairs,
-  FaExclamationTriangle,
-} from "react-icons/fa";
+import { FaGift, FaCrosshairs, FaExclamationTriangle } from "react-icons/fa";
 import "../App.css";
 
 const Login = () => {

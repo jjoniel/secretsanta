@@ -64,3 +64,10 @@ def login(
 def read_users_me(current_user: models.User = Depends(get_current_active_user)):
     """Get current user information"""
     return current_user
+
+
+@router.get("/check-email/{email}")
+def check_email_exists(email: str, db: Session = Depends(get_db)):
+    """Check if an email is already registered"""
+    existing_user = db.query(models.User).filter(models.User.email == email).first()
+    return {"exists": existing_user is not None}
