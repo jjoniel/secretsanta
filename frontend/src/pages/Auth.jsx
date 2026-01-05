@@ -203,6 +203,7 @@ const Auth = () => {
             style={{
               display: "flex",
               alignItems: "center",
+              justifyContent: "center",
               gap: "var(--spacing-xs)",
               padding: "var(--spacing-sm) var(--spacing-lg)",
               borderRadius: "9999px",
@@ -220,6 +221,8 @@ const Auth = () => {
               fontWeight: 500,
               cursor: "pointer",
               transition: "all 0.3s ease",
+              flex: "1 1 calc(50% - var(--spacing-sm) / 2)",
+              minWidth: 0,
             }}
             onMouseEnter={(e) => {
               if (gameType !== "santa") {
@@ -244,6 +247,7 @@ const Auth = () => {
             style={{
               display: "flex",
               alignItems: "center",
+              justifyContent: "center",
               gap: "var(--spacing-xs)",
               padding: "var(--spacing-sm) var(--spacing-lg)",
               borderRadius: "9999px",
@@ -261,6 +265,8 @@ const Auth = () => {
               fontWeight: 500,
               cursor: "pointer",
               transition: "all 0.3s ease",
+              flex: "1 1 calc(50% - var(--spacing-sm) / 2)",
+              minWidth: 0,
             }}
             onMouseEnter={(e) => {
               if (gameType !== "assassins") {
