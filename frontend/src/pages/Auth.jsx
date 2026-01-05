@@ -17,7 +17,6 @@ const Auth = () => {
   const [gameType, setGameType] = useState(null); // 'santa' or 'assassins'
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [emailExists, setEmailExists] = useState(null); // null, true, or false
   const [checkingEmail, setCheckingEmail] = useState(false);
   const [error, setError] = useState("");
@@ -73,11 +72,6 @@ const Auth = () => {
         navigate("/dashboard");
       } else {
         // Register
-        if (password !== confirmPassword) {
-          setError("Passwords do not match");
-          setLoading(false);
-          return;
-        }
         if (password.length < 6) {
           setError("Password must be at least 6 characters");
           setLoading(false);
