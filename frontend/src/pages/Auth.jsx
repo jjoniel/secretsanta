@@ -255,7 +255,9 @@ const Auth = () => {
           }}
         >
           <h1
-            className={emailExists === true ? "title-fade-out" : "title-fade-in"}
+            className={
+              emailExists === true ? "title-fade-out" : "title-fade-in"
+            }
             style={{
               fontSize: "clamp(2.5rem, 6vw, 4rem)",
               fontWeight: 700,
@@ -265,7 +267,8 @@ const Auth = () => {
               position: "absolute",
               width: "100%",
               opacity: emailExists === true ? 0 : 1,
-              transform: emailExists === true ? "translateY(-1rem)" : "translateY(0)",
+              transform:
+                emailExists === true ? "translateY(-1rem)" : "translateY(0)",
               transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
               pointerEvents: "none",
             }}
@@ -273,7 +276,9 @@ const Auth = () => {
             exchan.ge
           </h1>
           <h1
-            className={emailExists === true ? "title-fade-in" : "title-fade-out"}
+            className={
+              emailExists === true ? "title-fade-in" : "title-fade-out"
+            }
             style={{
               fontSize: "clamp(2.5rem, 6vw, 4rem)",
               fontWeight: 700,
@@ -283,7 +288,8 @@ const Auth = () => {
               position: "absolute",
               width: "100%",
               opacity: emailExists === true ? 1 : 0,
-              transform: emailExists === true ? "translateY(0)" : "translateY(1rem)",
+              transform:
+                emailExists === true ? "translateY(0)" : "translateY(1rem)",
               transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
               pointerEvents: "none",
             }}
@@ -545,36 +551,6 @@ const Auth = () => {
             to {
               opacity: 1;
               transform: translateY(-50%) scale(1);
-            }
-          }
-          
-          .title-fade-in {
-            animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-          }
-          
-          .title-fade-out {
-            animation: fadeOutDown 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-          }
-          
-          @keyframes fadeInUp {
-            from {
-              opacity: 0;
-              transform: translateY(1rem);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-          
-          @keyframes fadeOutDown {
-            from {
-              opacity: 1;
-              transform: translateY(0);
-            }
-            to {
-              opacity: 0;
-              transform: translateY(-1rem);
             }
           }
           
