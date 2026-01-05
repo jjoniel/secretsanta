@@ -115,7 +115,7 @@ const Dashboard = () => {
       )}
 
       <div className="card">
-        <h2 style={{ marginBottom: "var(--spacing-lg)" }}>Create New Group</h2>
+        <h2 style={{ marginBottom: "var(--spacing-lg)", color: "#ffffff" }}>Create New Group</h2>
         <form
           onSubmit={handleCreateGroup}
           className="flex gap-md"
@@ -146,11 +146,11 @@ const Dashboard = () => {
 
       <div className="card">
         <div className="flex-between mb-lg">
-          <h2>Your Groups</h2>
+          <h2 style={{ color: "#ffffff" }}>Your Groups</h2>
           {groups.length > 0 && (
             <span
               style={{
-                color: "var(--color-text-secondary)",
+                color: "#ffffff",
                 fontSize: "0.875rem",
               }}
             >
@@ -164,8 +164,8 @@ const Dashboard = () => {
             <div className="empty-state-icon">
               <FaBox style={{ fontSize: "3rem" }} />
             </div>
-            <h3 style={{ marginBottom: "var(--spacing-sm)" }}>No groups yet</h3>
-            <p style={{ color: "var(--color-text-secondary)" }}>
+            <h3 style={{ marginBottom: "var(--spacing-sm)", color: "#ffffff" }}>No groups yet</h3>
+            <p style={{ color: "#ffffff" }}>
               Create your first Secret Santa group to get started!
             </p>
           </div>
@@ -185,7 +185,7 @@ const Dashboard = () => {
                   className="flex-between"
                   style={{ marginBottom: "var(--spacing-md)" }}
                 >
-                  <h3 style={{ margin: 0 }}>{group.name}</h3>
+                  <h3 style={{ margin: 0, color: "#ffffff" }}>{group.name}</h3>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
@@ -199,7 +199,7 @@ const Dashboard = () => {
                 </div>
                 <p
                   style={{
-                    color: "var(--color-text-secondary)",
+                    color: "#ffffff",
                     fontSize: "0.875rem",
                     marginBottom: "var(--spacing-md)",
                   }}

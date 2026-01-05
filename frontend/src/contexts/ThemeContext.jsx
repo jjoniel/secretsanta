@@ -1,25 +1,24 @@
-import { createContext, useContext, useEffect } from 'react'
+import { createContext, useContext, useEffect } from "react";
 
-const ThemeContext = createContext()
+const ThemeContext = createContext();
 
 export const useTheme = () => {
-  const context = useContext(ThemeContext)
+  const context = useContext(ThemeContext);
   if (!context) {
-    throw new Error('useTheme must be used within ThemeProvider')
+    throw new Error("useTheme must be used within ThemeProvider");
   }
-  return context
-}
+  return context;
+};
 
 export const ThemeProvider = ({ children }) => {
   useEffect(() => {
     // Always set dark theme
-    document.documentElement.setAttribute('data-theme', 'dark')
-  }, [])
+    document.documentElement.setAttribute("data-theme", "dark");
+  }, []);
 
   return (
-    <ThemeContext.Provider value={{ theme: 'dark' }}>
+    <ThemeContext.Provider value={{ theme: "dark" }}>
       {children}
     </ThemeContext.Provider>
-  )
-}
-
+  );
+};
