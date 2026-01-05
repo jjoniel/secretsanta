@@ -152,7 +152,7 @@ const Auth = () => {
             width: "200%",
             height: "200%",
             backgroundImage: `url(${hatImage})`,
-            backgroundSize: "6rem 6rem",
+            backgroundSize: "2rem 2rem",
             backgroundRepeat: "repeat",
             backgroundPosition: "0 0",
             transform: "rotate(45deg)",
