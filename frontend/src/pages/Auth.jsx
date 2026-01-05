@@ -472,7 +472,6 @@ const Auth = () => {
               }
               required
               autoComplete={emailExists ? "current-password" : "new-password"}
-              autoFocus={emailExists !== null}
               style={{
                 width: "100%",
                 padding: "var(--spacing-sm) var(--spacing-lg)",
