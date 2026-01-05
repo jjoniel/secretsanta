@@ -399,7 +399,7 @@ const Auth = () => {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
+                placeholder="enter your email"
                 required
                 autoComplete="email"
                 autoFocus
@@ -456,16 +456,13 @@ const Auth = () => {
         {emailExists !== null && (
           <form onSubmit={handlePasswordSubmit}>
             <div className="form-group">
-              <label htmlFor="password">
-                {emailExists ? "Password" : "Create Password"}
-              </label>
               <input
                 id="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder={
-                  emailExists ? "Enter your password" : "At least 6 characters"
+                  emailExists ? "enter your password" : "create a password"
                 }
                 required
                 autoComplete={emailExists ? "current-password" : "new-password"}
