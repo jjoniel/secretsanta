@@ -35,18 +35,6 @@
   backdrop-filter: blur(1rem);
 }
 
-/* Only clickable cards get hover effect */
-.card-clickable {
-  cursor: pointer;
-  transition: transform var(--transition-base),
-    box-shadow var(--transition-base);
-}
-
-.card-clickable:hover {
-  transform: translateY(-0.125rem);
-  box-shadow: var(--shadow-xl);
-}
-
 /* Buttons */
 .btn {
   display: inline-flex;
@@ -142,12 +130,8 @@
 
 .btn-ghost {
   background: transparent;
-  color: var(--color-text-primary);
-  border: 0.0625rem solid transparent;
-}
-
-.btn-ghost {
   color: var(--color-text-inverse);
+  border: 0.0625rem solid transparent;
 }
 
 .btn-ghost:hover:not(:disabled) {
@@ -179,9 +163,7 @@
   letter-spacing: -0.01em;
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
+.form-group input {
   width: 100%;
   padding: 0.875rem 1rem;
   border: 0.0625rem solid var(--color-border);
@@ -195,16 +177,13 @@
   appearance: none;
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
+.form-group input:focus {
   outline: none;
   border-color: var(--color-accent);
   box-shadow: 0 0 0 0.1875rem var(--color-accent-light);
 }
 
-.form-group input::placeholder,
-.form-group textarea::placeholder {
+.form-group input::placeholder {
   color: var(--color-text-tertiary);
 }
 
@@ -322,23 +301,6 @@ h3 {
 
 .grid-2 {
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-}
-
-.grid-3 {
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-}
-
-/* Utility Classes */
-.text-center {
-  text-align: center;
-}
-
-.text-muted {
-  color: var(--color-text-secondary);
-}
-
-.text-small {
-  font-size: 0.875rem;
 }
 
 .flex {
