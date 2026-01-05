@@ -455,9 +455,12 @@ const Auth = () => {
             maxWidth: "20rem",
             marginLeft: "auto",
             marginRight: "auto",
+            height: emailExists !== null ? "auto" : "0",
             opacity: emailExists !== null ? 1 : 0,
             visibility: emailExists !== null ? "visible" : "hidden",
-            transition: "opacity var(--transition-base)",
+            overflow: "hidden",
+            transition: "opacity 0.2s ease, height 0.2s ease",
+            pointerEvents: emailExists !== null ? "auto" : "none",
           }}
         >
           <div style={{ marginBottom: "var(--spacing-md)" }}>
