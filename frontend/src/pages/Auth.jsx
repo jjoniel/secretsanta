@@ -239,15 +239,20 @@ const Auth = () => {
           }}
         >
           {patternPositions.map((item) => (
-            <FaWater
+            <div
               key={item.id}
               style={{
                 position: "absolute",
                 left: `${item.x}rem`,
                 top: `${item.y}rem`,
-                fontSize: "2rem",
-                color: "rgba(249, 115, 115, 0.15)",
+                width: "2rem",
+                height: "2rem",
+                backgroundImage: `url(${watergunImage})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "center",
                 transform: `rotate(${item.rotation}deg)`,
+                opacity: 0.15,
               }}
             />
           ))}
