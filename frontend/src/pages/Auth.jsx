@@ -455,6 +455,7 @@ const Auth = () => {
             maxWidth: "20rem",
             marginLeft: "auto",
             marginRight: "auto",
+            minHeight: "8rem",
             opacity: emailExists !== null ? 1 : 0,
             visibility: emailExists !== null ? "visible" : "hidden",
             pointerEvents: emailExists !== null ? "auto" : "none",
