@@ -1,41 +1,35 @@
-# Quick Start Guide
+# Quick Start
 
-## 1. Backend Setup (5 minutes)
+Get up and running in 5 minutes.
+
+## Backend Setup
 
 ```bash
 cd backend
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+source venv/bin/activate
 pip install -r requirements.txt
+cp env.example .env
 ```
 
-Create `.env` file:
-
+Edit `.env`:
 ```env
 DATABASE_URL=sqlite:///./santa.db
-SECRET_KEY=change-this-to-a-random-string
+SECRET_KEY=your-random-secret-key-here
 ```
 
-**For Gmail API setup:**
-
-1. Go to https://console.cloud.google.com/
-2. Create a project
-3. Enable Gmail API
-4. Create OAuth 2.0 credentials (Desktop app)
-5. Download as `credentials.json` - can be in `backend` folder or project root
-6. On first run, the app will open a browser for OAuth authentication
-7. After authentication, `token.json` will be created automatically
-8. Your email address will be automatically detected from the authenticated Gmail account
-
-Run backend:
+**Gmail API:**
+1. [Google Cloud Console](https://console.cloud.google.com/) → Create project
+2. Enable Gmail API
+3. Create OAuth 2.0 credentials (Desktop app)
+4. Download as `credentials.json` in `backend/`
+5. Run backend → Complete OAuth flow in browser
 
 ```bash
 python run.py
-# or
-uvicorn app.main:app --reload
 ```
 
-## 2. Frontend Setup (2 minutes)
+## Frontend Setup
 
 ```bash
 cd frontend
@@ -43,31 +37,12 @@ npm install
 npm run dev
 ```
 
-## 3. First Use
-
-1. Open http://localhost:5173
-2. Register an account
-3. Create a group
-4. Add participants
-5. (Optional) Set restrictions
-6. Create assignments!
+Open `http://localhost:5173` → Register → Create groups → Add participants → Assign!
 
 ## Troubleshooting
 
-**Gmail API not working?**
+**Gmail API:** Ensure `credentials.json` is in `backend/` folder. First run opens browser for OAuth.
 
-- Make sure `credentials.json` is in the `backend` folder or project root
-- First run will open a browser for OAuth - complete the flow
-- After OAuth, `token.json` will be created automatically
-- Your sender email will be auto-detected from your authenticated Gmail account
-- Check that Gmail API is enabled in Google Cloud Console
+**Database:** Delete `santa.db` to reset.
 
-**Database errors?**
-
-- Delete `santa.db` and restart - it will recreate
-- For PostgreSQL, make sure DATABASE_URL is correct
-
-**Frontend can't connect to backend?**
-
-- Check backend is running on port 8000
-- Check CORS settings in backend `.env`
+**Connection:** Backend runs on port 8000, frontend on 5173.

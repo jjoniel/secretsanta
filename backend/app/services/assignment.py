@@ -1,6 +1,5 @@
 from typing import List, Dict, Optional
 from sqlalchemy.orm import Session
-from collections import deque
 import random
 from .. import models
 from datetime import datetime
