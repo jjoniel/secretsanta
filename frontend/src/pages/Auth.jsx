@@ -216,7 +216,10 @@ const Auth = () => {
                 gameType === "santa"
                   ? "rgba(249, 115, 115, 0.1)"
                   : "var(--color-bg)",
-              color: gameType === "santa" ? "var(--color-accent)" : "var(--color-text)",
+              color:
+                gameType === "santa"
+                  ? "var(--color-accent)"
+                  : "var(--color-text)",
               fontSize: "0.875rem",
               fontWeight: 500,
               cursor: "pointer",
@@ -238,7 +241,10 @@ const Auth = () => {
             <FaGift
               style={{
                 fontSize: "1rem",
-                color: gameType === "santa" ? "var(--color-accent)" : "var(--color-accent)",
+                color:
+                  gameType === "santa"
+                    ? "var(--color-accent)"
+                    : "var(--color-accent)",
               }}
             />
             Secret Santa
@@ -261,7 +267,10 @@ const Auth = () => {
                 gameType === "assassins"
                   ? "rgba(249, 115, 115, 0.1)"
                   : "var(--color-bg)",
-              color: gameType === "assassins" ? "var(--color-accent)" : "var(--color-text)",
+              color:
+                gameType === "assassins"
+                  ? "var(--color-accent)"
+                  : "var(--color-text)",
               fontSize: "0.875rem",
               fontWeight: 500,
               cursor: "pointer",
@@ -283,7 +292,10 @@ const Auth = () => {
             <FaCrosshairs
               style={{
                 fontSize: "1rem",
-                color: gameType === "assassins" ? "var(--color-accent)" : "var(--color-accent)",
+                color:
+                  gameType === "assassins"
+                    ? "var(--color-accent)"
+                    : "var(--color-accent)",
               }}
             />
             Assassins
