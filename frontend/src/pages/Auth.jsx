@@ -532,20 +532,33 @@ const Auth = () => {
           input:focus,
           input:focus-visible,
           input:active,
-          input:hover,
-          input:-webkit-autofill,
-          input:-webkit-autofill:hover,
-          input:-webkit-autofill:focus,
-          input:-webkit-autofill:active {
+          input:hover {
             outline: none !important;
             border: 0.0625rem solid var(--color-border) !important;
             background: var(--color-bg) !important;
             background-color: var(--color-bg) !important;
             color: var(--color-text) !important;
-            -webkit-text-fill-color: var(--color-text) !important;
-            -webkit-box-shadow: 0 0 0 1000px var(--color-bg) inset !important;
             box-shadow: none !important;
             transition: none !important;
+          }
+          
+          /* Aggressive autofill prevention - must override browser defaults */
+          input:-webkit-autofill,
+          input:-webkit-autofill:hover,
+          input:-webkit-autofill:focus,
+          input:-webkit-autofill:active,
+          input:-webkit-autofill:focus-visible {
+            outline: none !important;
+            border: 0.0625rem solid var(--color-border) !important;
+            background: var(--color-bg) !important;
+            background-color: var(--color-bg) !important;
+            background-image: none !important;
+            color: var(--color-text) !important;
+            -webkit-text-fill-color: var(--color-text) !important;
+            -webkit-box-shadow: 0 0 0 1000px var(--color-bg) inset !important;
+            box-shadow: 0 0 0 1000px var(--color-bg) inset !important;
+            transition: background-color 5000s ease-in-out 0s !important;
+            -webkit-transition: background-color 5000s ease-in-out 0s !important;
           }
           
         `}</style>
