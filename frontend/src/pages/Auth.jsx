@@ -115,7 +115,7 @@ const Auth = () => {
         const spacing = 15; // rem spacing between hats
         const cols = Math.ceil(window.innerWidth / (spacing * 16)) + 2; // +2 for overflow
         const rows = Math.ceil(window.innerHeight / (spacing * 16)) + 2;
-        
+
         for (let row = -1; row < rows; row++) {
           for (let col = -1; col < cols; col++) {
             hats.push({
@@ -128,7 +128,7 @@ const Auth = () => {
         }
         return hats;
       };
-      
+
       setHatPositions(generateHatPositions());
     } else {
       setHatPositions([]);
@@ -174,7 +174,7 @@ const Auth = () => {
       }}
     >
       {/* Randomly rotated hat pattern for Santa */}
-      {gameType === "santa" && (
+      {gameType === "santa" && hatPositions.length > 0 && (
         <div
           style={{
             position: "absolute",
@@ -201,7 +201,7 @@ const Auth = () => {
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
                 transform: `rotate(${hat.rotation}deg)`,
-                opacity: 0.1,
+                opacity: 0.15,
               }}
             />
           ))}
@@ -219,7 +219,7 @@ const Auth = () => {
           background: gameType
             ? "rgba(2, 6, 23, 0.85)"
             : "rgba(2, 6, 23, 0.95)",
-          zIndex: 0,
+          zIndex: 1,
           transition: "background 0.5s ease",
         }}
       />
