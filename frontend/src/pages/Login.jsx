@@ -77,10 +77,7 @@ const Login = () => {
               fontSize: 'clamp(1.75rem, 4vw, 2.25rem)',
               fontWeight: 700,
               marginBottom: 'var(--spacing-sm)',
-              background: 'var(--gradient-accent)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
+              color: 'var(--color-text-primary)',
             }}
           >
             Secret Santa
