@@ -105,31 +105,30 @@ const Auth = () => {
     return angles[Math.floor(Math.random() * angles.length)];
   };
 
-  // Generate hat positions for Santa background
-  const generateHatPositions = () => {
-    const hats = [];
-    const spacing = 15; // rem spacing between hats
-    const hatSize = 2; // rem size of each hat
-    const cols = Math.ceil(window.innerWidth / (spacing * 16)) + 2; // +2 for overflow
-    const rows = Math.ceil(window.innerHeight / (spacing * 16)) + 2;
-    
-    for (let row = -1; row < rows; row++) {
-      for (let col = -1; col < cols; col++) {
-        hats.push({
-          id: `${row}-${col}`,
-          x: col * spacing,
-          y: row * spacing,
-          rotation: getRandomRotation(),
-        });
-      }
-    }
-    return hats;
-  };
-
   const [hatPositions, setHatPositions] = useState([]);
 
   useEffect(() => {
     if (gameType === "santa") {
+      // Generate hat positions for Santa background
+      const generateHatPositions = () => {
+        const hats = [];
+        const spacing = 15; // rem spacing between hats
+        const cols = Math.ceil(window.innerWidth / (spacing * 16)) + 2; // +2 for overflow
+        const rows = Math.ceil(window.innerHeight / (spacing * 16)) + 2;
+        
+        for (let row = -1; row < rows; row++) {
+          for (let col = -1; col < cols; col++) {
+            hats.push({
+              id: `${row}-${col}`,
+              x: col * spacing,
+              y: row * spacing,
+              rotation: getRandomRotation(),
+            });
+          }
+        }
+        return hats;
+      };
+      
       setHatPositions(generateHatPositions());
     } else {
       setHatPositions([]);
