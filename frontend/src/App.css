@@ -36,6 +36,12 @@
   backdrop-filter: blur(1rem);
 }
 
+[data-theme='dark'] .card {
+  background: var(--color-bg-elevated);
+  border-color: var(--color-border);
+  box-shadow: var(--shadow-lg);
+}
+
 .card:hover {
   transform: translateY(-0.125rem);
   box-shadow: var(--shadow-xl);
@@ -145,6 +151,15 @@
   border-color: var(--color-border-subtle);
 }
 
+[data-theme='dark'] .btn-ghost {
+  color: var(--color-text-inverse);
+}
+
+[data-theme='dark'] .btn-ghost:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
 .btn-sm {
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
@@ -183,6 +198,14 @@
   transition: all var(--transition-fast);
   -webkit-appearance: none;
   appearance: none;
+}
+
+[data-theme='dark'] .form-group input,
+[data-theme='dark'] .form-group select,
+[data-theme='dark'] .form-group textarea {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-border);
+  color: var(--color-text-primary);
 }
 
 .form-group input:focus,
@@ -227,16 +250,34 @@
   border: 0.0625rem solid var(--color-error);
 }
 
+[data-theme='dark'] .message-error {
+  background: var(--color-error-bg);
+  color: #ff6b6b;
+  border-color: var(--color-error);
+}
+
 .message-success {
   background: var(--color-success-bg);
   color: var(--color-success);
   border: 0.0625rem solid var(--color-success);
 }
 
+[data-theme='dark'] .message-success {
+  background: var(--color-success-bg);
+  color: #4ade80;
+  border-color: var(--color-success);
+}
+
 .message-warning {
   background: var(--color-warning-bg);
   color: var(--color-warning);
   border: 0.0625rem solid var(--color-warning);
+}
+
+[data-theme='dark'] .message-warning {
+  background: var(--color-warning-bg);
+  color: #fbbf24;
+  border-color: var(--color-warning);
 }
 
 /* Loading */
@@ -250,6 +291,10 @@
   color: var(--color-text-inverse);
 }
 
+[data-theme='dark'] .loading {
+  color: var(--color-text-primary);
+}
+
 .spinner {
   width: 2.5rem;
   height: 2.5rem;
@@ -257,6 +302,11 @@
   border-top-color: var(--color-text-inverse);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
+}
+
+[data-theme='dark'] .spinner {
+  border-color: rgba(255, 255, 255, 0.3);
+  border-top-color: var(--color-text-primary);
 }
 
 @keyframes spin {
@@ -290,6 +340,10 @@ h3 {
 .empty-state {
   text-align: center;
   padding: var(--spacing-3xl) var(--spacing-lg);
+  color: var(--color-text-secondary);
+}
+
+[data-theme='dark'] .empty-state {
   color: var(--color-text-secondary);
 }
 

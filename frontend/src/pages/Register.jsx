@@ -1,54 +1,54 @@
-import { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
-import { useAuth } from '../contexts/AuthContext'
-import ThemeToggle from '../components/ThemeToggle'
-import '../App.css'
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import ThemeToggle from "../components/ThemeToggle";
+import "../App.css";
 
 const Register = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
-  const { register } = useAuth()
-  const navigate = useNavigate()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { register } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError('')
-    setLoading(true)
+    e.preventDefault();
+    setError("");
+    setLoading(true);
 
     try {
-      await register(email, password)
-      navigate('/dashboard')
+      await register(email, password);
+      navigate("/dashboard");
     } catch (err) {
-      const errorDetail = err.response?.data?.detail
+      const errorDetail = err.response?.data?.detail;
       if (Array.isArray(errorDetail)) {
-        const firstError = errorDetail[0]
-        setError(firstError?.msg || 'Validation error')
+        const firstError = errorDetail[0];
+        setError(firstError?.msg || "Validation error");
       } else {
-        setError(errorDetail || 'Failed to register')
+        setError(errorDetail || "Failed to register");
       }
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div
       style={{
-        minHeight: '100vh',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 'var(--spacing-md)',
-        position: 'relative',
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "var(--spacing-md)",
+        position: "relative",
       }}
     >
       <div
         style={{
-          position: 'absolute',
-          top: 'var(--spacing-lg)',
-          right: 'var(--spacing-lg)',
+          position: "absolute",
+          top: "var(--spacing-lg)",
+          right: "var(--spacing-lg)",
         }}
       >
         <ThemeToggle />
@@ -57,16 +57,18 @@ const Register = () => {
       <div
         className="card"
         style={{
-          width: '100%',
-          maxWidth: '28rem',
-          animation: 'fadeInUp 0.5s ease-out',
+          width: "100%",
+          maxWidth: "28rem",
+          animation: "fadeInUp 0.5s ease-out",
         }}
       >
-        <div style={{ textAlign: 'center', marginBottom: 'var(--spacing-2xl)' }}>
+        <div
+          style={{ textAlign: "center", marginBottom: "var(--spacing-2xl)" }}
+        >
           <div
             style={{
-              fontSize: '3.5rem',
-              marginBottom: 'var(--spacing-md)',
+              fontSize: "3.5rem",
+              marginBottom: "var(--spacing-md)",
               lineHeight: 1,
             }}
           >
@@ -74,21 +76,21 @@ const Register = () => {
           </div>
           <h1
             style={{
-              fontSize: 'clamp(1.75rem, 4vw, 2.25rem)',
+              fontSize: "clamp(1.75rem, 4vw, 2.25rem)",
               fontWeight: 700,
-              marginBottom: 'var(--spacing-sm)',
-              background: 'var(--gradient-accent)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
+              marginBottom: "var(--spacing-sm)",
+              background: "var(--gradient-accent)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
             }}
           >
             Join Secret Santa
           </h1>
           <p
             style={{
-              color: 'var(--color-text-secondary)',
-              fontSize: '0.9375rem',
+              color: "var(--color-text-secondary)",
+              fontSize: "0.9375rem",
             }}
           >
             Create your account to get started
@@ -123,10 +125,10 @@ const Register = () => {
             />
             <small
               style={{
-                color: 'var(--color-text-tertiary)',
-                fontSize: '0.8125rem',
-                marginTop: 'var(--spacing-xs)',
-                display: 'block',
+                color: "var(--color-text-tertiary)",
+                fontSize: "0.8125rem",
+                marginTop: "var(--spacing-xs)",
+                display: "block",
               }}
             >
               Must be at least 6 characters
@@ -141,34 +143,41 @@ const Register = () => {
           <button
             type="submit"
             className="btn btn-primary"
-            style={{ width: '100%', marginTop: 'var(--spacing-md)' }}
+            style={{ width: "100%", marginTop: "var(--spacing-md)" }}
             disabled={loading}
           >
             {loading ? (
               <>
-                <span className="spinner" style={{ width: '1rem', height: '1rem', borderWidth: '0.125rem' }} />
+                <span
+                  className="spinner"
+                  style={{
+                    width: "1rem",
+                    height: "1rem",
+                    borderWidth: "0.125rem",
+                  }}
+                />
                 <span>Creating account...</span>
               </>
             ) : (
-              'Create Account'
+              "Create Account"
             )}
           </button>
         </form>
 
         <p
           style={{
-            marginTop: 'var(--spacing-xl)',
-            textAlign: 'center',
-            color: 'var(--color-text-secondary)',
-            fontSize: '0.875rem',
+            marginTop: "var(--spacing-xl)",
+            textAlign: "center",
+            color: "var(--color-text-secondary)",
+            fontSize: "0.875rem",
           }}
         >
-          Already have an account?{' '}
+          Already have an account?{" "}
           <Link
             to="/login"
             style={{
-              color: 'var(--color-accent)',
-              textDecoration: 'none',
+              color: "var(--color-accent)",
+              textDecoration: "none",
               fontWeight: 500,
             }}
           >
@@ -190,7 +199,7 @@ const Register = () => {
         }
       `}</style>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;

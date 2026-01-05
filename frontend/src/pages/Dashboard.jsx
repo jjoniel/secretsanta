@@ -85,7 +85,8 @@ const Dashboard = () => {
           </h1>
           <p
             style={{
-              color: 'rgba(255, 255, 255, 0.8)',
+              color: 'var(--color-text-inverse)',
+              opacity: 0.9,
               fontSize: '0.9375rem',
             }}
           >

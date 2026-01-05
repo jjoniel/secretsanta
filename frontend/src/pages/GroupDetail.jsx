@@ -199,7 +199,7 @@ const GroupDetail = () => {
             className="card"
             style={{
               marginBottom: 'var(--spacing-lg)',
-              background: 'var(--color-bg-secondary)',
+              background: 'var(--color-bg-tertiary)',
               animation: 'slideDown 0.3s ease-out',
             }}
           >
