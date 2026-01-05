@@ -410,25 +410,25 @@ const Auth = () => {
                   textAlign: "center",
                 }}
               />
-              {emailExists === true && (
-                <FaCheckCircle
-                  title="account found!"
-                  style={{
-                    position: "absolute",
-                    right: "var(--spacing-sm)",
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                    color: "var(--color-success)",
-                    fontSize: "1.25rem",
-                    background: "transparent",
-                    border: "0.125rem solid var(--color-success)",
-                    borderRadius: "50%",
-                    padding: "0.125rem",
-                    cursor: "help",
-                    animation: "checkmarkIn 0.3s ease-out",
-                  }}
-                />
-              )}
+              <FaCheckCircle
+                title="account found!"
+                style={{
+                  position: "absolute",
+                  right: "var(--spacing-sm)",
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  color: "var(--color-success)",
+                  fontSize: "1.25rem",
+                  background: "transparent",
+                  border: "0.125rem solid var(--color-success)",
+                  borderRadius: "50%",
+                  padding: "0.125rem",
+                  cursor: "help",
+                  opacity: emailExists === true ? 1 : 0,
+                  animation: emailExists === true ? "checkmarkIn 0.3s ease-out" : "none",
+                  pointerEvents: emailExists === true ? "auto" : "none",
+                }}
+              />
             </div>
           </div>
           {checkingEmail && (
@@ -479,7 +479,6 @@ const Auth = () => {
                 fontFamily: "inherit",
                 background: "var(--color-bg)",
                 color: "var(--color-text)",
-                transition: "all var(--transition-fast)",
                 textAlign: "center",
               }}
             />
