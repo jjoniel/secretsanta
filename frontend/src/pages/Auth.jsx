@@ -216,7 +216,7 @@ const Auth = () => {
                 gameType === "santa"
                   ? "rgba(249, 115, 115, 0.1)"
                   : "var(--color-bg)",
-              color: "var(--color-text)",
+              color: gameType === "santa" ? "var(--color-accent)" : "var(--color-text)",
               fontSize: "0.875rem",
               fontWeight: 500,
               cursor: "pointer",
@@ -227,18 +227,19 @@ const Auth = () => {
             onMouseEnter={(e) => {
               if (gameType !== "santa") {
                 e.currentTarget.style.borderColor = "var(--color-accent)";
-                e.currentTarget.style.transform = "scale(1.05)";
               }
             }}
             onMouseLeave={(e) => {
               if (gameType !== "santa") {
                 e.currentTarget.style.borderColor = "var(--color-border)";
-                e.currentTarget.style.transform = "scale(1)";
               }
             }}
           >
             <FaGift
-              style={{ fontSize: "1rem", color: "var(--color-accent)" }}
+              style={{
+                fontSize: "1rem",
+                color: gameType === "santa" ? "var(--color-accent)" : "var(--color-accent)",
+              }}
             />
             Secret Santa
           </button>
@@ -260,7 +261,7 @@ const Auth = () => {
                 gameType === "assassins"
                   ? "rgba(249, 115, 115, 0.1)"
                   : "var(--color-bg)",
-              color: "var(--color-text)",
+              color: gameType === "assassins" ? "var(--color-accent)" : "var(--color-text)",
               fontSize: "0.875rem",
               fontWeight: 500,
               cursor: "pointer",
@@ -271,18 +272,19 @@ const Auth = () => {
             onMouseEnter={(e) => {
               if (gameType !== "assassins") {
                 e.currentTarget.style.borderColor = "var(--color-accent)";
-                e.currentTarget.style.transform = "scale(1.05)";
               }
             }}
             onMouseLeave={(e) => {
               if (gameType !== "assassins") {
                 e.currentTarget.style.borderColor = "var(--color-border)";
-                e.currentTarget.style.transform = "scale(1)";
               }
             }}
           >
             <FaCrosshairs
-              style={{ fontSize: "1rem", color: "var(--color-accent)" }}
+              style={{
+                fontSize: "1rem",
+                color: gameType === "assassins" ? "var(--color-accent)" : "var(--color-accent)",
+              }}
             />
             Assassins
           </button>
