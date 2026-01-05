@@ -404,7 +404,9 @@ const Auth = () => {
               style={{
                 width: "100%",
                 padding: "var(--spacing-sm) var(--spacing-lg)",
-                border: "0.0625rem solid var(--color-border)",
+                border: emailExists === true
+                  ? "0.125rem solid var(--color-success)"
+                  : "0.0625rem solid var(--color-border)",
                 borderRadius: "9999px",
                 fontSize: "0.875rem",
                 fontFamily: "inherit",
