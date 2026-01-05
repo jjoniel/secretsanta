@@ -571,6 +571,19 @@ const Auth = () => {
               transform: translateY(0);
             }
           }
+          
+          /* Prevent browser autofill from changing input styles */
+          input:-webkit-autofill,
+          input:-webkit-autofill:hover,
+          input:-webkit-autofill:focus,
+          input:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 1000px var(--color-bg) inset !important;
+            -webkit-text-fill-color: var(--color-text) !important;
+            box-shadow: 0 0 0 1000px var(--color-bg) inset !important;
+            background-color: var(--color-bg) !important;
+            border: 0.0625rem solid var(--color-border) !important;
+            transition: background-color 5000s ease-in-out 0s !important;
+          }
         `}</style>
     </div>
   );
