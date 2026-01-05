@@ -592,6 +592,17 @@ const Auth = () => {
             }
           }
           
+          @keyframes checkmarkIn {
+            from {
+              opacity: 0;
+              transform: translateY(-50%) scale(0);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(-50%) scale(1);
+            }
+          }
+          
           /* Prevent browser autofill from changing input styles */
           input:-webkit-autofill,
           input:-webkit-autofill:hover,
