@@ -498,7 +498,7 @@ const Auth = () => {
               </div>
 
               {!emailExists && (
-                <div style={{ marginBottom: 0 }}>
+                <div style={{ marginBottom: "var(--spacing-md)" }}>
                   <input
                     id="confirmPassword"
                     type="password"
