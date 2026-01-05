@@ -301,7 +301,7 @@ const Auth = () => {
               }`,
               background:
                 gameType === "santa"
-                  ? "var(--color-accent)"
+                  ? "rgba(249, 115, 115, 0.1)"
                   : "var(--color-bg)",
               color: "var(--color-text)",
               fontSize: "0.875rem",
@@ -323,7 +323,7 @@ const Auth = () => {
             }}
           >
             <FaGift
-              style={{ fontSize: "1rem", color: "var(--color-text)" }}
+              style={{ fontSize: "1rem", color: "var(--color-accent)" }}
             />
             secret santa
           </button>
@@ -403,7 +403,6 @@ const Auth = () => {
                   fontFamily: "inherit",
                   background: "var(--color-bg)",
                   color: "var(--color-text)",
-                  transition: "all var(--transition-fast)",
                   textAlign: "center",
                 }}
               />
@@ -464,7 +463,6 @@ const Auth = () => {
                 fontFamily: "inherit",
                 background: "var(--color-bg)",
                 color: "var(--color-text)",
-                transition: "all var(--transition-fast)",
                 textAlign: "center",
               }}
             />
@@ -542,20 +540,15 @@ const Auth = () => {
             transition: background-color 5000s ease-in-out 0s !important;
           }
           
-          /* Style inputs on focus to match selected button */
+          /* Remove all active effects from inputs */
           input:focus,
-          input:focus-visible {
+          input:focus-visible,
+          input:active,
+          input:hover {
             outline: none !important;
-            border: 0.0625rem solid var(--color-accent) !important;
-            background: var(--color-accent) !important;
+            border: 0.0625rem solid var(--color-border) !important;
+            background: var(--color-bg) !important;
             color: var(--color-text) !important;
-          }
-          
-          /* Style placeholder text on focus to match selected button */
-          input:focus::placeholder,
-          input:focus-visible::placeholder {
-            color: var(--color-text) !important;
-            opacity: 0.7 !important;
           }
         `}</style>
     </div>
