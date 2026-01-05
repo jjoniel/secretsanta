@@ -102,11 +102,8 @@ const Auth = () => {
   const getBackgroundStyle = () => {
     if (gameType === "santa") {
       return {
-        backgroundImage: `url(${hatImage})`,
-        backgroundSize: "12rem 12rem",
-        backgroundRepeat: "repeat",
-        backgroundPosition: "0 0",
-        backgroundAttachment: "fixed",
+        position: "relative",
+        overflow: "hidden",
       };
     } else if (gameType === "assassins") {
       return {
@@ -248,7 +245,9 @@ const Auth = () => {
                 lineHeight: 1,
               }}
             />
-            <span style={{ display: "flex", alignItems: "center", lineHeight: 1 }}>
+            <span
+              style={{ display: "flex", alignItems: "center", lineHeight: 1 }}
+            >
               Secret Santa
             </span>
           </button>
@@ -302,7 +301,9 @@ const Auth = () => {
                 lineHeight: 1,
               }}
             />
-            <span style={{ display: "flex", alignItems: "center", lineHeight: 1 }}>
+            <span
+              style={{ display: "flex", alignItems: "center", lineHeight: 1 }}
+            >
               Assassins
             </span>
           </button>
