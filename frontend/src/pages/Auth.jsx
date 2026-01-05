@@ -6,6 +6,7 @@ import {
   FaCrosshairs,
   FaExclamationTriangle,
   FaCheck,
+  FaWater,
 } from "react-icons/fa";
 import axios from "axios";
 import hatImage from "../assets/images/hat.png";
@@ -188,8 +189,8 @@ const Auth = () => {
         ...getBackgroundStyle(),
       }}
     >
-      {/* Randomly rotated hat pattern for Santa */}
-      {gameType === "santa" && hatPositions.length > 0 && (
+      {/* Randomly rotated pattern for Santa (hats) */}
+      {gameType === "santa" && patternPositions.length > 0 && (
         <div
           style={{
             position: "absolute",
@@ -202,21 +203,51 @@ const Auth = () => {
             pointerEvents: "none",
           }}
         >
-          {hatPositions.map((hat) => (
+          {patternPositions.map((item) => (
             <div
-              key={hat.id}
+              key={item.id}
               style={{
                 position: "absolute",
-                left: `${hat.x}rem`,
-                top: `${hat.y}rem`,
+                left: `${item.x}rem`,
+                top: `${item.y}rem`,
                 width: "2rem",
                 height: "2rem",
                 backgroundImage: `url(${hatImage})`,
                 backgroundSize: "contain",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
-                transform: `rotate(${hat.rotation}deg)`,
+                transform: `rotate(${item.rotation}deg)`,
                 opacity: 0.15,
+              }}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Randomly rotated pattern for Assassins (water guns) */}
+      {gameType === "assassins" && patternPositions.length > 0 && (
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            overflow: "hidden",
+            zIndex: 0,
+            pointerEvents: "none",
+          }}
+        >
+          {patternPositions.map((item) => (
+            <FaWater
+              key={item.id}
+              style={{
+                position: "absolute",
+                left: `${item.x}rem`,
+                top: `${item.y}rem`,
+                fontSize: "2rem",
+                color: "rgba(249, 115, 115, 0.15)",
+                transform: `rotate(${item.rotation}deg)`,
               }}
             />
           ))}
