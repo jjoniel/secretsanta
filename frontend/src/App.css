@@ -32,7 +32,6 @@
   box-shadow: var(--shadow-lg);
   margin-bottom: var(--spacing-lg);
   border: 0.0625rem solid var(--color-border-subtle);
-  transition: transform var(--transition-base), box-shadow var(--transition-base);
   backdrop-filter: blur(1rem);
 }
 
@@ -42,7 +41,13 @@
   box-shadow: var(--shadow-lg);
 }
 
-.card:hover {
+/* Only clickable cards get hover effect */
+.card-clickable {
+  cursor: pointer;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.card-clickable:hover {
   transform: translateY(-0.125rem);
   box-shadow: var(--shadow-xl);
 }

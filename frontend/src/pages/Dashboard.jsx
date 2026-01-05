@@ -162,20 +162,12 @@ const Dashboard = () => {
             {groups.map((group, index) => (
               <div
                 key={group.id}
-                className="card"
+                className="card card-clickable"
                 style={{
                   marginBottom: 0,
-                  cursor: 'pointer',
-                  transition: 'all var(--transition-base)',
                   animation: `fadeInUp 0.4s ease-out ${index * 0.1}s both`,
                 }}
                 onClick={() => navigate(`/groups/${group.id}`)}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-0.25rem)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)'
-                }}
               >
                 <div className="flex-between" style={{ marginBottom: 'var(--spacing-md)' }}>
                   <h3 style={{ margin: 0 }}>{group.name}</h3>

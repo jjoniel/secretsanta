@@ -8,6 +8,28 @@
   box-sizing: border-box;
 }
 
+/* Smooth theme transitions - exclude interactive elements that need faster transitions */
+*,
+*::before,
+*::after {
+  transition: background-color var(--transition-theme) ease,
+              color var(--transition-theme) ease,
+              border-color var(--transition-theme) ease,
+              box-shadow var(--transition-theme) ease,
+              background-image var(--transition-theme) ease;
+}
+
+/* Reset transitions for interactive elements */
+button,
+a,
+input,
+select,
+textarea,
+.btn,
+[role="button"] {
+  transition: all var(--transition-fast);
+}
+
 :root {
   /* Base font size for rem calculations */
   font-size: 16px;
@@ -60,7 +82,8 @@
   
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-theme: 600ms cubic-bezier(0.4, 0, 0.2, 1);
   
   --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --gradient-accent: linear-gradient(135deg, #0071e3 0%, #00a8ff 100%);
@@ -118,7 +141,9 @@ body {
   background: var(--color-bg-primary);
   background-image: var(--gradient-primary);
   min-height: 100vh;
-  transition: background-color var(--transition-base), color var(--transition-base);
+  transition: background-color var(--transition-slow) ease,
+              background-image var(--transition-slow) ease,
+              color var(--transition-slow) ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
