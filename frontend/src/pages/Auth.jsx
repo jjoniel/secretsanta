@@ -282,7 +282,7 @@ const Auth = () => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              gap: "var(--spacing-xs)",
+              gap: "var(--spacing-sm)",
               padding: "var(--spacing-sm) var(--spacing-lg)",
               borderRadius: "9999px",
               border: `0.0625rem solid ${
@@ -318,7 +318,7 @@ const Auth = () => {
             <FaGift
               style={{ fontSize: "1rem", color: "var(--color-accent)" }}
             />
-            Secret Santa
+            secret santa
           </button>
           <button
             onClick={() => setGameType("assassins")}
@@ -326,7 +326,7 @@ const Auth = () => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              gap: "var(--spacing-xs)",
+              gap: "var(--spacing-sm)",
               padding: "var(--spacing-sm) var(--spacing-lg)",
               borderRadius: "9999px",
               border: `0.0625rem solid ${
