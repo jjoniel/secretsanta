@@ -114,8 +114,10 @@ const Auth = () => {
         const hats = [];
         const spacing = 15; // rem spacing between hats
         // Use viewport dimensions, fallback to reasonable defaults
-        const viewportWidth = typeof window !== "undefined" ? window.innerWidth : 1920;
-        const viewportHeight = typeof window !== "undefined" ? window.innerHeight : 1080;
+        const viewportWidth =
+          typeof window !== "undefined" ? window.innerWidth : 1920;
+        const viewportHeight =
+          typeof window !== "undefined" ? window.innerHeight : 1080;
         const remInPx = 16; // 1rem = 16px
         const cols = Math.ceil(viewportWidth / (spacing * remInPx)) + 2; // +2 for overflow
         const rows = Math.ceil(viewportHeight / (spacing * remInPx)) + 2;
@@ -219,21 +221,6 @@ const Auth = () => {
         </div>
       )}
 
-      {/* Overlay for readability */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: gameType
-            ? "rgba(2, 6, 23, 0.85)"
-            : "rgba(2, 6, 23, 0.95)",
-          zIndex: 1,
-          transition: "background 0.5s ease",
-        }}
-      />
 
       <div
         style={{
