@@ -323,7 +323,7 @@ const Auth = () => {
             }}
           >
             <FaGift
-              style={{ fontSize: "1rem", color: "var(--color-accent)" }}
+              style={{ fontSize: "1rem", color: "var(--color-text)" }}
             />
             secret santa
           </button>
