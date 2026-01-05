@@ -603,6 +603,13 @@ const Auth = () => {
             border: 0.0625rem solid var(--color-border) !important;
             transition: background-color 5000s ease-in-out 0s !important;
           }
+          
+          /* Remove focus outline on all inputs */
+          input:focus,
+          input:focus-visible {
+            outline: none !important;
+            border: 0.0625rem solid var(--color-border) !important;
+          }
         `}</style>
     </div>
   );
