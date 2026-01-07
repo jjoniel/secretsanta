@@ -238,7 +238,7 @@ const Auth = () => {
                   opacity: 0.15,
                   animation: `fall ${animationDuration}s linear infinite`,
                   animationDelay: `${animationDelay}s`,
-                  "--initial-rotation": `${item.rotation}deg`,
+                  transform: `rotate(${item.rotation}deg)`,
                 }}
               />
             );
