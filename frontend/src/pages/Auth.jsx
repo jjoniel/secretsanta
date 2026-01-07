@@ -601,19 +601,28 @@ const Auth = () => {
           @keyframes emailFoundFlash {
             0% {
               opacity: 0;
-              transform: scale(0.98);
+              transform: scale(0.98) translateY(0);
             }
-            10% {
+            15% {
               opacity: 1;
-              transform: scale(1);
+              transform: scale(1.02) translateY(-0.1rem);
+            }
+            30% {
+              transform: scale(0.99) translateY(0.1rem);
+            }
+            50% {
+              transform: scale(1.01) translateY(-0.05rem);
+            }
+            70% {
+              transform: scale(1) translateY(0);
             }
             90% {
               opacity: 1;
-              transform: scale(1);
+              transform: scale(1) translateY(0);
             }
             100% {
               opacity: 0;
-              transform: scale(0.98);
+              transform: scale(0.98) translateY(0);
             }
           }
           
