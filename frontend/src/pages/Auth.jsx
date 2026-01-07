@@ -5,6 +5,7 @@ import {
   FaGift,
   FaCrosshairs,
   FaExclamationTriangle,
+  FaCheck,
   FaCheckCircle,
 } from "react-icons/fa";
 import axios from "axios";
@@ -17,7 +18,9 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailExists, setEmailExists] = useState(null); // null, true, or false
+  const [checkingEmail, setCheckingEmail] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
   const { login, register } = useAuth();
   const navigate = useNavigate();
@@ -175,24 +178,30 @@ const Auth = () => {
             pointerEvents: "none",
           }}
         >
-          {patternPositions.map((item) => (
-            <div
-              key={item.id}
-              style={{
-                position: "absolute",
-                left: `${item.x}rem`,
-                top: `${item.y}rem`,
-                width: "2rem",
-                height: "2rem",
-                backgroundImage: `url(${hatImage})`,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
-                transform: `rotate(${item.rotation}deg)`,
-                opacity: 0.15,
-              }}
-            />
-          ))}
+          {patternPositions.map((item, index) => {
+            const animationDuration = 10 + (index % 5) * 2; // Vary between 10-18 seconds
+            const animationDelay = (index % 10) * 0.5; // Stagger delays
+            return (
+              <div
+                key={item.id}
+                style={{
+                  position: "absolute",
+                  left: `${item.x}rem`,
+                  top: `${item.y}rem`,
+                  width: "2rem",
+                  height: "2rem",
+                  backgroundImage: `url(${hatImage})`,
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                  transform: `rotate(${item.rotation}deg)`,
+                  opacity: 0.15,
+                  animation: `fall ${animationDuration}s linear infinite`,
+                  animationDelay: `${animationDelay}s`,
+                }}
+              />
+            );
+          })}
         </div>
       )}
 
@@ -210,24 +219,30 @@ const Auth = () => {
             pointerEvents: "none",
           }}
         >
-          {patternPositions.map((item) => (
-            <div
-              key={item.id}
-              style={{
-                position: "absolute",
-                left: `${item.x}rem`,
-                top: `${item.y}rem`,
-                width: "2rem",
-                height: "2rem",
-                backgroundImage: `url(${watergunImage})`,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
-                transform: `rotate(${item.rotation}deg)`,
-                opacity: 0.15,
-              }}
-            />
-          ))}
+          {patternPositions.map((item, index) => {
+            const animationDuration = 10 + (index % 5) * 2; // Vary between 10-18 seconds
+            const animationDelay = (index % 10) * 0.5; // Stagger delays
+            return (
+              <div
+                key={item.id}
+                style={{
+                  position: "absolute",
+                  left: `${item.x}rem`,
+                  top: `${item.y}rem`,
+                  width: "2rem",
+                  height: "2rem",
+                  backgroundImage: `url(${watergunImage})`,
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                  opacity: 0.15,
+                  animation: `fall ${animationDuration}s linear infinite`,
+                  animationDelay: `${animationDelay}s`,
+                  "--initial-rotation": `${item.rotation}deg`,
+                }}
+              />
+            );
+          })}
         </div>
       )}
 
@@ -533,6 +548,65 @@ const Auth = () => {
           </button>
         </form>
       </div>
+
+      <style>{`
+          @keyframes fadeInUp {
+            from {
+              opacity: 0.5;
+              transform: translateY(2rem);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          
+          @keyframes checkmarkIn {
+            from {
+              opacity: 0;
+              transform: translateY(-50%) scale(0);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(-50%) scale(1);
+            }
+          }
+          
+          /* Keep all input fields statically styled - no changes on any interaction */
+          input,
+          input:focus,
+          input:focus-visible,
+          input:active,
+          input:hover {
+            outline: none !important;
+            border: 0.0625rem solid var(--color-border) !important;
+            background: var(--color-bg) !important;
+            background-color: var(--color-bg) !important;
+            color: var(--color-text) !important;
+            box-shadow: none !important;
+            transition: none !important;
+          }
+          
+          /* Aggressive autofill prevention - must override browser defaults */
+          input:-webkit-autofill,
+          input:-webkit-autofill:hover,
+          input:-webkit-autofill:focus,
+          input:-webkit-autofill:active,
+          input:-webkit-autofill:focus-visible {
+            outline: none !important;
+            border: 0.0625rem solid var(--color-border) !important;
+            background: var(--color-bg) !important;
+            background-color: var(--color-bg) !important;
+            background-image: none !important;
+            color: var(--color-text) !important;
+            -webkit-text-fill-color: var(--color-text) !important;
+            -webkit-box-shadow: 0 0 0 1000px var(--color-bg) inset !important;
+            box-shadow: 0 0 0 1000px var(--color-bg) inset !important;
+            transition: background-color 5000s ease-in-out 0s !important;
+            -webkit-transition: background-color 5000s ease-in-out 0s !important;
+          }
+          
+        `}</style>
     </div>
   );
 };
