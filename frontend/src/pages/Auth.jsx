@@ -101,6 +101,7 @@ const Auth = () => {
   };
 
   const [fallingIcons, setFallingIcons] = useState([]);
+  const [showAccountFoundFlash, setShowAccountFoundFlash] = useState(false);
 
   useEffect(() => {
     if (gameType === "santa" || gameType === "assassins") {
@@ -169,6 +170,19 @@ const Auth = () => {
       setFallingIcons([]);
     }
   }, [gameType]);
+
+  // Flash the email field when an account is found
+  useEffect(() => {
+    if (emailExists === true) {
+      setShowAccountFoundFlash(true);
+      const timeoutId = setTimeout(() => {
+        setShowAccountFoundFlash(false);
+      }, 1500);
+      return () => clearTimeout(timeoutId);
+    } else {
+      setShowAccountFoundFlash(false);
+    }
+  }, [emailExists]);
 
   const getBackgroundStyle = () => {
     return {};
@@ -446,29 +460,24 @@ const Auth = () => {
                   textAlign: "center",
                 }}
               />
-              {emailExists === true && (
+              {showAccountFoundFlash && (
                 <div
                   style={{
                     position: "absolute",
-                    right: "var(--spacing-sm)",
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                    pointerEvents: "auto",
+                    inset: 0,
+                    borderRadius: "9999px",
+                    backgroundColor: "var(--color-success)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#ffffff",
+                    fontSize: "0.875rem",
+                    fontWeight: 500,
+                    pointerEvents: "none",
+                    animation: "emailFoundFlash 1.5s ease-out forwards",
                   }}
-                  title="account found!"
                 >
-                  <FaCheckCircle
-                    style={{
-                      color: "var(--color-success)",
-                      fontSize: "1.25rem",
-                      background: "transparent",
-                      border: "0.125rem solid var(--color-success)",
-                      borderRadius: "50%",
-                      padding: "0.125rem",
-                      cursor: "help",
-                      animation: "checkmarkIn 0.3s ease-out",
-                    }}
-                  />
+                  account found!
                 </div>
               )}
             </div>
@@ -570,14 +579,22 @@ const Auth = () => {
             }
           }
           
-          @keyframes checkmarkIn {
-            from {
+          @keyframes emailFoundFlash {
+            0% {
               opacity: 0;
-              transform: translateY(-50%) scale(0.85);
+              transform: scale(0.98);
             }
-            to {
+            10% {
               opacity: 1;
-              transform: translateY(-50%) scale(1);
+              transform: scale(1);
+            }
+            90% {
+              opacity: 1;
+              transform: scale(1);
+            }
+            100% {
+              opacity: 0;
+              transform: scale(0.98);
             }
           }
           
