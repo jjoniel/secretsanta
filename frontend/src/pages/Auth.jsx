@@ -111,13 +111,13 @@ const Auth = () => {
         const viewportWidth =
           typeof window !== "undefined" ? window.innerWidth : 1920;
 
-        for (let i = 0; i < 75; i++) {
+        for (let i = 0; i < 50; i++) {
           items.push({
             id: `icon-${i}`,
-            x: Math.random() * viewportWidth, // Random x position across viewport width
+            x: (Math.random() * 20 * viewportWidth) / 20, // Random x position across viewport width
             rotation: getRandomRotation(),
             animationDuration: 8 + Math.random() * 10, // Random speed between 8-18 seconds
-            animationDelay: Math.random() * 5, // Random delay between 0-5 seconds
+            animationDelay: -(Math.random() * (8 + Math.random() * 10)), // Negative delay to start mid-cycle
           });
         }
         return items;
@@ -175,9 +175,9 @@ const Auth = () => {
                 position: "absolute",
                 left: `${item.x}px`,
                 top: "-2rem",
-                transform: `rotate(${item.rotation}deg)`,
                 animation: `fall ${item.animationDuration}s linear infinite`,
                 animationDelay: `${item.animationDelay}s`,
+                willChange: "transform",
               }}
             >
               <div
@@ -189,6 +189,7 @@ const Auth = () => {
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center",
                   opacity: 0.15,
+                  transform: `rotate(${item.rotation}deg)`,
                 }}
               />
             </div>
@@ -217,9 +218,9 @@ const Auth = () => {
                 position: "absolute",
                 left: `${item.x}px`,
                 top: "-2rem",
-                transform: `rotate(${item.rotation}deg)`,
                 animation: `fall ${item.animationDuration}s linear infinite`,
                 animationDelay: `${item.animationDelay}s`,
+                willChange: "transform",
               }}
             >
               <div
@@ -231,6 +232,7 @@ const Auth = () => {
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center",
                   opacity: 0.15,
+                  transform: `rotate(${item.rotation}deg)`,
                 }}
               />
             </div>
@@ -544,10 +546,10 @@ const Auth = () => {
       <style>{`
           @keyframes fall {
             from {
-              transform: translateY(-100vh);
+              transform: translateY(-20vh);
             }
             to {
-              transform: translateY(100vh);
+              transform: translateY(120vh);
             }
           }
           
