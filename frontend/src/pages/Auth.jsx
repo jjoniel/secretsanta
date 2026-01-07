@@ -498,11 +498,27 @@ const Auth = () => {
                       borderRadius: "9999px",
                       border: "0.125rem solid transparent",
                       background:
-                        "linear-gradient(270deg, #fe97f9, #83c9f4, #fe97f9)",
+                        "linear-gradient(270deg, #16a34a, #bbf7d0, #16a34a)",
                       backgroundSize: "200% 200%",
                       animation: "borderLoop 1.5s linear forwards",
                     }}
                   />
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: "0.0625rem",
+                      borderRadius: "9999px",
+                      backgroundColor: "var(--color-success)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#ffffff",
+                      fontSize: "0.875rem",
+                      fontWeight: 500,
+                    }}
+                  >
+                    account found!
+                  </div>
                 </div>
               )}
             </div>
