@@ -224,6 +224,7 @@ const Auth = () => {
                   backgroundPosition: "center",
                   opacity: 0.15,
                   transform: `rotate(${item.rotation}deg)`,
+                  animation: `rotate ${item.rotationSpeed}s linear infinite`,
                 }}
               />
             </div>
@@ -267,6 +268,7 @@ const Auth = () => {
                   backgroundPosition: "center",
                   opacity: 0.15,
                   transform: `rotate(${item.rotation}deg)`,
+                  animation: `rotate ${item.rotationSpeed}s linear infinite`,
                 }}
               />
             </div>
@@ -584,6 +586,15 @@ const Auth = () => {
             }
             to {
               transform: translateY(120vh);
+            }
+          }
+          
+          @keyframes rotate {
+            from {
+              transform: rotate(0deg);
+            }
+            to {
+              transform: rotate(360deg);
             }
           }
           
