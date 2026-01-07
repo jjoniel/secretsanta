@@ -546,27 +546,18 @@ const Auth = () => {
                 textAlign: "center",
               }}
             />
-            <div
-              style={{
-                marginTop: "var(--spacing-sm)",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                padding: "0.25rem 0.75rem",
-                borderRadius: "9999px",
-                border: "0.0625rem solid var(--color-border)",
-                background: "var(--color-bg)",
-                color: "var(--color-text)",
-                fontSize: "0.75rem",
-                opacity: 0.9,
-              }}
-            >
-              passwords must be at least 6 characters
-            </div>
           </div>
 
           {error && (
-            <div className="message message-error" role="alert">
+            <div
+              className="message message-error"
+              role="alert"
+              style={
+                error.includes("at least 6 characters")
+                  ? { borderRadius: "9999px", justifyContent: "center" }
+                  : undefined
+              }
+            >
               <FaExclamationTriangle />
               <span>{error}</span>
             </div>
