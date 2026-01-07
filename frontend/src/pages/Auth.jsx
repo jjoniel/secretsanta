@@ -110,7 +110,7 @@ const Auth = () => {
         const items = [];
         const viewportWidth =
           typeof window !== "undefined" ? window.innerWidth : 1920;
-        
+
         for (let i = 0; i < 75; i++) {
           items.push({
             id: `icon-${i}`,
@@ -154,8 +154,8 @@ const Auth = () => {
         ...getBackgroundStyle(),
       }}
     >
-      {/* Randomly rotated pattern for Santa (hats) */}
-      {gameType === "santa" && patternPositions.length > 0 && (
+      {/* Falling Santa hats */}
+      {gameType === "santa" && fallingIcons.length > 0 && (
         <div
           style={{
             position: "absolute",
@@ -168,40 +168,36 @@ const Auth = () => {
             pointerEvents: "none",
           }}
         >
-          {patternPositions.map((item, index) => {
-            const animationDuration = 10 + (index % 5) * 2; // Vary between 10-18 seconds
-            const animationDelay = (index % 10) * 0.5; // Stagger delays
-            return (
+          {fallingIcons.map((item) => (
+            <div
+              key={item.id}
+              style={{
+                position: "absolute",
+                left: `${item.x}px`,
+                top: "-2rem",
+                transform: `rotate(${item.rotation}deg)`,
+                animation: `fall ${item.animationDuration}s linear infinite`,
+                animationDelay: `${item.animationDelay}s`,
+              }}
+            >
               <div
-                key={item.id}
                 style={{
-                  position: "absolute",
-                  left: `${item.x}rem`,
-                  top: `${item.y}rem`,
-                  transform: `rotate(${item.rotation}deg)`,
-                  animation: `fall ${animationDuration}s linear infinite`,
-                  animationDelay: `${animationDelay}s`,
+                  width: "2rem",
+                  height: "2rem",
+                  backgroundImage: `url(${hatImage})`,
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                  opacity: 0.15,
                 }}
-              >
-                <div
-                  style={{
-                    width: "2rem",
-                    height: "2rem",
-                    backgroundImage: `url(${hatImage})`,
-                    backgroundSize: "contain",
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center",
-                    opacity: 0.15,
-                  }}
-                />
-              </div>
-            );
-          })}
+              />
+            </div>
+          ))}
         </div>
       )}
 
-      {/* Randomly rotated pattern for Assassins (water guns) */}
-      {gameType === "assassins" && patternPositions.length > 0 && (
+      {/* Falling water guns */}
+      {gameType === "assassins" && fallingIcons.length > 0 && (
         <div
           style={{
             position: "absolute",
