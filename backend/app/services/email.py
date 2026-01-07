@@ -72,16 +72,6 @@ def get_gmail_service():
     return build("gmail", "v1", credentials=creds)
 
 
-def get_sender_email_from_gmail():
-    """Get the authenticated user's email address from Gmail API"""
-    try:
-        service = get_gmail_service()
-        profile = service.users().getProfile(userId="me").execute()
-        return profile.get("emailAddress")
-    except Exception as e:
-        raise ValueError(f"Failed to get sender email from Gmail API: {e}")
-
-
 def create_message(sender: str, to: str, subject: str, message_text: str) -> Dict:
     """Create a Gmail API raw message from basic fields."""
     mime_message = MIMEText(message_text)
@@ -101,15 +91,7 @@ def send_assignments_via_email(assignments: Dict[str, str], sender_email: str = 
         assignments: Dict mapping giver_email -> receiver_name
         sender_email: Email address to send from (defaults to authenticated Gmail account)
     """
-    # Get sender email from Gmail API if not provided
-    if sender_email is None:
-        try:
-            sender_email = get_sender_email_from_gmail()
-        except Exception as e:
-            raise ValueError(
-                f"Could not determine sender email from Gmail API. Ensure Gmail API is properly configured. Error: {e}"
-            )
-
+    sender_email = sender_email or "me"
     service = get_gmail_service()
 
     for recipient_email, receiver_name in assignments.items():
@@ -136,15 +118,7 @@ def send_assignments_via_email(assignments: Dict[str, str], sender_email: str = 
 
 def send_test_email(test_email: str, sender_email: str = None):
     """Send a test email to verify Gmail API setup"""
-    # Get sender email from Gmail API if not provided
-    if sender_email is None:
-        try:
-            sender_email = get_sender_email_from_gmail()
-        except Exception as e:
-            raise ValueError(
-                f"Could not determine sender email from Gmail API. Ensure Gmail API is properly configured. Error: {e}"
-            )
-
+    sender_email = sender_email or "me"
     service = get_gmail_service()
 
     body = (
@@ -156,6 +130,31 @@ def send_test_email(test_email: str, sender_email: str = None):
         sender=sender_email,
         to=test_email,
         subject="Secret Santa Email Test ✔️",
+        message_text=body,
+    )
+
+    service.users().messages().send(userId="me", body=message).execute()
+
+
+def send_password_reset_email(
+    to_email: str, reset_link: str, sender_email: str = None
+) -> None:
+    """Send a password reset email with a reset link."""
+    sender_email = sender_email or "me"
+    service = get_gmail_service()
+
+    body = (
+        "Hi,\n\n"
+        "We received a request to reset your exchan.ge password.\n\n"
+        f"Click this link to reset your password:\n{reset_link}\n\n"
+        "If you did not request this, you can safely ignore this email.\n\n"
+        "Thanks,\nexchan.ge"
+    )
+
+    message = create_message(
+        sender=sender_email,
+        to=to_email,
+        subject="Reset your exchan.ge password",
         message_text=body,
     )
 

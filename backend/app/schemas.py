@@ -45,6 +45,31 @@ class TokenData(BaseModel):
     email: Optional[str] = None
 
 
+class PasswordResetRequest(BaseModel):
+    email: EmailStr
+
+
+class PasswordResetConfirm(BaseModel):
+    token: str
+    new_password: str
+
+    @field_validator("new_password")
+    @classmethod
+    def validate_new_password(cls, v: str) -> str:
+        # Reuse the same rules as UserCreate.password
+        if not isinstance(v, str):
+            raise ValueError("Password must be a string")
+        if len(v) < 6:
+            raise ValueError("Password must be at least 6 characters long")
+        password_bytes = v.encode("utf-8")
+        if len(password_bytes) > 72:
+            raise ValueError(
+                f"Password is too long ({len(password_bytes)} bytes). "
+                "Maximum 72 bytes allowed."
+            )
+        return v
+
+
 # Group schemas
 class GroupCreate(BaseModel):
     name: str

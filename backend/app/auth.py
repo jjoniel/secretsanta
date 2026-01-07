@@ -12,6 +12,7 @@ import os
 SECRET_KEY = os.getenv("SECRET_KEY", "your-secret-key-change-in-production")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
+PASSWORD_RESET_TOKEN_EXPIRE_MINUTES = 30
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/auth/login")
 
@@ -56,6 +57,26 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
+
+
+def create_password_reset_token(email: str) -> str:
+    """Create a short-lived JWT token for password reset."""
+    expires = timedelta(minutes=PASSWORD_RESET_TOKEN_EXPIRE_MINUTES)
+    return create_access_token(
+        data={"sub": email, "scope": "password_reset"}, expires_delta=expires
+    )
+
+
+def verify_password_reset_token(token: str) -> Optional[str]:
+    """Verify a password reset token and return the email if valid."""
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        if payload.get("scope") != "password_reset":
+            return None
+        email: str = payload.get("sub")
+        return email
+    except JWTError:
+        return None
 
 
 def get_user_by_email(db: Session, email: str) -> Optional[models.User]:

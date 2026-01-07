@@ -1,5 +1,5 @@
 from datetime import timedelta
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, BackgroundTasks
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from .. import models, schemas
@@ -10,7 +10,11 @@ from ..auth import (
     get_password_hash,
     get_current_active_user,
     ACCESS_TOKEN_EXPIRE_MINUTES,
+    create_password_reset_token,
+    verify_password_reset_token,
 )
+from ..services.email import send_password_reset_email
+import os
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
 
@@ -71,3 +75,52 @@ def check_email_exists(email: str, db: Session = Depends(get_db)):
     """Check if an email is already registered"""
     existing_user = db.query(models.User).filter(models.User.email == email).first()
     return {"exists": existing_user is not None}
+
+
+@router.post("/forgot-password")
+def forgot_password(
+    payload: schemas.PasswordResetRequest,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db),
+):
+    """
+    Request a password reset. Always returns 200 to avoid leaking which emails exist.
+    """
+    user = db.query(models.User).filter(models.User.email == payload.email).first()
+    if user:
+        token = create_password_reset_token(user.email)
+        frontend_base = os.getenv(
+            "FRONTEND_RESET_URL", "http://localhost:5173/reset-password?token="
+        )
+        reset_link = f"{frontend_base}{token}"
+        background_tasks.add_task(
+            send_password_reset_email,
+            to_email=user.email,
+            reset_link=reset_link,
+        )
+    return {"message": "If an account exists for this email, a reset link has been sent."}
+
+
+@router.post("/reset-password")
+def reset_password(
+    payload: schemas.PasswordResetConfirm,
+    db: Session = Depends(get_db),
+):
+    """Reset password using a password reset token."""
+    email = verify_password_reset_token(payload.token)
+    if not email:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid or expired token"
+        )
+
+    user = db.query(models.User).filter(models.User.email == email).first()
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="User not found"
+        )
+
+    user.hashed_password = get_password_hash(payload.new_password)
+    db.add(user)
+    db.commit()
+
+    return {"message": "Password has been reset successfully."}

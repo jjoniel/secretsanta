@@ -476,7 +476,7 @@ const Auth = () => {
                     borderRadius: "50%",
                     padding: "0.125rem",
                     animation: "checkmarkIn 0.3s ease-out",
-                    zIndex: 2,
+                    zIndex: 3,
                   }}
                 />
               )}
@@ -486,39 +486,22 @@ const Auth = () => {
                     position: "absolute",
                     inset: 0,
                     borderRadius: "9999px",
-                    padding: "0.125rem",
                     pointerEvents: "none",
-                    zIndex: 0,
+                    zIndex: 2,
+                    background:
+                      "linear-gradient(270deg, var(--color-success), color-mix(in srgb, var(--color-success) 80%, white 20%), var(--color-success))",
+                    backgroundSize: "200% 200%",
+                    animation: "borderLoop 1.5s linear forwards",
+                    transition: "opacity 0.5s",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#ffffff",
+                    fontSize: "0.875rem",
+                    fontWeight: 500,
                   }}
                 >
-                  <div
-                    style={{
-                      position: "absolute",
-                      inset: "-0.125rem",
-                      borderRadius: "9999px",
-                      border: "0.125rem solid transparent",
-                      background:
-                        "linear-gradient(270deg, #16a34a, #bbf7d0, #16a34a)",
-                      backgroundSize: "200% 200%",
-                      animation: "borderLoop 1.5s linear forwards",
-                    }}
-                  />
-                  <div
-                    style={{
-                      position: "absolute",
-                      inset: "0.0625rem",
-                      borderRadius: "9999px",
-                      backgroundColor: "var(--color-success)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: "#ffffff",
-                      fontSize: "0.875rem",
-                      fontWeight: 500,
-                    }}
-                  >
-                    account found!
-                  </div>
+                  account found!
                 </div>
               )}
             </div>
@@ -563,6 +546,23 @@ const Auth = () => {
                 textAlign: "center",
               }}
             />
+            <div
+              style={{
+                marginTop: "var(--spacing-sm)",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "0.25rem 0.75rem",
+                borderRadius: "9999px",
+                border: "0.0625rem solid var(--color-border)",
+                background: "var(--color-bg)",
+                color: "var(--color-text)",
+                fontSize: "0.75rem",
+                opacity: 0.9,
+              }}
+            >
+              passwords must be at least 6 characters
+            </div>
           </div>
 
           {error && (
@@ -575,7 +575,11 @@ const Auth = () => {
           <button
             type="submit"
             className="btn btn-primary"
-            style={{ width: "100%", marginTop: "var(--spacing-md)" }}
+            style={{
+              width: "100%",
+              marginTop: "var(--spacing-md)",
+              borderRadius: "9999px",
+            }}
             disabled={loading}
           >
             {loading ? (
@@ -598,6 +602,47 @@ const Auth = () => {
               "Create Account"
             )}
           </button>
+
+          {emailExists && !loading && (
+            <button
+              type="button"
+              onClick={async () => {
+                if (!email || !email.includes("@")) return;
+                setError("");
+                setSuccess("");
+                try {
+                  await axios.post("/api/auth/forgot-password", { email });
+                  setSuccess("Check your email for a password reset link.");
+                } catch (err) {
+                  // Do not surface detailed errors to avoid leaking info
+                  setSuccess("Check your email for a password reset link.");
+                }
+              }}
+              style={{
+                marginTop: "var(--spacing-sm)",
+                background: "transparent",
+                border: "none",
+                padding: 0,
+                color: "var(--color-text)",
+                opacity: 0.8,
+                fontSize: "0.75rem",
+                cursor: email ? "pointer" : "default",
+                textDecoration: email ? "underline" : "none",
+              }}
+            >
+              forgot password?
+            </button>
+          )}
+
+          {success && !error && (
+            <div
+              className="message message-success"
+              role="status"
+              style={{ marginTop: "var(--spacing-sm)" }}
+            >
+              <span>{success}</span>
+            </div>
+          )}
         </form>
       </div>
 
@@ -621,12 +666,19 @@ const Auth = () => {
           }
           
           @keyframes borderLoop {
-            0% {
+          0% {
+          opacity: 0;}
+            20% {
+            opacity: 1;
               background-position: 0% 50%;
             }
-            100% {
+            80% {
+            opacity: 1;
               background-position: 200% 50%;
             }
+              100% {
+              opacity: 0;
+              }
           }
           
           /* Keep all input fields statically styled - no changes on any interaction */
