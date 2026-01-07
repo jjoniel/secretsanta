@@ -5,7 +5,6 @@ import {
   FaGift,
   FaCrosshairs,
   FaExclamationTriangle,
-  FaCheck,
   FaCheckCircle,
 } from "react-icons/fa";
 import axios from "axios";
