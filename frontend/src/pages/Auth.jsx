@@ -481,6 +481,7 @@ const Auth = () => {
             opacity: emailExists !== null ? 1 : 0,
             pointerEvents: emailExists !== null ? "auto" : "none",
             position: "relative",
+            transition: "opacity 0.5s",
           }}
         >
           <div style={{ marginBottom: "var(--spacing-md)" }}>
@@ -566,11 +567,24 @@ const Auth = () => {
           @keyframes checkmarkIn {
             from {
               opacity: 0;
-              transform: translateY(-50%) scale(0);
+              mask: conic-gradient(from 0deg, transparent 0deg, transparent 360deg);
+              -webkit-mask: conic-gradient(from 0deg, transparent 0deg, transparent 360deg);
             }
             to {
               opacity: 1;
-              transform: translateY(-50%) scale(1);
+              mask: conic-gradient(from 0deg, black 0deg, black 360deg);
+              -webkit-mask: conic-gradient(from 0deg, black 0deg, black 360deg);
+            }
+          }
+          
+          @keyframes checkmarkInRotate {
+            from {
+              mask: conic-gradient(from 0deg, black 0deg, transparent 360deg);
+              -webkit-mask: conic-gradient(from 0deg, black 0deg, transparent 360deg);
+            }
+            to {
+              mask: conic-gradient(from 0deg, black 0deg, black 360deg);
+              -webkit-mask: conic-gradient(from 0deg, black 0deg, black 360deg);
             }
           }
           
