@@ -188,18 +188,23 @@ const Auth = () => {
                   position: "absolute",
                   left: `${item.x}rem`,
                   top: `${item.y}rem`,
-                  width: "2rem",
-                  height: "2rem",
-                  backgroundImage: `url(${hatImage})`,
-                  backgroundSize: "contain",
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "center",
-                  opacity: 0.15,
+                  transform: `rotate(${item.rotation}deg)`,
                   animation: `fall ${animationDuration}s linear infinite`,
                   animationDelay: `${animationDelay}s`,
-                  transform: `rotate(${item.rotation}deg)`,
                 }}
-              />
+              >
+                <div
+                  style={{
+                    width: "2rem",
+                    height: "2rem",
+                    backgroundImage: `url(${hatImage})`,
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center",
+                    opacity: 0.15,
+                  }}
+                />
+              </div>
             );
           })}
         </div>
