@@ -182,8 +182,8 @@ const Auth = () => {
             >
               <div
                 style={{
-                  width: "2rem",
-                  height: "2rem",
+                  width: "4rem",
+                  height: "4rem",
                   backgroundImage: `url(${hatImage})`,
                   backgroundSize: "contain",
                   backgroundRepeat: "no-repeat",
