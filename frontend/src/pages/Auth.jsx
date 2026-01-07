@@ -484,16 +484,26 @@ const Auth = () => {
                 <div
                   style={{
                     position: "absolute",
-                    inset: "-0.125rem",
+                    inset: 0,
                     borderRadius: "9999px",
                     padding: "0.125rem",
-                    background:
-                      "conic-gradient(from 0deg, #f97373, #facc15, #4ade80, #38bdf8, #a855f7, #f97373)",
                     pointerEvents: "none",
-                    animation: "emailFoundFlash 1.5s ease-out forwards",
                     zIndex: 0,
                   }}
-                />
+                >
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: "-0.125rem",
+                      borderRadius: "9999px",
+                      border: "0.125rem solid transparent",
+                      background:
+                        "linear-gradient(270deg, #fe97f9, #83c9f4, #fe97f9)",
+                      backgroundSize: "200% 200%",
+                      animation: "borderLoop 1.5s linear forwards",
+                    }}
+                  />
+                </div>
               )}
             </div>
           </div>
@@ -594,43 +604,12 @@ const Auth = () => {
             }
           }
           
-          @keyframes emailFoundFlash {
+          @keyframes borderLoop {
             0% {
-              opacity: 0;
-              transform: rotate(0deg) scale(1);
-            }
-            10% {
-              opacity: 1;
-              transform: rotate(45deg) scale(1.02);
-            }
-            20% {
-              transform: rotate(90deg) scale(1.02);
-            }
-            30% {
-              transform: rotate(135deg) scale(1.02);
-            }
-            40% {
-              transform: rotate(180deg) scale(1.02);
-            }
-            50% {
-              transform: rotate(225deg) scale(1.02);
-            }
-            60% {
-              transform: rotate(270deg) scale(1.02);
-            }
-            70% {
-              transform: rotate(315deg) scale(1.02);
-            }
-            80% {
-              transform: rotate(360deg) scale(1.01);
-            }
-            90% {
-              opacity: 1;
-              transform: rotate(360deg) scale(1);
+              background-position: 0% 50%;
             }
             100% {
-              opacity: 0;
-              transform: rotate(360deg) scale(1);
+              background-position: 200% 50%;
             }
           }
           
