@@ -101,48 +101,38 @@ const Auth = () => {
     return angles[Math.floor(Math.random() * angles.length)];
   };
 
-  const [patternPositions, setPatternPositions] = useState([]);
+  const [fallingIcons, setFallingIcons] = useState([]);
 
   useEffect(() => {
     if (gameType === "santa" || gameType === "assassins") {
-      // Generate pattern positions for background
-      const generatePatternPositions = () => {
+      // Generate 75 falling icons with random x positions and speeds
+      const generateFallingIcons = () => {
         const items = [];
-        const spacing = 15; // rem spacing between items
-        // Use viewport dimensions, fallback to reasonable defaults
         const viewportWidth =
           typeof window !== "undefined" ? window.innerWidth : 1920;
-        const viewportHeight =
-          typeof window !== "undefined" ? window.innerHeight : 1080;
-        const remInPx = 16; // 1rem = 16px
-        const cols = Math.ceil(viewportWidth / (spacing * remInPx)) + 2; // +2 for overflow
-        const rows = Math.ceil(viewportHeight / (spacing * remInPx)) + 2;
-
-        for (let row = -1; row < rows; row++) {
-          for (let col = -1; col < cols; col++) {
-            // Stagger every other row by half spacing
-            const xOffset = row % 2 === 0 ? 0 : spacing / 2;
-            items.push({
-              id: `${row}-${col}`,
-              x: col * spacing + xOffset,
-              y: row * spacing,
-              rotation: getRandomRotation(),
-            });
-          }
+        
+        for (let i = 0; i < 75; i++) {
+          items.push({
+            id: `icon-${i}`,
+            x: Math.random() * viewportWidth, // Random x position across viewport width
+            rotation: getRandomRotation(),
+            animationDuration: 8 + Math.random() * 10, // Random speed between 8-18 seconds
+            animationDelay: Math.random() * 5, // Random delay between 0-5 seconds
+          });
         }
         return items;
       };
 
-      setPatternPositions(generatePatternPositions());
+      setFallingIcons(generateFallingIcons());
 
       // Regenerate on window resize
       const handleResize = () => {
-        setPatternPositions(generatePatternPositions());
+        setFallingIcons(generateFallingIcons());
       };
       window.addEventListener("resize", handleResize);
       return () => window.removeEventListener("resize", handleResize);
     } else {
-      setPatternPositions([]);
+      setFallingIcons([]);
     }
   }, [gameType]);
 
