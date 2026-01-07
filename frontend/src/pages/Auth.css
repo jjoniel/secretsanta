@@ -23,6 +23,10 @@
   }
 }
 
+.checkmark-icon {
+  animation: checkmarkIn 0.3s ease-out;
+}
+
 /* Input field static styling - no interaction effects */
 .auth-input,
 .auth-input:focus,
