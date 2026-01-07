@@ -283,57 +283,21 @@ const Auth = () => {
           zIndex: 1,
           width: "100%",
           maxWidth: "28rem",
-          animation: "fadeInUp 0.5s ease-out",
         }}
       >
-        {/* Title with transition */}
-        <div
+        {/* Title */}
+        <h1
           style={{
-            position: "relative",
-            height: "clamp(3rem, 7vw, 4.5rem)",
+            fontSize: "clamp(2.5rem, 6vw, 4rem)",
+            fontWeight: 700,
+            color: "var(--color-text)",
+            letterSpacing: "-0.02em",
+            textAlign: "center",
             marginBottom: "var(--spacing-xl)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
           }}
         >
-          <h1
-            style={{
-              fontSize: "clamp(2.5rem, 6vw, 4rem)",
-              fontWeight: 700,
-              color: "var(--color-text)",
-              letterSpacing: "-0.02em",
-              textAlign: "center",
-              position: "absolute",
-              width: "100%",
-              opacity: emailExists === true ? 0 : 1,
-              transform:
-                emailExists === true ? "translateY(-1rem)" : "translateY(0)",
-              transition: "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
-              pointerEvents: "none",
-            }}
-          >
-            exchan.ge
-          </h1>
-          <h1
-            style={{
-              fontSize: "clamp(2.5rem, 6vw, 4rem)",
-              fontWeight: 700,
-              color: "var(--color-text)",
-              letterSpacing: "-0.02em",
-              textAlign: "center",
-              position: "absolute",
-              width: "100%",
-              opacity: emailExists === true ? 1 : 0,
-              transform:
-                emailExists === true ? "translateY(0)" : "translateY(1rem)",
-              transition: "transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
-              pointerEvents: "none",
-            }}
-          >
-            welcome back
-          </h1>
-        </div>
+          exchan.ge
+        </h1>
 
         {/* Game Type Pills */}
         <div
@@ -365,7 +329,7 @@ const Auth = () => {
               }`,
               background:
                 gameType === "santa"
-                  ? "rgba(249, 115, 115, 0.1)"
+                  ? "rgba(249, 115, 115, 1)"
                   : "var(--color-bg)",
               color: "var(--color-text)",
               fontSize: "0.875rem",
@@ -378,21 +342,21 @@ const Auth = () => {
             onMouseEnter={(e) => {
               if (gameType !== "santa") {
                 e.currentTarget.style.borderColor = "var(--color-accent)";
+                e.currentTarget.style.color = "var(--color-accent)";
               }
             }}
+            onMouseDown={(e) => {
+              e.currentTarget.style.borderColor = "var(--color-border)";
+              e.currentTarget.style.color = "var(--color-text)";
+            }}
             onMouseLeave={(e) => {
-              if (gameType !== "santa") {
-                e.currentTarget.style.borderColor = "var(--color-border)";
-              }
+              e.currentTarget.style.borderColor = "var(--color-border)";
+              e.currentTarget.style.color = "var(--color-text)";
             }}
           >
             <FaGift
               style={{
                 fontSize: "1rem",
-                color:
-                  gameType === "santa"
-                    ? "var(--color-accent)"
-                    : "var(--color-text)",
               }}
             />
             secret santa
@@ -413,7 +377,7 @@ const Auth = () => {
               }`,
               background:
                 gameType === "assassins"
-                  ? "rgba(249, 115, 115, 0.1)"
+                  ? "var(--color-accent)"
                   : "var(--color-bg)",
               color: "var(--color-text)",
               fontSize: "0.875rem",
@@ -426,21 +390,21 @@ const Auth = () => {
             onMouseEnter={(e) => {
               if (gameType !== "assassins") {
                 e.currentTarget.style.borderColor = "var(--color-accent)";
+                e.currentTarget.style.color = "var(--color-accent)";
               }
             }}
+            onMouseDown={(e) => {
+              e.currentTarget.style.borderColor = "var(--color-border)";
+              e.currentTarget.style.color = "var(--color-text)";
+            }}
             onMouseLeave={(e) => {
-              if (gameType !== "assassins") {
-                e.currentTarget.style.borderColor = "var(--color-border)";
-              }
+              e.currentTarget.style.borderColor = "var(--color-border)";
+              e.currentTarget.style.color = "var(--color-text)";
             }}
           >
             <FaCrosshairs
               style={{
                 fontSize: "1rem",
-                color:
-                  gameType === "assassins"
-                    ? "var(--color-accent)"
-                    : "var(--color-text)",
               }}
             />
             assassins
@@ -596,17 +560,6 @@ const Auth = () => {
             }
             to {
               transform: rotate(calc(var(--initial-rotation, 0deg) + 360deg));
-            }
-          }
-          
-          @keyframes fadeInUp {
-            from {
-              opacity: 0.5;
-              transform: translateY(2rem);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
             }
           }
           
