@@ -550,6 +550,15 @@ const Auth = () => {
       </div>
 
       <style>{`
+          @keyframes fall {
+            from {
+              transform: translateY(-100vh);
+            }
+            to {
+              transform: translateY(100vh);
+            }
+          }
+          
           @keyframes fadeInUp {
             from {
               opacity: 0.5;
