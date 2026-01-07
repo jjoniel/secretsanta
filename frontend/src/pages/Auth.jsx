@@ -223,7 +223,6 @@ const Auth = () => {
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center",
                   opacity: 0.15,
-                  transform: `rotate(${item.rotation}deg)`,
                   animation: `rotate ${item.rotationSpeed}s linear infinite`,
                 }}
               />
@@ -267,7 +266,6 @@ const Auth = () => {
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center",
                   opacity: 0.15,
-                  transform: `rotate(${item.rotation}deg)`,
                   animation: `rotate ${item.rotationSpeed}s linear infinite`,
                 }}
               />
