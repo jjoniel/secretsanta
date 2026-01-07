@@ -458,6 +458,8 @@ const Auth = () => {
                   background: "var(--color-bg)",
                   color: "var(--color-text)",
                   textAlign: "center",
+                  position: "relative",
+                  zIndex: 1,
                 }}
               />
               {emailExists === true && (
@@ -482,22 +484,16 @@ const Auth = () => {
                 <div
                   style={{
                     position: "absolute",
-                    inset: 0,
+                    inset: "-0.125rem",
                     borderRadius: "9999px",
-                    backgroundColor: "var(--color-success)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "#ffffff",
-                    fontSize: "0.875rem",
-                    fontWeight: 500,
+                    padding: "0.125rem",
+                    background:
+                      "conic-gradient(from 0deg, #f97373, #facc15, #4ade80, #38bdf8, #a855f7, #f97373)",
                     pointerEvents: "none",
                     animation: "emailFoundFlash 1.5s ease-out forwards",
-                    zIndex: 1,
+                    zIndex: 0,
                   }}
-                >
-                  account found!
-                </div>
+                />
               )}
             </div>
           </div>
@@ -601,28 +597,40 @@ const Auth = () => {
           @keyframes emailFoundFlash {
             0% {
               opacity: 0;
-              transform: scale(0.98) translateY(0);
+              transform: rotate(0deg) scale(1);
             }
-            15% {
+            10% {
               opacity: 1;
-              transform: scale(1.02) translateY(-0.1rem);
+              transform: rotate(45deg) scale(1.02);
+            }
+            20% {
+              transform: rotate(90deg) scale(1.02);
             }
             30% {
-              transform: scale(0.99) translateY(0.1rem);
+              transform: rotate(135deg) scale(1.02);
+            }
+            40% {
+              transform: rotate(180deg) scale(1.02);
             }
             50% {
-              transform: scale(1.01) translateY(-0.05rem);
+              transform: rotate(225deg) scale(1.02);
+            }
+            60% {
+              transform: rotate(270deg) scale(1.02);
             }
             70% {
-              transform: scale(1) translateY(0);
+              transform: rotate(315deg) scale(1.02);
+            }
+            80% {
+              transform: rotate(360deg) scale(1.01);
             }
             90% {
               opacity: 1;
-              transform: scale(1) translateY(0);
+              transform: rotate(360deg) scale(1);
             }
             100% {
               opacity: 0;
-              transform: scale(0.98) translateY(0);
+              transform: rotate(360deg) scale(1);
             }
           }
           
