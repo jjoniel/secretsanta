@@ -278,7 +278,7 @@ h3 {
   opacity: 0.5;
 }
 
-/* Responsive Grid */
+/* Layout Utilities */
 .grid {
   display: grid;
   gap: var(--spacing-md);
@@ -298,20 +298,8 @@ h3 {
   align-items: center;
 }
 
-.gap-sm {
-  gap: var(--spacing-sm);
-}
-
 .gap-md {
   gap: var(--spacing-md);
-}
-
-.gap-lg {
-  gap: var(--spacing-lg);
-}
-
-.mb-sm {
-  margin-bottom: var(--spacing-sm);
 }
 
 .mb-md {
@@ -320,16 +308,4 @@ h3 {
 
 .mb-lg {
   margin-bottom: var(--spacing-lg);
-}
-
-.mt-sm {
-  margin-top: var(--spacing-sm);
-}
-
-.mt-md {
-  margin-top: var(--spacing-md);
-}
-
-.mt-lg {
-  margin-top: var(--spacing-lg);
 }

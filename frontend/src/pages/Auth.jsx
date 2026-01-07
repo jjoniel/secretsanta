@@ -18,9 +18,7 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailExists, setEmailExists] = useState(null); // null, true, or false
-  const [checkingEmail, setCheckingEmail] = useState(false);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
   const { login, register } = useAuth();
   const navigate = useNavigate();
@@ -344,7 +342,13 @@ const Auth = () => {
             }}
           >
             <FaGift
-              style={{ fontSize: "1rem", color: "var(--color-accent)" }}
+              style={{
+                fontSize: "1rem",
+                color:
+                  gameType === "santa"
+                    ? "var(--color-accent)"
+                    : "var(--color-text)",
+              }}
             />
             secret santa
           </button>
@@ -364,7 +368,7 @@ const Auth = () => {
               }`,
               background:
                 gameType === "assassins"
-                  ? "var(--color-accent)"
+                  ? "rgba(249, 115, 115, 0.1)"
                   : "var(--color-bg)",
               color: "var(--color-text)",
               fontSize: "0.875rem",
@@ -386,7 +390,13 @@ const Auth = () => {
             }}
           >
             <FaCrosshairs
-              style={{ fontSize: "1rem", color: "var(--color-text)" }}
+              style={{
+                fontSize: "1rem",
+                color:
+                  gameType === "assassins"
+                    ? "var(--color-accent)"
+                    : "var(--color-text)",
+              }}
             />
             assassins
           </button>
@@ -525,64 +535,6 @@ const Auth = () => {
         </form>
       </div>
 
-      <style>{`
-          @keyframes fadeInUp {
-            from {
-              opacity: 0.5;
-              transform: translateY(2rem);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-          
-          @keyframes checkmarkIn {
-            from {
-              opacity: 0;
-              transform: translateY(-50%) scale(0);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(-50%) scale(1);
-            }
-          }
-          
-          /* Keep all input fields statically styled - no changes on any interaction */
-          input,
-          input:focus,
-          input:focus-visible,
-          input:active,
-          input:hover {
-            outline: none !important;
-            border: 0.0625rem solid var(--color-border) !important;
-            background: var(--color-bg) !important;
-            background-color: var(--color-bg) !important;
-            color: var(--color-text) !important;
-            box-shadow: none !important;
-            transition: none !important;
-          }
-          
-          /* Aggressive autofill prevention - must override browser defaults */
-          input:-webkit-autofill,
-          input:-webkit-autofill:hover,
-          input:-webkit-autofill:focus,
-          input:-webkit-autofill:active,
-          input:-webkit-autofill:focus-visible {
-            outline: none !important;
-            border: 0.0625rem solid var(--color-border) !important;
-            background: var(--color-bg) !important;
-            background-color: var(--color-bg) !important;
-            background-image: none !important;
-            color: var(--color-text) !important;
-            -webkit-text-fill-color: var(--color-text) !important;
-            -webkit-box-shadow: 0 0 0 1000px var(--color-bg) inset !important;
-            box-shadow: 0 0 0 1000px var(--color-bg) inset !important;
-            transition: background-color 5000s ease-in-out 0s !important;
-            -webkit-transition: background-color 5000s ease-in-out 0s !important;
-          }
-          
-        `}</style>
     </div>
   );
 };
