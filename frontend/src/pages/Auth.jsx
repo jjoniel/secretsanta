@@ -461,7 +461,7 @@ const Auth = () => {
                     borderRadius: "50%",
                     padding: "0.125rem",
                     cursor: "help",
-                    animation: "checkmarkIn 0.3s ease-out",
+                    animation: "checkmarkInRotate 0.5s ease-out",
                   }}
                 />
               )}
@@ -578,13 +578,15 @@ const Auth = () => {
           }
           
           @keyframes checkmarkInRotate {
-            from {
-              mask: conic-gradient(from 0deg, black 0deg, transparent 360deg);
-              -webkit-mask: conic-gradient(from 0deg, black 0deg, transparent 360deg);
+            0% {
+              opacity: 0;
+              mask: conic-gradient(from 0deg, transparent 0deg, transparent 0deg, transparent 360deg);
+              -webkit-mask: conic-gradient(from 0deg, transparent 0deg, transparent 0deg, transparent 360deg);
             }
-            to {
-              mask: conic-gradient(from 0deg, black 0deg, black 360deg);
-              -webkit-mask: conic-gradient(from 0deg, black 0deg, black 360deg);
+            100% {
+              opacity: 1;
+              mask: conic-gradient(from 0deg, black 0deg, black 360deg, transparent 360deg);
+              -webkit-mask: conic-gradient(from 0deg, black 0deg, black 360deg, transparent 360deg);
             }
           }
           
