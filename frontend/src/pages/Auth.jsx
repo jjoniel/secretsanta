@@ -97,8 +97,7 @@ const Auth = () => {
 
   // Generate random hat rotations (45, 135, 225, or 315 degrees)
   const getRandomRotation = () => {
-    const angles = [45, 135, 225, 315];
-    return angles[Math.floor(Math.random() * angles.length)];
+    return Math.floor(Math.random() * 360);
   };
 
   const [fallingIcons, setFallingIcons] = useState([]);
@@ -111,37 +110,38 @@ const Auth = () => {
         const viewportWidth =
           typeof window !== "undefined" ? window.innerWidth : 1920;
         const remInPx = 16; // 1rem = 16px
-        
+
         // Icon sizes: santa hats are 4rem, water guns are 3rem
         const iconWidth = gameType === "santa" ? 4 : 3; // in rem
         const iconWidthPx = iconWidth * remInPx;
         const gapPx = 1 * remInPx; // 1rem gap minimum
-        
+
         // Calculate how many icons can fit
         const spacingNeeded = iconWidthPx + gapPx;
         const maxIcons = Math.floor(viewportWidth / spacingNeeded);
-        
+
         // Generate unique x positions with proper spacing
         const usedXPositions = new Set();
         const xPositions = [];
-        
+
         for (let i = 0; i < maxIcons; i++) {
           let x;
           let attempts = 0;
           do {
             // Try to place icon at calculated position with some randomness
             const baseX = i * spacingNeeded;
-            const randomOffset = Math.random() * (spacingNeeded - iconWidthPx - gapPx);
+            const randomOffset =
+              Math.random() * (spacingNeeded - iconWidthPx - gapPx);
             x = Math.floor(baseX + randomOffset);
             attempts++;
           } while (usedXPositions.has(x) && attempts < 100);
-          
+
           if (!usedXPositions.has(x)) {
             usedXPositions.add(x);
             xPositions.push(x);
           }
         }
-        
+
         // Create items with unique x positions
         xPositions.forEach((x, i) => {
           items.push({
@@ -150,9 +150,10 @@ const Auth = () => {
             rotation: getRandomRotation(),
             animationDuration: 8 + Math.random() * 10, // Random speed between 8-18 seconds
             animationDelay: -(Math.random() * (8 + Math.random() * 10)), // Negative delay to start mid-cycle
+            rotationSpeed: 2 + Math.random() * 4, // Random rotation speed between 2-6 seconds per full rotation
           });
         });
-        
+
         return items;
       };
 
