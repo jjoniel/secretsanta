@@ -460,6 +460,24 @@ const Auth = () => {
                   textAlign: "center",
                 }}
               />
+              {emailExists === true && (
+                <FaCheckCircle
+                  style={{
+                    position: "absolute",
+                    right: "var(--spacing-sm)",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    color: "var(--color-success)",
+                    fontSize: "1.25rem",
+                    background: "transparent",
+                    border: "0.125rem solid var(--color-success)",
+                    borderRadius: "50%",
+                    padding: "0.125rem",
+                    animation: "checkmarkIn 0.3s ease-out",
+                    zIndex: 2,
+                  }}
+                />
+              )}
               {showAccountFoundFlash && (
                 <div
                   style={{
@@ -475,6 +493,7 @@ const Auth = () => {
                     fontWeight: 500,
                     pointerEvents: "none",
                     animation: "emailFoundFlash 1.5s ease-out forwards",
+                    zIndex: 1,
                   }}
                 >
                   account found!
