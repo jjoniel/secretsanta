@@ -194,10 +194,10 @@ const Auth = () => {
                   backgroundSize: "contain",
                   backgroundRepeat: "no-repeat",
                   backgroundPosition: "center",
-                  transform: `rotate(${item.rotation}deg)`,
                   opacity: 0.15,
                   animation: `fall ${animationDuration}s linear infinite`,
                   animationDelay: `${animationDelay}s`,
+                  transform: `rotate(${item.rotation}deg)`,
                 }}
               />
             );
