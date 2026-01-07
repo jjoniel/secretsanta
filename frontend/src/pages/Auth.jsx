@@ -105,21 +105,54 @@ const Auth = () => {
 
   useEffect(() => {
     if (gameType === "santa" || gameType === "assassins") {
-      // Generate 75 falling icons with random x positions and speeds
+      // Generate falling icons spaced across page width with no overlap
       const generateFallingIcons = () => {
         const items = [];
         const viewportWidth =
           typeof window !== "undefined" ? window.innerWidth : 1920;
-
-        for (let i = 0; i < 50; i++) {
+        const remInPx = 16; // 1rem = 16px
+        
+        // Icon sizes: santa hats are 4rem, water guns are 3rem
+        const iconWidth = gameType === "santa" ? 4 : 3; // in rem
+        const iconWidthPx = iconWidth * remInPx;
+        const gapPx = 1 * remInPx; // 1rem gap minimum
+        
+        // Calculate how many icons can fit
+        const spacingNeeded = iconWidthPx + gapPx;
+        const maxIcons = Math.floor(viewportWidth / spacingNeeded);
+        
+        // Generate unique x positions with proper spacing
+        const usedXPositions = new Set();
+        const xPositions = [];
+        
+        for (let i = 0; i < maxIcons; i++) {
+          let x;
+          let attempts = 0;
+          do {
+            // Try to place icon at calculated position with some randomness
+            const baseX = i * spacingNeeded;
+            const randomOffset = Math.random() * (spacingNeeded - iconWidthPx - gapPx);
+            x = Math.floor(baseX + randomOffset);
+            attempts++;
+          } while (usedXPositions.has(x) && attempts < 100);
+          
+          if (!usedXPositions.has(x)) {
+            usedXPositions.add(x);
+            xPositions.push(x);
+          }
+        }
+        
+        // Create items with unique x positions
+        xPositions.forEach((x, i) => {
           items.push({
             id: `icon-${i}`,
-            x: (Math.random() * 20 * viewportWidth) / 20, // Random x position across viewport width
+            x: x,
             rotation: getRandomRotation(),
             animationDuration: 8 + Math.random() * 10, // Random speed between 8-18 seconds
             animationDelay: -(Math.random() * (8 + Math.random() * 10)), // Negative delay to start mid-cycle
           });
-        }
+        });
+        
         return items;
       };
 
