@@ -447,23 +447,29 @@ const Auth = () => {
                 }}
               />
               {emailExists === true && (
-                <FaCheckCircle
-                  title="account found!"
+                <div
                   style={{
                     position: "absolute",
                     right: "var(--spacing-sm)",
                     top: "50%",
                     transform: "translateY(-50%)",
-                    color: "var(--color-success)",
-                    fontSize: "1.25rem",
-                    background: "transparent",
-                    border: "0.125rem solid var(--color-success)",
-                    borderRadius: "50%",
-                    padding: "0.125rem",
-                    cursor: "help",
-                    animation: "checkmarkInRotate 0.5s ease-out",
+                    pointerEvents: "auto",
                   }}
-                />
+                  title="account found!"
+                >
+                  <FaCheckCircle
+                    style={{
+                      color: "var(--color-success)",
+                      fontSize: "1.25rem",
+                      background: "transparent",
+                      border: "0.125rem solid var(--color-success)",
+                      borderRadius: "50%",
+                      padding: "0.125rem",
+                      cursor: "help",
+                      animation: "checkmarkIn 0.3s ease-out",
+                    }}
+                  />
+                </div>
               )}
             </div>
           </div>
@@ -567,26 +573,11 @@ const Auth = () => {
           @keyframes checkmarkIn {
             from {
               opacity: 0;
-              mask: conic-gradient(from 0deg, transparent 0deg, transparent 360deg);
-              -webkit-mask: conic-gradient(from 0deg, transparent 0deg, transparent 360deg);
+              transform: translateY(-50%) scale(0.85);
             }
             to {
               opacity: 1;
-              mask: conic-gradient(from 0deg, black 0deg, black 360deg);
-              -webkit-mask: conic-gradient(from 0deg, black 0deg, black 360deg);
-            }
-          }
-          
-          @keyframes checkmarkInRotate {
-            0% {
-              opacity: 0;
-              mask: conic-gradient(from 0deg, transparent 0deg, transparent 0deg, transparent 360deg);
-              -webkit-mask: conic-gradient(from 0deg, transparent 0deg, transparent 0deg, transparent 360deg);
-            }
-            100% {
-              opacity: 1;
-              mask: conic-gradient(from 0deg, black 0deg, black 360deg, transparent 360deg);
-              -webkit-mask: conic-gradient(from 0deg, black 0deg, black 360deg, transparent 360deg);
+              transform: translateY(-50%) scale(1);
             }
           }
           
